@@ -1,0 +1,18 @@
+{
+  "tasks": {
+    "dev": "deno run -A --node-modules-dir npm:next dev",
+    "build": "deno run -A --node-modules-dir npm:next build",
+    "start": "deno run -A --node-modules-dir npm:next start",
+    "lint": "deno lint"
+  },
+  "compilerOptions": {
+    "lib": ["dom", "dom.iterable", "dom.asynciterable", "deno.ns"],
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
+    "paths": {
+      "@/*": ["./*"]
+    }
+  },
+  "nodeModulesDir": "auto",
+  "exclude": [".next", "node_modules"]
+}
