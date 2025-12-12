@@ -2,3 +2,5 @@
 env/
 venv/
 .next/
+node_modules/
+dist/
