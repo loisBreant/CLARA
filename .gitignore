@@ -4,3 +4,5 @@ venv/
 .next/
 node_modules/
 dist/
+back/src/back.egg-info
+__pycache__/

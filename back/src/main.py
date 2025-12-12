@@ -8,9 +8,9 @@ from fastapi import FastAPI, File, UploadFile, Form, HTTPException, BackgroundTa
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Dict, Any, List, Optional
-from src.agents.oncology_agent import OncologyAgentSystem
-from src.core.llm_client import LLMClient
-from src.tools.database_tool import DatabaseTool
+from agents.oncology_agent import OncologyAgentSystem
+from core.llm_client import LLMClient
+from tools.database_tool import DatabaseTool
 
 app = FastAPI(
     title="Onco-Agent API",

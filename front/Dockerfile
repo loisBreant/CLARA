@@ -3,24 +3,18 @@ FROM denoland/deno:alpine AS builder
 WORKDIR /app
 
 COPY deno.json deno.lock package.json ./
-
 RUN deno install --allow-scripts --node-modules-dir
 
-# Copy the rest of the application code
 COPY . .
-
-# Build the Vite application
 RUN deno task build
 
-# Production stage
-FROM denoland/deno:alpine AS runner
-WORKDIR /app
+FROM caddy:latest AS runner
 
-# Copy artifacts from builder
-COPY --from=builder /app/dist ./dist
+WORKDIR /srv/app
 
-# Install 'serve' package globally or run it via npm specifier
-# We'll use deno to run npm:serve
-EXPOSE 3000
+COPY Caddyfile /etc/caddy/Caddyfile
+COPY --from=builder /app/dist /usr/share/caddy
 
-CMD ["run", "-A", "npm:serve", "-s", "dist", "-p", "3000"]
+EXPOSE 80
+
+CMD ["caddy", "run", "--config", "/etc/caddy/Caddyfile", "--adapter", "caddyfile"]
