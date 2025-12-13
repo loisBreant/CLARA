@@ -6,3 +6,5 @@ node_modules/
 dist/
 back/src/back.egg-info
 __pycache__/
+back/.env
+data/logs/costs.csv

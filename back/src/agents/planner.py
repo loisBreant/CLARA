@@ -1,10 +1,9 @@
-import json
-from core.llm_client import OllamaClient 
+from src.agents.agent import Agent 
 
-class PlannerAgent:
-    def __init__(self, client: OllamaClient):
-        self.client = client
-        self.system_prompt = """
+class PlannerAgent(Agent):
+ 
+    def __init__(self):
+        system_prompt = """
 Tu es l'Architecte Clinique du système C.L.A.R.A.
 Ta tâche est de PLANIFIER l'analyse d'un dossier patient, mais NE PAS l'exécuter toi-même.
 
@@ -26,34 +25,4 @@ Format attendu :
   {"step": 3, "tool": "NO_TOOL", "args": "Synthèse", "description": "Rédiger le rapport final"}
 ] 
 """
-    def generate_plan(self, patient_data: dict, image_path: str, scenario_id: str):
-        # 1. Construction du message utilisateur
-        user_msg = f"""
-        NOUVEAU CAS PATIENT :
-        Nom : {patient_data.get('nom')}
-        Age : {patient_data.get('age')}
-        Symptômes : {patient_data.get('symptomes')}
-        Chemin Image : {image_path}
-        
-        Génère le plan d'action JSON.
-        """
-
-        # 2. Appel au LLM (Gemma 2)
-        # On loggue l'appel ici pour le fichier costs.csv 
-        response_text = self.client.call_model(
-            prompt=user_msg, 
-            system_instruction=self.system_prompt,
-            scenario_id=scenario_id,
-            call_id="planner_01"
-        )
-
-        # 3. Nettoyage et Parsing (Crucial avec les LLM locaux)
-        try:
-            # Parfois Gemma ajoute des ```json ... ```, on les retire
-            clean_json = response_text.replace("```json", "").replace("```", "").strip()
-            plan = json.loads(clean_json)
-            return plan
-        except json.JSONDecodeError:
-            print(f"Erreur de format JSON du Planner: {response_text}")
-            # Fallback : On retourne un plan par défaut de sécurité
-            return [{"step": 1, "tool": "NO_TOOL", "args": "Erreur Planification", "description": "Echec du planner"}]
+        super().__init__(system_prompt)
