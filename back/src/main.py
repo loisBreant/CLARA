@@ -77,6 +77,5 @@ async def chat(request: ChatRequest) -> StreamingResponse:
     agent = PlannerAgent()
     return StreamingResponse(agent.ask(request.question))
 
-
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000, reload=True)

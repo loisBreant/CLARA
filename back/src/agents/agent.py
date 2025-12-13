@@ -32,8 +32,13 @@ class Agent:
         """
         Yields jsons of AgentResponse
         """
+        full_prompt = f"""\
+SYSTEM_PROMPT: {self.system_prompt}
+---
+USER_PROMPT: {prompt}\
+"""
         stream = self.client.chat.send(
-            model=self.model,
+            model=full_prompt,
             messages=[{"role": "user", "content": prompt}],
             stream=True,
             stream_options=components.ChatStreamOptions(include_usage=True),

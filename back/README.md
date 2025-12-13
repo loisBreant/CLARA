@@ -12,10 +12,4 @@ ruff format
 ty check
 ```
 
-TODO:
 
-- [ ] Save previous messages
-- [ ] Agent memory
-- [ ] Connect agents
-- [ ] Agents' metrics
-- [ ] Agents' graph

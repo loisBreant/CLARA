@@ -20,9 +20,14 @@ Règles :
 
 Format attendu :
 [
-  {"step": 1, "tool": "NOM_OUTIL", "args": "argument_pour_outil", "description": "Pourquoi je fais ça"},
+  {"step": 1, "tool": "NOM_OUTIL", "child_prompt": "argument_pour_outil", "description": "Pourquoi je fais ça"},
   {"step": 2, "tool": "NOM_OUTIL", "args": "...", "description": "..."},
   {"step": 3, "tool": "NO_TOOL", "args": "Synthèse", "description": "Rédiger le rapport final"}
 ] 
 """
         super().__init__(system_prompt)
+
+    # TODO:
+    # def ask(self, prompt: str):
+    #     super().ask()
+        
