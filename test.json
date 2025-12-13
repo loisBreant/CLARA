@@ -1,0 +1,10 @@
+{
+    "metrics": {
+        "input_token_count": 0.0,
+        "output_token_count": 0.0,
+        "current_time_taken": 0.0,
+        "total_time_taken": 0.0,
+        "current_input_token_count": 1.0
+    },
+    "chunk": "Hello"
+}

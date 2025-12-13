@@ -123,14 +123,6 @@ function generateMermaidDefinition(
     );
     lines.push("");
 
-    const emojiMap: Record<string, string> = {
-      // Orchestrator: '🧠',
-      // Vision: '👁️',
-      // Analysis: '🔬',
-      // Response: '💬',
-      // Diagnosis: '🩺',
-    };
-
     // Add nodes with properly escaped labels
     nodes.forEach((node) => {
       // const icon = emojiMap[node.type] || '⚙️'; // Default icon

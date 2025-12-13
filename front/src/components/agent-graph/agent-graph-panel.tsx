@@ -6,14 +6,15 @@ import { MermaidGraph } from "./mermaid-graph"
 import { AgentNodeList } from "./agent-node-list"
 import { MetricsPanel } from "./metrics-panel"
 import { GitBranch, List, BarChart3 } from "lucide-react"
-import type { AgentNode } from "@/lib/types"
+import type { AgentNode, AgentMetrics } from "@/lib/types"
 
 interface AgentGraphPanelProps {
   nodes: AgentNode[]
   activeNodeId: string | null
+  metrics: AgentMetrics | null
 }
 
-export function AgentGraphPanel({ nodes, activeNodeId }: AgentGraphPanelProps) {
+export function AgentGraphPanel({ nodes, activeNodeId, metrics }: AgentGraphPanelProps) {
   const [selectedTab, setSelectedTab] = useState("graph")
 
   const totalTokens = nodes.reduce((sum, node) => sum + node.tokens, 0)
@@ -80,7 +81,7 @@ export function AgentGraphPanel({ nodes, activeNodeId }: AgentGraphPanelProps) {
 
         <TabsContent value="metrics" className="relative flex-1 m-0 p-0 flex-col min-h-0 data-[state=active]:flex">
           <div className="absolute inset-0 overflow-y-auto p-6">
-            <MetricsPanel totalTokens={totalTokens} totalTime={totalTime} nodes={nodes} />
+            <MetricsPanel totalTokens={totalTokens} totalTime={totalTime} nodes={nodes} metrics={metrics} />
           </div>
         </TabsContent>
       </Tabs>

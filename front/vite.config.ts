@@ -1,5 +1,5 @@
-import { defineConfig } from "npm:vite@^5.0.0";
-import react from "npm:@vitejs/plugin-react@^4.0.0";
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
 import path from "node:path";
 
 export default defineConfig({

@@ -3,15 +3,14 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from "recharts"
-import type { AgentNode } from "@/lib/types"
+import type { AgentNode, AgentMetrics } from "@/lib/types"
 
 interface MetricsPanelProps {
-  totalTokens: number
-  totalTime: number
   nodes: AgentNode[]
+  metrics: AgentMetrics | null
 }
 
-export function MetricsPanel({ totalTokens, totalTime, nodes }: MetricsPanelProps) {
+export function MetricsPanel({ nodes, metrics }: MetricsPanelProps) {
   const tokenData = nodes.map((node) => ({
     name: node.name.split(" ")[0],
     tokens: node.tokens,
@@ -24,7 +23,7 @@ export function MetricsPanel({ totalTokens, totalTime, nodes }: MetricsPanelProp
     { name: "Pending", value: nodes.filter((n) => n.status === "pending").length, color: "#475569" },
   ].filter((d) => d.value > 0)
 
-  if (nodes.length === 0) {
+  if (nodes.length === 0 && !metrics) {
     return (
       <div className="flex h-64 items-center justify-center text-center">
         <p className="text-sm text-muted-foreground">Metrics will appear once agents start processing</p>
@@ -38,27 +37,44 @@ export function MetricsPanel({ totalTokens, totalTime, nodes }: MetricsPanelProp
       <div className="grid grid-cols-2 gap-4">
         <Card className="bg-secondary/30 border-border">
           <CardHeader className="pb-2">
-            <CardTitle className="text-xs font-medium text-muted-foreground">Token Efficiency</CardTitle>
+            <CardTitle className="text-xs font-medium text-muted-foreground">Total Input Tokens</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-foreground">
-              {(totalTokens / Math.max(nodes.length, 1)).toFixed(0)}
+              {metrics?.input_token_count.toLocaleString() || "0"}
             </div>
-            <p className="text-xs text-muted-foreground">avg tokens/agent</p>
-            <Progress value={Math.min((totalTokens / 10000) * 100, 100)} className="mt-3 h-1.5" />
+            <p className="text-xs text-muted-foreground">
+              Current Input Tokens: {metrics?.current_input_token_count.toLocaleString() || "0"}
+            </p>
+            <Progress value={Math.min(((metrics?.input_token_count || 0) / 10000) * 100, 100)} className="mt-3 h-1.5" />
           </CardContent>
         </Card>
 
         <Card className="bg-secondary/30 border-border">
           <CardHeader className="pb-2">
-            <CardTitle className="text-xs font-medium text-muted-foreground">Response Time</CardTitle>
+            <CardTitle className="text-xs font-medium text-muted-foreground">Total Output Tokens</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-foreground">
-              {(totalTime / Math.max(nodes.length, 1)).toFixed(0)}ms
+              {metrics?.output_token_count.toLocaleString() || "0"}
             </div>
-            <p className="text-xs text-muted-foreground">avg time/agent</p>
-            <Progress value={Math.min((totalTime / 10000) * 100, 100)} className="mt-3 h-1.5" />
+            <p className="text-xs text-muted-foreground">
+              Time taken for current chunk: {(metrics?.current_time_taken || 0).toFixed(2)}s
+            </p>
+            <Progress value={Math.min(((metrics?.output_token_count || 0) / 10000) * 100, 100)} className="mt-3 h-1.5" />
+          </CardContent>
+        </Card>
+
+        <Card className="bg-secondary/30 border-border">
+          <CardHeader className="pb-2">
+            <CardTitle className="text-xs font-medium text-muted-foreground">Total Time Taken</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold text-foreground">
+              {(metrics?.total_time_taken || 0).toFixed(2)}s
+            </div>
+            <p className="text-xs text-muted-foreground">overall processing time</p>
+            <Progress value={Math.min(((metrics?.total_time_taken || 0) / 60) * 100, 100)} className="mt-3 h-1.5" />
           </CardContent>
         </Card>
       </div>

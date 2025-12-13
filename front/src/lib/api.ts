@@ -1,4 +1,4 @@
-export async function fetchApi(endpoint: string, method: string, data?: any) {
+export async function fetchApi(endpoint: string, method: string, data?: unknown) {
   const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:8000"; // Assuming backend runs on 8000
 
 

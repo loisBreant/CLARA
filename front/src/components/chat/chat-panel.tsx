@@ -8,7 +8,6 @@ import { Input } from "@/components/ui/input";
 import { Send, ImagePlus, Mic } from "lucide-react";
 import { ChatMessage } from "./chat-message";
 import { StreamingMessage } from "./streaming-message";
-import { ImageUploadPreview } from "./image-upload-preview";
 import type { Message } from "@/lib/types";
 
 interface ChatPanelProps {

@@ -3827,6 +3827,10 @@
     }
   },
   "workspace": {
+    "dependencies": [
+      "npm:@vitejs/plugin-react@4",
+      "npm:vite@5"
+    ],
     "packageJson": {
       "dependencies": [
         "npm:@hookform/resolvers@^3.10.0",
