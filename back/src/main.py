@@ -73,9 +73,8 @@ async def init_session() -> ChatSession:
 
 
 @app.post("/chat")
-async def chat(request: ChatRequest):
+async def chat(request: ChatRequest) -> StreamingResponse:
     agent = PlannerAgent()
-
     return StreamingResponse(agent.ask(request.question))
 
 
