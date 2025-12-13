@@ -6,4 +6,8 @@ COPY pyproject.toml ./
 
 RUN pip install uv
 
-CMD ["uv", "run", "src/main.py"]
+RUN uv sync
+
+COPY . .
+
+CMD ["uv", "run", "uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000"]

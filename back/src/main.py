@@ -19,7 +19,7 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["http://localhost:8080", "http://localhost:5173"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -58,11 +58,14 @@ class ChatRequest(BaseModel):
     question: str
     session_id: str
 
+class ChatSession(BaseModel):
+    session_id: uuid.UUID
+
 @app.post("/init-session")
-async def init_session():
+async def init_session() -> ChatSession:
     id = uuid.uuid4()
     chats[id] = {"planner": PlannerAgent()}
-    return {id: id}
+    return ChatSession(session_id=id)
 
 @app.post("/chat")
 async def chat(request: ChatRequest):
