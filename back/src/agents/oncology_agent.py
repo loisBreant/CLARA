@@ -1,7 +1,5 @@
-import json
 import os
 import sys
-from typing import Dict, Any
 
 # Hack pour imports relatifs si lancé depuis un script externe
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../")))
@@ -51,18 +49,18 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../.
 #
 #         prompt_coordinator = f"""
 #         Tu es un Oncologue Expert.
-#         
+#
 #         CONTEXTE PATIENT:
 #         - Age: {patient_data.get("age")}
 #         - Historique Chirurgical: {patient_data.get("surgical_history")}
-#         
+#
 #         ANALYSE IMAGE (IA Vision):
 #         - Résultat: {findings}
 #         - Confiance: {vision_result["confidence_score"]}
-#         
+#
 #         GUIDELINES MÉDICALES APPLICABLES:
 #         {guidelines}
-#         
+#
 #         TÂCHE:
 #         Rédige un compte-rendu diagnostique préliminaire concis.
 #         Analyse la compatibilité entre l'image et l'historique patient.
@@ -80,18 +78,18 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../.
 #
 #         prompt_critic = f"""
 #         Tu es un Auditeur de Sécurité Clinique (Safety Reviewer).
-#         
+#
 #         Ton but unique est de valider la cohérence logique du rapport ci-dessous.
-#         
+#
 #         DONNÉES D'ENTRÉE :
 #         1. Dossier Patient : {json.dumps(patient_data)}
 #         2. Résultat Brut Vision : {vision_result["clinical_summary"]}
 #         3. Rapport Proposé : {preliminary_report}
-#         
+#
 #         INSTRUCTIONS :
 #         - Vérifie si le rapport contredit l'historique chirurgical (ex: détection de tumeur sur un sein absent/mastectomisé).
 #         - Vérifie si la confiance de l'IA Vision est suffisante (> 0.8) pour affirmer un diagnostic.
-#         
+#
 #         FORMAT DE RÉPONSE :
 #         Commence ta réponse par "STATUT: VALIDE" ou "STATUT: REJETÉ".
 #         Ensuite, explique ton raisonnement en une phrase.

@@ -30,4 +30,3 @@ Format attendu :
     # TODO:
     # def ask(self, prompt: str):
     #     super().ask()
-        

@@ -51,7 +51,10 @@ USER_PROMPT: {prompt}\
             if event.usage:
                 self.metrics.output_token_count += event.usage.completion_tokens
                 self.metrics.input_token_count += event.usage.prompt_tokens
-                yield AgentResponse(metrics=self.metrics, chunk="").model_dump_json() + "\n"
+                yield (
+                    AgentResponse(metrics=self.metrics, chunk="").model_dump_json()
+                    + "\n"
+                )
                 continue
 
             if not event.choices:
@@ -62,7 +65,10 @@ USER_PROMPT: {prompt}\
             if chunk:
                 cur_token_count += 1
                 self.metrics.current_input_token_count = cur_token_count
-                yield AgentResponse(metrics=self.metrics, chunk=chunk).model_dump_json() + "\n"
+                yield (
+                    AgentResponse(metrics=self.metrics, chunk=chunk).model_dump_json()
+                    + "\n"
+                )
             self.metrics.current_input_token_count = 0
             self.metrics.current_time_taken = time.time() - start_time
 

@@ -17,7 +17,7 @@ app = FastAPI(
 )
 
 app.add_middleware(
-    CORSMiddleware, # type:ignore
+    CORSMiddleware,  # type:ignore
     allow_origins=["http://localhost:8080", "http://localhost:5173"],
     allow_credentials=True,
     allow_methods=["*"],
@@ -76,6 +76,7 @@ async def init_session() -> ChatSession:
 async def chat(request: ChatRequest) -> StreamingResponse:
     agent = PlannerAgent()
     return StreamingResponse(agent.ask(request.question))
+
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000, reload=True)
