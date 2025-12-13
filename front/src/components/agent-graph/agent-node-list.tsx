@@ -18,6 +18,9 @@ const iconMap: Record<string, React.ElementType> = {
   analysis: FileSearch,
   response: MessageSquare,
   diagnosis: Stethoscope,
+  planner: Brain,
+  executor: Stethoscope,
+  reactive: Zap,
 }
 
 export function AgentNodeList({ nodes, activeNodeId }: AgentNodeListProps) {

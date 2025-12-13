@@ -8,8 +8,9 @@ import { Header } from "./layout/header";
 import type {
   Message,
   AgentNode,
-  AgentMetrics,
+  AgentsMetrics,
   AgentResponse,
+  AgentData,
 } from "@/lib/types";
 
 export function MedicalAIChat() {
@@ -19,7 +20,7 @@ export function MedicalAIChat() {
   const [currentStreamingText, setCurrentStreamingText] = useState("");
   const [activeNodeId, setActiveNodeId] = useState<string | null>(null);
   const [sessionId, setSessionId] = useState<string | null>(null);
-  const [metrics, setMetrics] = useState<AgentMetrics | null>(null);
+  const [metrics, setMetrics] = useState<AgentsMetrics | null>(null);
 
   // Initialize session on component mount
   useEffect(() => {
@@ -47,8 +48,6 @@ export function MedicalAIChat() {
     setCurrentStreamingText("");
 
     try {
-      // Assuming the backend /chat endpoint returns a plain text stream
-      // We will accumulate the text and then add it as a complete message
       const response = await fetchApi("/chat", "POST", {
         question: text,
         session_id: sessionId,
@@ -60,29 +59,77 @@ export function MedicalAIChat() {
       }
 
       const decoder = new TextDecoder("utf-8");
-      // Loop to read the stream
-      //
       let acc = "";
+      
       while (true) {
         const { done, value } = await reader.read();
         if (done) {
           break;
         }
-        const text = decoder.decode(value, { stream: true });
+        const textChunk = decoder.decode(value, { stream: true });
+        
         try {
-          for (let line of text.split("\n")) {
-            if (!line) continue;
+          const lines = textChunk.split("\n");
+          for (let line of lines) {
+            if (!line.trim()) continue;
+            
             const agentResponse: AgentResponse = JSON.parse(line);
+            
+            // Update Metrics
             if (agentResponse.metrics) {
               setMetrics(agentResponse.metrics);
+              
+              // Update Agent Nodes based on metrics
+              const newNodes: AgentNode[] = Object.values(agentResponse.metrics.agents).map((agent: AgentData) => {
+                // Determine status
+                let status: "pending" | "running" | "complete" = "pending";
+                
+                // If this is the agent currently streaming
+                if (agent.id === agentResponse.id && isStreaming) {
+                   status = "running";
+                } else if (agent.time_taken > 0 || agent.output_token_count > 0) {
+                   status = "complete";
+                }
+                
+                // Determine parentId (first dependency)
+                const parentId = agent.dependencies.length > 0 ? agent.dependencies[0] : undefined;
+                
+                // Determine children (agents that depend on this one)
+                // This is O(N^2) but N is small (number of agents)
+                const childrenIds = Object.values(agentResponse.metrics.agents)
+                    .filter(other => other.dependencies.includes(agent.id))
+                    .map(other => other.id);
+
+                return {
+                  id: agent.id,
+                  name: formatAgentName(agent.type),
+                  type: agent.type,
+                  description: getAgentDescription(agent.type),
+                  status: status,
+                  tokens: agent.input_token_count + agent.output_token_count,
+                  duration: agent.time_taken * 1000, // s to ms
+                  parentId: parentId,
+                  childrenIds: childrenIds,
+                  messageIndex: messages.length + 1, // Current message index
+                };
+              });
+              
+              setAgentNodes(newNodes);
             }
+            
+            // Update Streaming Text
             if (agentResponse.chunk) {
               acc += agentResponse.chunk;
               setCurrentStreamingText((prev) => prev + agentResponse.chunk);
             }
+
+            // Update Active Node ID
+            if (agentResponse.id) {
+                setActiveNodeId(agentResponse.id);
+            }
           }
         } catch (error) {
-          throw "Cannot parse message chunk!: " + error
+          console.error("Error parsing stream chunk:", error);
         }
       }
 
@@ -91,6 +138,8 @@ export function MedicalAIChat() {
         content: acc,
       };
       setMessages((prev) => [...prev, aiMessage]);
+      setActiveNodeId(null); // Reset active node after completion
+      
     } catch (error) {
       console.error("Failed to send message:", error);
       setMessages((prev) => [
@@ -112,13 +161,14 @@ export function MedicalAIChat() {
     setIsStreaming(false);
     setCurrentStreamingText("");
     setActiveNodeId(null);
-    setSessionId(null); // Reset session ID on reset
-    setMetrics(null); // Reset metrics on reset
-    // Re-initialize session after reset
+    setSessionId(null);
+    setMetrics(null);
+    
+    // Re-initialize session
     const initSession = async () => {
       try {
         const response = await fetchApi("/init-session", "POST");
-        const data = await response.json(); // Explicitly parse JSON here
+        const data = await response.json();
         setSessionId(data.session_id);
       } catch (error) {
         console.error("Failed to re-initialize session:", error);
@@ -146,4 +196,22 @@ export function MedicalAIChat() {
       </div>
     </div>
   );
+}
+
+// Helpers for formatting
+function formatAgentName(type: string): string {
+    return type.charAt(0).toUpperCase() + type.slice(1) + " Agent";
+}
+
+function getAgentDescription(type: string): string {
+    switch (type) {
+        case "planner":
+            return "Analyzes the request and creates a step-by-step execution plan.";
+        case "executor":
+            return "Executes the tasks defined in the plan using available tools.";
+        case "reactive":
+            return "Reacts to immediate observations or clarifies ambiguities.";
+        default:
+            return "Performs specialized tasks for the medical analysis.";
+    }
 }

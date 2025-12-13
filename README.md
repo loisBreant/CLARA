@@ -1,10 +1,12 @@
-1. Install uv
-
-```bash
-curl -LsSf https://astral.sh/uv/install.sh | sh
-```
-
 This project C.L.A.R.A. stands for Clinical Logic & Agentic Reasoning Assistant.
+
+## Run the project
+
+### Dev
+
+Follow the instructions in the back/ and front/ directories.
+
+### Prod
 
 1. Run back and front
 
@@ -12,15 +14,17 @@ This project C.L.A.R.A. stands for Clinical Logic & Agentic Reasoning Assistant.
 docker compose up --build
 ```
 
-1.  Go on `http://localhost:8501` to view the front
+2.  Go on `http://localhost:8501` to view the front
 
 Agent:
+
 - 1. Planneur agent
 - 1. Executor agent
 - 1. Oncology agent
 - 1. Summary agent
 
 TODO:
+
 - [ ] Save previous messages
 - [ ] Agent memory
 - [ ] Connect agents

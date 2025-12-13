@@ -1,32 +1,90 @@
-from src.agents.agent import Agent
+import json
+from typing import List
+from dataclasses import dataclass
+from src.agents.agent import Agent, AgentResponse
+from src.core.models import AgentType, AgentsMetrics
 
+
+@dataclass
+class PlannedTask:
+    id: str
+    description: str
+    tool: str
+    args: str
+    dependencies: List[str]
+    estimated_time: int
+    status: str = "pending"
 
 class PlannerAgent(Agent):
     def __init__(self):
         system_prompt = """
 Tu es l'Architecte Clinique du système C.L.A.R.A.
-Ta tâche est de PLANIFIER l'analyse d'un dossier patient, mais NE PAS l'exécuter toi-même.
-
-Voici les OUTILS disponibles pour l'Exécuteur :
-1. VISION_TOOL(image_path) : Pour détecter une tumeur sur une radio.
-2. GUIDELINE_TOOL(query) : Pour chercher des protocoles officiels (RAG).
-3. STATS_TOOL(sql_query) : Pour comparer aux statistiques de la base de données (DuckDB).
-
-Règles :
-- Reçois le dossier patient et l'image en entrée.
-- Décompose le problème en étapes logiques.
-- Réponds UNIQUEMENT sous forme d'une liste JSON stricte.
-- N'écris aucune phrase d'introduction ou de conclusion.
-
-Format attendu :
+Ta tâche est de PLANIFIER l'analyse d'un dossier patient de manière STRATÉGIQUE.
+... (Règles inchangées) ...
+Format JSON attendu :
 [
-  {"step": 1, "tool": "NOM_OUTIL", "child_prompt": "argument_pour_outil", "description": "Pourquoi je fais ça"},
-  {"step": 2, "tool": "NOM_OUTIL", "args": "...", "description": "..."},
-  {"step": 3, "tool": "NO_TOOL", "args": "Synthèse", "description": "Rédiger le rapport final"}
-] 
+  {
+    "id": "step_1",
+    "description": "...",
+    "tool": "VISION_TOOL",
+    "args": "...",
+    "dependencies": [],
+    "estimated_time": 2
+  }
+]
 """
-        super().__init__(system_prompt)
+        super().__init__(system_prompt, AgentType.PLANNER, model="google/gemma-3-27b-it:free")
 
-    # TODO:
-    # def ask(self, prompt: str):
-    #     super().ask()
+    def plan(self, request: str, metrics: AgentsMetrics):
+        yield AgentResponse(metrics=metrics, id=self.data.id, chunk="Step 1 : Planification**\n\n")
+        prompt = f"Requête à planifier : {request}" 
+        full_response = ""
+        try:
+            for response in self.ask(prompt, metrics):
+                full_response += response.chunk
+                yield response
+        except Exception as e:
+            print(f"Erreur lors de la génération du plan : {e}")
+            return []
+        
+        tasks = self._parse_tasks(full_response)
+        
+        plan_desc = "\n**Plan généré :**\n"
+        for t in tasks:
+            plan_desc += f"- {t.id}: {t.description} ({t.tool})\n"
+        plan_desc += "\n"
+        yield AgentResponse(metrics=metrics, id=self.data.id, chunk=plan_desc)
+        
+        # yield _create_chunk(metrics, executor.data.id, "⚙️ **Phase 2 : Exécution du plan...**\n\n")
+        
+        # result_dict = executor.execute_plan(tasks, question, metrics)
+        # final_answer = result_dict.get('final_answer', "Pas de réponse générée.")
+        
+        # yield _create_chunk(metrics, executor.data.id, f"**Résultat Final :**\n\n{final_answer}")
+            
+         
+
+    def _parse_tasks(self, json_response: str) -> List[PlannedTask]:
+        try:
+            cleaned_response = json_response.replace("```json", "").replace("```", "").strip()
+            start = cleaned_response.find("[")
+            end = cleaned_response.rfind("]")
+            if start != -1 and end != -1:
+                cleaned_response = cleaned_response[start:end+1]
+                
+            data = json.loads(cleaned_response)
+            tasks = []
+            for item in data:
+                task = PlannedTask(
+                    id=item.get("id", str(item.get("step", "unknown"))),
+                    description=item.get("description", ""),
+                    tool=item.get("tool", "NO_TOOL"),
+                    args=item.get("args") or item.get("child_prompt", ""),
+                    dependencies=item.get("dependencies", []),
+                    estimated_time=item.get("estimated_time", 1)
+                )
+                tasks.append(task)
+            return tasks
+        except Exception as e:
+            print(f"Erreur de parsing du plan : {e}")
+            return []

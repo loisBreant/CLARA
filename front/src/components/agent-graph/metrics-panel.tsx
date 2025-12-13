@@ -2,26 +2,39 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from "recharts"
-import type { AgentNode, AgentMetrics } from "@/lib/types"
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, Legend } from "recharts"
+import type { AgentNode, AgentsMetrics } from "@/lib/types"
 
 interface MetricsPanelProps {
   nodes: AgentNode[]
-  metrics: AgentMetrics | null
+  metrics: AgentsMetrics | null
 }
 
 export function MetricsPanel({ nodes, metrics }: MetricsPanelProps) {
-  const tokenData = nodes.map((node) => ({
-    name: node.name.split(" ")[0],
-    tokens: node.tokens,
-    time: node.duration,
-  }))
+  const tokenData = nodes.map((node) => {
+    const agentData = metrics?.agents[node.id]
+    return {
+      name: node.name.split(" ")[0],
+      inputTokens: agentData?.input_token_count || 0,
+      outputTokens: agentData?.output_token_count || 0,
+      time: node.duration,
+    }
+  })
 
   const statusData = [
     { name: "Complete", value: nodes.filter((n) => n.status === "complete").length, color: "#22c55e" },
     { name: "Running", value: nodes.filter((n) => n.status === "running").length, color: "#6366f1" },
     { name: "Pending", value: nodes.filter((n) => n.status === "pending").length, color: "#475569" },
   ].filter((d) => d.value > 0)
+
+  // Calculate totals from metrics
+  const totalInputTokens = metrics 
+    ? Object.values(metrics.agents).reduce((sum, agent) => sum + agent.input_token_count, 0) 
+    : 0;
+  const totalOutputTokens = metrics 
+    ? Object.values(metrics.agents).reduce((sum, agent) => sum + agent.output_token_count, 0) 
+    : 0;
+  const totalTime = metrics?.total_time || 0;
 
   if (nodes.length === 0 && !metrics) {
     return (
@@ -41,12 +54,12 @@ export function MetricsPanel({ nodes, metrics }: MetricsPanelProps) {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-foreground">
-              {metrics?.input_token_count.toLocaleString() || "0"}
+              {totalInputTokens.toLocaleString()}
             </div>
             <p className="text-xs text-muted-foreground">
-              Current Input Tokens: {metrics?.current_input_token_count.toLocaleString() || "0"}
+              Across all agents
             </p>
-            <Progress value={Math.min(((metrics?.input_token_count || 0) / 10000) * 100, 100)} className="mt-3 h-1.5" />
+            <Progress value={Math.min((totalInputTokens / 10000) * 100, 100)} className="mt-3 h-1.5" />
           </CardContent>
         </Card>
 
@@ -56,12 +69,12 @@ export function MetricsPanel({ nodes, metrics }: MetricsPanelProps) {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-foreground">
-              {metrics?.output_token_count.toLocaleString() || "0"}
+              {totalOutputTokens.toLocaleString()}
             </div>
-            <p className="text-xs text-muted-foreground">
-              Time taken for current chunk: {(metrics?.current_time_taken || 0).toFixed(2)}s
+             <p className="text-xs text-muted-foreground">
+              Across all agents
             </p>
-            <Progress value={Math.min(((metrics?.output_token_count || 0) / 10000) * 100, 100)} className="mt-3 h-1.5" />
+            <Progress value={Math.min((totalOutputTokens / 10000) * 100, 100)} className="mt-3 h-1.5" />
           </CardContent>
         </Card>
 
@@ -71,10 +84,10 @@ export function MetricsPanel({ nodes, metrics }: MetricsPanelProps) {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-foreground">
-              {(metrics?.total_time_taken || 0).toFixed(2)}s
+              {totalTime.toFixed(2)}s
             </div>
             <p className="text-xs text-muted-foreground">overall processing time</p>
-            <Progress value={Math.min(((metrics?.total_time_taken || 0) / 60) * 100, 100)} className="mt-3 h-1.5" />
+            <Progress value={Math.min((totalTime / 60) * 100, 100)} className="mt-3 h-1.5" />
           </CardContent>
         </Card>
       </div>
@@ -98,7 +111,9 @@ export function MetricsPanel({ nodes, metrics }: MetricsPanelProps) {
                     color: "#f1f5f9",
                   }}
                 />
-                <Bar dataKey="tokens" fill="#6366f1" radius={[0, 4, 4, 0]} />
+                <Legend />
+                <Bar dataKey="inputTokens" name="Input Tokens" stackId="a" fill="#6366f1" radius={[0, 0, 0, 0]} />
+                <Bar dataKey="outputTokens" name="Output Tokens" stackId="a" fill="#22c55e" radius={[0, 4, 4, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>

@@ -1,14 +1,20 @@
 import uvicorn
 import os
 import uuid
+import time
+from uuid import UUID
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+from typing import Generator
 
 from fastapi.responses import StreamingResponse
 
 from src.agents.planner import PlannerAgent
+from src.agents.executor import ExecutorAgent
+from src.agents.agent import AgentResponse
+from src.core.models import AgentsMetrics
 
 app = FastAPI(
     title="Onco-Agent API",
@@ -38,24 +44,6 @@ def health_check():
     return {"status": "running", "mode": "async"}
 
 
-# @app.get("/metrics")
-# def get_metrics():
-#     if not os.path.exists(log_file):
-#         return {"total_cost_usd": 0.0, "total_tokens": 0, "logs": []}
-#     try:
-#         df = pd.read_csv(log_file)
-#         if df.empty:
-#             return {"total_cost_usd": 0.0, "total_tokens": 0, "logs": []}
-#
-#         total_cost = pd.to_numeric(df['estimated_cost_usd'], errors='coerce').sum()
-#         total_tokens = pd.to_numeric(df['total_tokens'], errors='coerce').sum()
-#         logs = df.tail(50).fillna("").to_dict(orient="records")
-#
-#         return {"total_cost_usd": total_cost, "total_tokens": int(total_tokens), "logs": logs}
-#     except Exception as e:
-#         return {"error": str(e)}
-
-
 class ChatRequest(BaseModel):
     question: str
     session_id: str
@@ -68,15 +56,38 @@ class ChatSession(BaseModel):
 @app.post("/init-session")
 async def init_session() -> ChatSession:
     id = uuid.uuid4()
-    chats[id] = {"planner": PlannerAgent()}
+    # On instancie les deux agents nécessaires pour la session
+    chats[id] = {
+        "planner": PlannerAgent(),
+        "executor": ExecutorAgent()
+    }
     return ChatSession(session_id=id)
 
+def chat_generator(question: str) -> Generator[str, None, None]:
+    """
+    Générateur qui orchestre Planner + Executor et stream les résultats
+    au format attendu par le frontend (AgentResponse JSONs).
+    """
+    planner = PlannerAgent()
+    executor = ExecutorAgent()
+    metrics = AgentsMetrics()
+    start_time = time.time()
+ 
+    try:
+        for response in planner.plan(question, metrics):
+            yield create_chunk(response)
+    except Exception as e:
+        yield create_chunk(AgentResponse(metrics=metrics, id=planner.data.id, chunk=f"**Erreur :** {str(e)}"))
+
+    metrics.total_time = time.time() - start_time
+    yield AgentResponse(metrics=metrics, id=executor.data.id, chunk="").model_dump_json() + "\n"
+
+def create_chunk(agent_response: AgentResponse) -> str:
+    return agent_response.model_dump_json() + "\n"
 
 @app.post("/chat")
 async def chat(request: ChatRequest) -> StreamingResponse:
-    agent = PlannerAgent()
-    return StreamingResponse(agent.ask(request.question))
-
+    return StreamingResponse(chat_generator(request.question), media_type="application/x-ndjson")
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000, reload=True)
