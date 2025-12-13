@@ -44,7 +44,7 @@ export function ChatPanel({
         }
     };
 
-    console.log(currentStreamingText);
+
     const handleImageUploadClick = () => {
         fileInputRef.current?.click();
     };

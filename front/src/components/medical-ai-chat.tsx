@@ -13,18 +13,15 @@ export function MedicalAIChat() {
     const [isStreaming, setIsStreaming] = useState(false);
     const [currentStreamingText, setCurrentStreamingText] = useState("");
     const [activeNodeId, setActiveNodeId] = useState<string | null>(null);
-    const [conversationIndex, setConversationIndex] = useState(0); // Keep for demo if needed, otherwise remove
     const [sessionId, setSessionId] = useState<string | null>(null);
 
     // Initialize session on component mount
     useEffect(() => {
         const initSession = async () => {
-            console.log("Attempting to initialize session...");
             try {
                 const response = await fetchApi("/init-session", "POST");
                 const data = await response.json(); // Explicitly parse JSON here
                 setSessionId(data.session_id);
-                console.log("Session initialized with ID:", data.session_id);
             } catch (error) {
                 console.error("Failed to initialize session:", error);
             }
@@ -33,7 +30,6 @@ export function MedicalAIChat() {
     }, []);
 
     const handleSendMessage = async (text: string) => {
-        console.log("handleSendMessage called. Current sessionId:", sessionId);
         if (!sessionId) {
             console.error("No session ID available. Message not sent.");
             return;
@@ -58,24 +54,26 @@ export function MedicalAIChat() {
             }
 
             const decoder = new TextDecoder("utf-8");
-            let receivedText = "";
-
             // Loop to read the stream
+            //
+            let acc = "";
             while (true) {
                 const { done, value } = await reader.read();
                 if (done) {
                     break;
                 }
                 const chunk = decoder.decode(value, { stream: true });
+                acc += chunk;
                 setCurrentStreamingText((prev) => prev + chunk);
             }
 
-            // Once the stream is done, move the accumulated text to messages
-            const aiMessage: Message = { role: "assistant", content: receivedText };
+            const aiMessage: Message = {
+                role: "assistant",
+                content: acc,
+            };
             setMessages((prev) => [...prev, aiMessage]);
         } catch (error) {
             console.error("Failed to send message:", error);
-            // Optionally add an error message to the chat
             setMessages((prev) => [
                 ...prev,
                 {
@@ -92,7 +90,6 @@ export function MedicalAIChat() {
     const handleReset = () => {
         setMessages([]);
         setAgentNodes([]);
-        setConversationIndex(0);
         setIsStreaming(false);
         setCurrentStreamingText("");
         setActiveNodeId(null);
@@ -103,7 +100,6 @@ export function MedicalAIChat() {
                 const response = await fetchApi("/init-session", "POST");
                 const data = await response.json(); // Explicitly parse JSON here
                 setSessionId(data.session_id);
-                console.log("Session re-initialized with ID:", data.session_id);
             } catch (error) {
                 console.error("Failed to re-initialize session:", error);
             }
