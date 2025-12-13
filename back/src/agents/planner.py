@@ -1,7 +1,7 @@
-from src.agents.agent import Agent 
+from src.agents.agent import Agent
+
 
 class PlannerAgent(Agent):
- 
     def __init__(self):
         system_prompt = """
 Tu es l'Architecte Clinique du système C.L.A.R.A.

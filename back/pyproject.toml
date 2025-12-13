@@ -20,4 +20,5 @@ dev = [
     "ipython>=9.8.0",
     "python-lsp-server>=1.14.0",
     "ruff>=0.14.9",
+    "ty>=0.0.1a34",
 ]
