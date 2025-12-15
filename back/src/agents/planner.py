@@ -1,59 +1,58 @@
-import json
-from core.llm_client import OllamaClient 
+from src.agents.agent import Agent, AgentResponse
+from src.agents.executor import ExecutorAgent, Tasks
+from src.core.models import AgentType, AgentsMetrics
 
-class PlannerAgent:
-    def __init__(self, client: OllamaClient):
-        self.client = client
-        self.system_prompt = """
-Tu es l'Architecte Clinique du système C.L.A.R.A.
-Ta tâche est de PLANIFIER l'analyse d'un dossier patient, mais NE PAS l'exécuter toi-même.
 
-Voici les OUTILS disponibles pour l'Exécuteur :
-1. VISION_TOOL(image_path) : Pour détecter une tumeur sur une radio.
-2. GUIDELINE_TOOL(query) : Pour chercher des protocoles officiels (RAG).
-3. STATS_TOOL(sql_query) : Pour comparer aux statistiques de la base de données (DuckDB).
 
-Règles :
-- Reçois le dossier patient et l'image en entrée.
-- Décompose le problème en étapes logiques.
-- Réponds UNIQUEMENT sous forme d'une liste JSON stricte.
-- N'écris aucune phrase d'introduction ou de conclusion.
-
-Format attendu :
+class PlannerAgent(Agent):
+    def __init__(self):
+        system_prompt = """
+Tu es le planner Clinique du système C.L.A.R.A.
+Ta tâche est de PLANIFIER l'analyse d'un dossier patient de manière STRATÉGIQUE.
+Si il n'y a aucune tache complexe a faire, et seulement une simple question, n'hesite pas a rendre une liste de taches vide et simplement repondre directement.
+Format JSON attendu :
 [
-  {"step": 1, "tool": "NOM_OUTIL", "args": "argument_pour_outil", "description": "Pourquoi je fais ça"},
-  {"step": 2, "tool": "NOM_OUTIL", "args": "...", "description": "..."},
-  {"step": 3, "tool": "NO_TOOL", "args": "Synthèse", "description": "Rédiger le rapport final"}
-] 
+  {
+    "id": "step_1",
+    "title": "...",
+    "description": "...",
+    "dependencies": [],
+  }
+]
 """
-    def generate_plan(self, patient_data: dict, image_path: str, scenario_id: str):
-        # 1. Construction du message utilisateur
-        user_msg = f"""
-        NOUVEAU CAS PATIENT :
-        Nom : {patient_data.get('nom')}
-        Age : {patient_data.get('age')}
-        Symptômes : {patient_data.get('symptomes')}
-        Chemin Image : {image_path}
-        
-        Génère le plan d'action JSON.
-        """
+        super().__init__(system_prompt, AgentType.PLANNER)
+        self.logs = []
 
-        # 2. Appel au LLM (Gemma 2)
-        # On loggue l'appel ici pour le fichier costs.csv 
-        response_text = self.client.call_model(
-            prompt=user_msg, 
-            system_instruction=self.system_prompt,
-            scenario_id=scenario_id,
-            call_id="planner_01"
-        )
-
-        # 3. Nettoyage et Parsing (Crucial avec les LLM locaux)
+    def plan(self, request: str, metrics: AgentsMetrics):
+        yield AgentResponse(metrics=metrics, id=self.agent_data.id, chunk="Step 1 : Planification**\n\n")
+        prompt = f"Requête à planifier : {request}" 
+        full_response = ""
         try:
-            # Parfois Gemma ajoute des ```json ... ```, on les retire
-            clean_json = response_text.replace("```json", "").replace("```", "").strip()
-            plan = json.loads(clean_json)
-            return plan
-        except json.JSONDecodeError:
-            print(f"Erreur de format JSON du Planner: {response_text}")
-            # Fallback : On retourne un plan par défaut de sécurité
-            return [{"step": 1, "tool": "NO_TOOL", "args": "Erreur Planification", "description": "Echec du planner"}]
+            for response in self.ask(prompt, metrics):
+                full_response += response.chunk
+                yield response
+        except Exception as e:
+            print(f"Erreur lors de la génération du plan : {e}")
+            return []
+
+        self.logs += full_response
+        tasks = Tasks(full_response)
+        yield AgentResponse(metrics=metrics, id=self.agent_data.id, chunk=tasks.render_tasks())
+          
+        for t in tasks:
+            executor = ExecutorAgent()
+            
+            full_response = ""
+            for response in executor.execute_task(t, tasks, metrics):
+                full_response += response
+                yield response
+
+            self.logs += full_response
+            
+        # result_dict = executor.execute_plan(tasks, question, metrics)
+        # final_answer = result_dict.get('final_answer', "Pas de réponse générée.")
+        
+        # yield _create_chunk(metrics, executor.data.id, f"**Résultat Final :**\n\n{final_answer}")
+            
+         
+

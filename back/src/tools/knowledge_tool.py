@@ -2,14 +2,14 @@ class KnowledgeTool:
     """
     Outil de recherche dans les guidelines cliniques (RAG simulé ou réel).
     """
-    
+
     @staticmethod
     def search_guidelines(query: str) -> str:
         """
         Simule une recherche vectorielle ou mot-clé dans une base de connaissances.
         """
         # Dans un vrai projet, ici on ferait : vector_db.search(query)
-        
+
         # Base de connaissances simulée
         if "BIRADS 4" in query.upper() or "MASSE" in query.upper():
             return (
