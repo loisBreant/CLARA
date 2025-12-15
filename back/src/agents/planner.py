@@ -1,6 +1,6 @@
 from src.agents.agent import Agent, AgentResponse
 from src.agents.executor import ExecutorAgent, Tasks
-from src.core.models import AgentType, AgentsMetrics
+from src.core.models import AgentType, AgentData, AgentsMetrics
 
 
 
@@ -41,13 +41,12 @@ Format JSON attendu :
           
         for t in tasks:
             executor = ExecutorAgent()
+            metrics.agents[executor.agent_data.id] = executor.agent_data
             
-            full_response = ""
             for response in executor.execute_task(t, tasks, metrics):
-                full_response += response
                 yield response
 
-            self.logs += full_response
+            self.logs += self.last_response
             
         # result_dict = executor.execute_plan(tasks, question, metrics)
         # final_answer = result_dict.get('final_answer', "Pas de réponse générée.")
