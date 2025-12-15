@@ -64,7 +64,7 @@ class AgentComparator:
                 'reactive': {
                     'response': reactive_response, 
                     'quality_metrics': reactive_quality,
-                    'execution_metrics': metrics.agents.get(str(self.reactive.data.id))
+                    'execution_metrics': metrics.agents.get(str(self.reactive.agent_data.id))
                 },
                 'planning': {
                     'response': planning_response, 

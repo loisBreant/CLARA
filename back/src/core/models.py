@@ -8,14 +8,22 @@ class AgentType(Enum):
     EXECUTOR = "executor"
     REACTIVE = "reactive"
 
+class Status(Enum):
+    QUEUED = "queued"
+    PENDING = "pending"
+    FINISHED = "finished"
+    BLOCKED = "blocked"
+
 class AgentData(BaseModel):
     id: UUID
     type: AgentType
     dependencies: List[UUID] = []
+    status: Status = Status.QUEUED
     
     input_token_count: float = 0.0
     output_token_count: float = 0.0
     time_taken: float = 0.0
+
 
 class AgentsMetrics(BaseModel):
     agents: Dict[UUID, AgentData] = {}

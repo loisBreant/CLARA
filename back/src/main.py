@@ -2,7 +2,6 @@ import uvicorn
 import os
 import uuid
 import time
-from uuid import UUID
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -69,7 +68,6 @@ def chat_generator(question: str) -> Generator[str, None, None]:
     au format attendu par le frontend (AgentResponse JSONs).
     """
     planner = PlannerAgent()
-    executor = ExecutorAgent()
     metrics = AgentsMetrics()
     start_time = time.time()
  
@@ -77,10 +75,11 @@ def chat_generator(question: str) -> Generator[str, None, None]:
         for response in planner.plan(question, metrics):
             yield create_chunk(response)
     except Exception as e:
-        yield create_chunk(AgentResponse(metrics=metrics, id=planner.data.id, chunk=f"**Erreur :** {str(e)}"))
+        yield create_chunk(AgentResponse(metrics=metrics, id=planner.agent_data.id, chunk=f"**Erreur :** {str(e)}"))
+        raise e
 
     metrics.total_time = time.time() - start_time
-    yield AgentResponse(metrics=metrics, id=executor.data.id, chunk="").model_dump_json() + "\n"
+    # yield AgentResponse(metrics=metrics, id=executor.data.id, chunk="").model_dump_json() + "\n"
 
 def create_chunk(agent_response: AgentResponse) -> str:
     return agent_response.model_dump_json() + "\n"

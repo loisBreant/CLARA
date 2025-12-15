@@ -1,12 +1,10 @@
-from typing import Generator, Optional, Dict
+from typing import Generator, Optional
 from openrouter import OpenRouter
 from dotenv import dotenv_values
 from openrouter import components
 import time
 import uuid
 from src.core.models import AgentData, AgentType, AgentsMetrics, AgentResponse
-from pydantic import BaseModel
-from uuid import UUID
 
 config = dotenv_values(".env")
 
@@ -15,19 +13,20 @@ class Agent:
         self.client = OpenRouter(api_key=config["OPENROUTER_API_KEY"])
         self.model = model
         self.system_prompt = system_prompt
+        self.last_response: str = ""
         
-        self.data = AgentData(
+        self.agent_data = AgentData(
             id=uuid.uuid4(),
             type=agent_type
         )
 
     def ask(self, prompt: str, metrics: AgentsMetrics) -> Generator[AgentResponse, None, None]:
-        metrics.agents[self.data.id] = self.data
+        self.last_response = ""
+        metrics.agents[self.agent_data.id] = self.agent_data
 
-        # Store baseline values to accumulate
-        base_input_tokens = self.data.input_token_count
-        base_output_tokens = self.data.output_token_count
-        base_time_taken = self.data.time_taken
+        base_input_tokens = self.agent_data.input_token_count
+        base_output_tokens = self.agent_data.output_token_count
+        base_time_taken = self.agent_data.time_taken
 
         messages = [
             {"role": "system", "content": self.system_prompt},
@@ -45,19 +44,16 @@ class Agent:
         current_output_tokens = 0
 
         for event in stream:
-            # Calculate duration for this specific request
             request_duration = time.time() - start_time
             
-            # Update cumulative time
-            self.data.time_taken = base_time_taken + request_duration
+            self.agent_data.time_taken = base_time_taken + request_duration
             
             if event.usage:
-                # Update with precise usage data
-                self.data.input_token_count = base_input_tokens + event.usage.prompt_tokens
-                self.data.output_token_count = base_output_tokens + event.usage.completion_tokens
+                self.agent_data.input_token_count = base_input_tokens + event.usage.prompt_tokens
+                self.agent_data.output_token_count = base_output_tokens + event.usage.completion_tokens
                 
-                metrics.agents[self.data.id] = self.data
-                yield AgentResponse(metrics=metrics, id=self.data.id, chunk="")
+                metrics.agents[self.agent_data.id] = self.agent_data
+                yield AgentResponse(metrics=metrics, id=self.agent_data.id, chunk="")
                 continue
 
             if not event.choices:
@@ -67,13 +63,13 @@ class Agent:
 
             if chunk:
                 current_output_tokens += 1
-                # Update with estimated output tokens (added to base)
-                self.data.output_token_count = base_output_tokens + current_output_tokens
+                self.agent_data.output_token_count = base_output_tokens + current_output_tokens
                 
-                metrics.agents[self.data.id] = self.data
-                yield AgentResponse(metrics=metrics, id=self.data.id, chunk=chunk)
+                metrics.agents[self.agent_data.id] = self.agent_data
+                self.last_response += chunk
+                yield AgentResponse(metrics=metrics, id=self.agent_data.id, chunk=chunk)
 
-        # Final time update
         request_duration = time.time() - start_time
-        self.data.time_taken = base_time_taken + request_duration
-        metrics.agents[self.data.id] = self.data
+        self.agent_data.time_taken = base_time_taken + request_duration
+        metrics.agents[self.agent_data.id] = self.agent_data
+
