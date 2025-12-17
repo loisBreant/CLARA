@@ -45,6 +45,7 @@ Format JSON attendu :
 ]
 """
         super().__init__(system_prompt, AgentType.PLANNER)
+        self.logs = []
 
     def plan(self, request: str, metrics: AgentsMetrics):
         yield AgentResponse(metrics=metrics, id=self.agent_data.id, chunk="**Phase 1 : Planification Stratégique**\n\n")
@@ -82,21 +83,26 @@ Format JSON attendu :
                 
                 yield AgentResponse(metrics=metrics, id=executor.agent_data.id, chunk="\n\n")
                 last_agent_id = executor.agent_data.id
+                self.logs.append(task_result_accumulated)
                 # FIXME: add call to the planner to be sur it's ok
 
-            # Create final response
-#             yield AgentResponse(metrics=metrics, id=self.agent_data.id, chunk="**Phase 3 : Synthèse et Réponse Finale**\n\n")
-#             reactive = ReactiveAgent()
-#             reactive.agent_data.dependencies = [last_agent_id]
-#             metrics.agents[reactive.agent_data.id] = reactive.agent_data
-#             
-#             final_prompt = f"""
-# Voici le contexte de la demande et les résultats des tâches exécutées.
-# Synthétise tout cela pour donner une réponse finale complète et claire à l'utilisateur.
-#
-# """            
-#             for response in reactive.ask(final_prompt, metrics):
-#                 yield response
+            yield AgentResponse(metrics=metrics, id=self.agent_data.id, chunk="**Phase 3 : Synthèse et Réponse Finale**\n\n")
+            reactive = ReactiveAgent()
+            reactive.agent_data.dependencies = [last_agent_id]
+            metrics.agents[reactive.agent_data.id] = reactive.agent_data
+            
+            final_prompt = f"""
+Voici le contexte de la demande et les résultats des tâches exécutées.
+Synthétise tout cela pour donner une réponse finale complète et claire à l'utilisateur.
+
+Voici l'historique des conversations :
+user-prompt: {prompt}\n
+tasks: {tasks.render_tasks()}\n
+agents-response: {self.logs}\n
+
+"""            
+            for response in reactive.ask(final_prompt, metrics):
+                yield response
 
  
         # self.status = Status.FINISHED

@@ -90,11 +90,11 @@ export function MedicalAIChat() {
                 // Determine status
                 let status: "pending" | "running" | "complete" = "pending";
                 
-                // If this is the agent currently streaming (we know we are streaming here)
-                if (agent.id === agentResponse.id) {
-                   status = "running";
-                } else if (agent.time_taken > 0 || agent.output_token_count > 0) {
+                // Prioritize completion status
+                if (agent.status === "finished" || agent.time_taken > 0) {
                    status = "complete";
+                } else if (agent.id === agentResponse.id) {
+                   status = "running";
                 }
                 
                 // Determine parentId (first dependency)

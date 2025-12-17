@@ -3,7 +3,7 @@ from src.core.models import AgentType, AgentsMetrics
 
 class ReactiveAgent(Agent):
     def __init__(self):
-        system_prompt = f"""\
+        system_prompt = """\
 Tu es l'Interface Clinique C.L.A.R.A (Reactive Agent).
 Ton rôle est de synthétiser les résultats de l'exécution du plan pour fournir une RÉPONSE FINALE cohérente et professionnelle à l'utilisateur.
 

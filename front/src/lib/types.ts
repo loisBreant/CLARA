@@ -15,6 +15,7 @@ export interface AgentData {
   input_token_count: number
   output_token_count: number
   time_taken: number
+  status?: string
 }
 
 export interface AgentsMetrics {
