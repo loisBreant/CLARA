@@ -126,7 +126,7 @@ function generateMermaidDefinition(
     // Add nodes with properly escaped labels
     nodes.forEach((node) => {
       // const icon = emojiMap[node.type] || '⚙️'; // Default icon
-      const htmlLabel = `<div style="padding: 8px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #f1f5f9;"><span style="font-weight: 600; font-size: 1.1em; margin-top: 4px;">${node.name}</span><span style="font-size: 0.8em; opacity: 0.8; margin-top: 2px;">${node.tokens}tok &bull; ${node.duration}ms</span></div>`;
+      const htmlLabel = `<div style="padding: 8px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #f1f5f9;"><span style="font-weight: 600; font-size: 1.1em; margin-top: 4px;">${node.name}</span><span style="font-size: 0.8em; opacity: 0.8; margin-top: 2px;">${(node.duration / 1000).toFixed(1)}s &bull; ${node.tokens}tok</span></div>`;
 
       // Mermaid requires HTML labels to be wrapped in "%%" for explicit HTML,
       // or to use a specific syntax for different node types if htmlLabels is true.

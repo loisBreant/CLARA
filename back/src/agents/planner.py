@@ -1,3 +1,4 @@
+from dns.opcode import STATUS
 from src.agents.agent import Agent, AgentResponse
 from src.agents.executor import ExecutorAgent
 from src.agents.reactive import ReactiveAgent
@@ -67,7 +68,9 @@ Format JSON attendu :
             last_agent_id = self.agent_data.id
 
             for t in tasks:
-                executor = ExecutorAgent(t.step_id)
+                print (t.dependencies)
+                executor = ExecutorAgent(t)
+                print(f"coucou {executor.agent_data.dependencies}")
                 metrics.agents[executor.agent_data.id] = executor.agent_data
                 
                 task_result_accumulated = ""
@@ -82,20 +85,21 @@ Format JSON attendu :
                 # FIXME: add call to the planner to be sur it's ok
 
             # Create final response
-            yield AgentResponse(metrics=metrics, id=self.agent_data.id, chunk="**Phase 3 : Synthèse et Réponse Finale**\n\n")
-            reactive = ReactiveAgent()
-            reactive.agent_data.dependencies = [last_agent_id]
-            metrics.agents[reactive.agent_data.id] = reactive.agent_data
-            
-            final_prompt = f"""
-Voici le contexte de la demande et les résultats des tâches exécutées.
-Synthétise tout cela pour donner une réponse finale complète et claire à l'utilisateur.
-
-"""            
-            for response in reactive.ask(final_prompt, metrics):
-                yield response
+#             yield AgentResponse(metrics=metrics, id=self.agent_data.id, chunk="**Phase 3 : Synthèse et Réponse Finale**\n\n")
+#             reactive = ReactiveAgent()
+#             reactive.agent_data.dependencies = [last_agent_id]
+#             metrics.agents[reactive.agent_data.id] = reactive.agent_data
+#             
+#             final_prompt = f"""
+# Voici le contexte de la demande et les résultats des tâches exécutées.
+# Synthétise tout cela pour donner une réponse finale complète et claire à l'utilisateur.
+#
+# """            
+#             for response in reactive.ask(final_prompt, metrics):
+#                 yield response
 
  
         # self.status = Status.FINISHED
-        # metrics.agents[self.agent_data.id].status = self.status
-        # yield AgentResponse(metrics=metrics, id=self.agent_data.id, chunk="")
+        self.agent_data.status = Status.FINISHED
+        metrics.agents[self.agent_data.id] = self.agent_data
+        yield AgentResponse(metrics=metrics, id=self.agent_data.id, chunk="")

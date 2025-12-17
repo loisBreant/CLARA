@@ -83,7 +83,7 @@ export function AgentNodeList({ nodes, activeNodeId }: AgentNodeListProps) {
                   </div>
                   <div className="flex items-center gap-1.5 text-xs">
                     <Clock className="h-3 w-3 text-chart-1" />
-                    <span className="text-muted-foreground">{node.duration}ms</span>
+                    <span className="text-muted-foreground">{(node.duration / 1000).toFixed(1)}s</span>
                   </div>
                 </div>
               </div>

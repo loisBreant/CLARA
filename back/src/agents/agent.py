@@ -5,21 +5,28 @@ from openrouter import components
 import time
 import uuid
 from src.agents.telemetrics import append_to_csv
-from src.core.models import AgentData, AgentType, AgentsMetrics, AgentResponse
+from src.core.models import AgentData, AgentType, AgentsMetrics, AgentResponse, Status
 
 config = dotenv_values(".env")
 
 class Agent:
-    def __init__(self, system_prompt: str, agent_type: AgentType, model: str = "google/gemma-3-27b-it:free", id : str = str(uuid.uuid4())):
+    def __init__(self, system_prompt: str, agent_type: AgentType,  agent_data: AgentData = None, model: str = "google/gemma-3-27b-it:free"):
         self.client = OpenRouter(api_key=config["OPENROUTER_API_KEY"])
         self.model = model
         self.system_prompt = system_prompt
         self.last_response: str = ""
                     
-        self.agent_data = AgentData(
-            id=id,
+        self.agent_data = agent_data if agent_data else AgentData(
+            id=str(uuid.uuid4()),
             type=agent_type,
         )
+
+    def update_status(self, new_status: Status, metrics: AgentsMetrics, task = None):
+        self.agent_data.status = new_status
+        metrics.agents[self.agent_data.id] = self.agent_data
+        if task:
+            task.status = new_status
+
 
     def ask(self, prompt: str, metrics: AgentsMetrics) -> Generator[AgentResponse, None, None]:
         self.last_response = ""

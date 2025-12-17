@@ -1,7 +1,8 @@
+from asyncio import Task
 from dataclasses import dataclass
 from typing import Dict, List, Any, Optional, Callable
 from src.agents.agent import Agent, AgentResponse
-from src.core.models import AgentType, AgentsMetrics, Status
+from src.core.models import AgentData, AgentType, AgentsMetrics, Status
 from src.core.task import Tasks, PlannedTask
 from src.agents.memory import MemoryAgent
 from src.tools.test import add
@@ -45,7 +46,18 @@ class ToolExecutor:
 
 
 class ExecutorAgent(Agent):
-    def __init__(self, id: str):
+    def __init__(self, agent_data: PlannedTask | AgentData = None):
+        real_agent_data = None
+        if isinstance(agent_data, PlannedTask):
+            real_agent_data = AgentData(
+                id=agent_data.step_id,
+                type=AgentType.EXECUTOR,
+                dependencies=agent_data.dependencies,
+                status=agent_data.status,
+            )
+        else:
+            real_agent_data = agent_data
+
         system_prompt = """
 
 Role: System 
@@ -76,7 +88,7 @@ FORMAT JSON OBLIGATOIRE :
     }
 ]
 """
-        super().__init__(system_prompt, AgentType.EXECUTOR, model="google/gemma-3-27b-it:free", id=id)
+        super().__init__(system_prompt, AgentType.EXECUTOR,  real_agent_data, model="google/gemma-3-27b-it:free")
 
     def parse_tools(self, json_response: str) -> List[ToolExecutor]:
         try:
@@ -137,17 +149,15 @@ FORMAT JSON OBLIGATOIRE :
         
         # 1. Validation Dépendances
         if tasks.dependencies_met(task):
-            metrics.agents[self.agent_data.id].status = Status.PENDING
-            task.status = Status.PENDING
+            # Update status
+            self.update_status(Status.PENDING, metrics, task)
             
             for response in self.ask(task.description, metrics):
                 yield response
 
-            metrics.agents[self.agent_data.id].status = Status.FINISHED
-            task.status = Status.FINISHED
+            self.update_status(Status.FINISHED, metrics, task)
         else:
-            task.status = Status.BLOCKED
-            metrics.agents[self.agent_data.id].status = Status.BLOCKED
+            self.update_status(Status.BLOCKED, metrics, task)
             yield AgentResponse(metrics=metrics, id=self.agent_data.id, chunk="\n\n**Erreur : Dépendances non satisfaites.**")
             return
 
