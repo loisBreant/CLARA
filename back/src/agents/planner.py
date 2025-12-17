@@ -1,4 +1,3 @@
-from dns.opcode import STATUS
 from src.agents.agent import Agent, AgentResponse
 from src.agents.executor import ExecutorAgent
 from src.agents.reactive import ReactiveAgent
@@ -71,7 +70,6 @@ Format JSON attendu :
             for t in tasks:
                 print (t.dependencies)
                 executor = ExecutorAgent(t)
-                print(f"coucou {executor.agent_data.dependencies}")
                 metrics.agents[executor.agent_data.id] = executor.agent_data
                 
                 task_result_accumulated = ""

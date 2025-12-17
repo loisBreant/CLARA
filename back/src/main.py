@@ -11,7 +11,6 @@ from typing import Generator
 from fastapi.responses import StreamingResponse
 
 from src.agents.planner import PlannerAgent
-from src.agents.executor import ExecutorAgent
 from src.agents.agent import AgentResponse
 from src.core.models import AgentsMetrics
 

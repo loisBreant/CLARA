@@ -1,6 +1,5 @@
-from asyncio import Task
 from dataclasses import dataclass
-from typing import Dict, List, Any, Optional, Callable
+from typing import Dict, List, Any, Callable
 from src.agents.agent import Agent, AgentResponse
 from src.core.models import AgentData, AgentType, AgentsMetrics, Status
 from src.core.task import Tasks, PlannedTask

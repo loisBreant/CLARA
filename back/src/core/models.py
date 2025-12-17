@@ -1,6 +1,5 @@
 from pydantic import BaseModel
 from enum import Enum
-from uuid import UUID
 from typing import List, Dict
 
 class AgentType(Enum):
