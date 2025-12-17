@@ -73,7 +73,8 @@ class Tasks:
         return sorted_tasks
 
     def dependencies_met(self, task: PlannedTask) -> bool:
-        return all(dep in self.tasks for dep in task.dependencies)
+        task_ids = {t.id for t in self.tasks}
+        return all(dep in task_ids for dep in task.dependencies)
 
     def render_tasks(self) -> str:
         plan_desc = "\n**Plan généré :**\n"

@@ -11,6 +11,7 @@ import type {
   AgentsMetrics,
   AgentResponse,
   AgentData,
+  AgentType,
 } from "@/lib/types";
 
 export function MedicalAIChat() {
@@ -59,7 +60,11 @@ export function MedicalAIChat() {
       }
 
       const decoder = new TextDecoder("utf-8");
-      let acc = "";
+      
+      let currentSegmentText = "";
+      let currentAgentId: string | null = null;
+      let currentAgentType: AgentType | undefined = undefined;
+      let localAgentsMap: Record<string, AgentData> = {};
       
       while (true) {
         const { done, value } = await reader.read();
@@ -78,14 +83,15 @@ export function MedicalAIChat() {
             // Update Metrics
             if (agentResponse.metrics) {
               setMetrics(agentResponse.metrics);
+              localAgentsMap = agentResponse.metrics.agents;
               
               // Update Agent Nodes based on metrics
               const newNodes: AgentNode[] = Object.values(agentResponse.metrics.agents).map((agent: AgentData) => {
                 // Determine status
                 let status: "pending" | "running" | "complete" = "pending";
                 
-                // If this is the agent currently streaming
-                if (agent.id === agentResponse.id && isStreaming) {
+                // If this is the agent currently streaming (we know we are streaming here)
+                if (agent.id === agentResponse.id) {
                    status = "running";
                 } else if (agent.time_taken > 0 || agent.output_token_count > 0) {
                    status = "complete";
@@ -110,17 +116,45 @@ export function MedicalAIChat() {
                   duration: agent.time_taken * 1000, // s to ms
                   parentId: parentId,
                   childrenIds: childrenIds,
-                  messageIndex: messages.length + 1, // Current message index
+                  messageIndex: messages.length + 1, // Current message index (approximation)
                 };
               });
               
               setAgentNodes(newNodes);
             }
             
+            const chunkAgentId = agentResponse.id;
+            
+            // Check for agent switch
+            if (chunkAgentId && chunkAgentId !== currentAgentId) {
+                // If we have accumulated text for a previous agent, commit it as a message
+                if (currentSegmentText) {
+                    const messageToAdd: Message = {
+                        role: "assistant",
+                        content: currentSegmentText,
+                        agentType: currentAgentType
+                    };
+                    setMessages(prev => [...prev, messageToAdd]);
+                    currentSegmentText = "";
+                    setCurrentStreamingText("");
+                }
+                
+                currentAgentId = chunkAgentId;
+                // Try to resolve type
+                if (localAgentsMap[chunkAgentId]) {
+                    currentAgentType = localAgentsMap[chunkAgentId].type;
+                }
+            }
+            
+            // If we still don't have the type (e.g. metrics arrived late), try update
+            if (currentAgentId && !currentAgentType && localAgentsMap[currentAgentId]) {
+                currentAgentType = localAgentsMap[currentAgentId].type;
+            }
+
             // Update Streaming Text
             if (agentResponse.chunk) {
-              acc += agentResponse.chunk;
-              setCurrentStreamingText((prev) => prev + agentResponse.chunk);
+              currentSegmentText += agentResponse.chunk;
+              setCurrentStreamingText(currentSegmentText);
             }
 
             // Update Active Node ID
@@ -133,11 +167,16 @@ export function MedicalAIChat() {
         }
       }
 
-      const aiMessage: Message = {
-        role: "assistant",
-        content: acc,
-      };
-      setMessages((prev) => [...prev, aiMessage]);
+      // Final commit of any remaining text
+      if (currentSegmentText) {
+          const aiMessage: Message = {
+            role: "assistant",
+            content: currentSegmentText,
+            agentType: currentAgentType
+          };
+          setMessages((prev) => [...prev, aiMessage]);
+      }
+      
       setActiveNodeId(null); // Reset active node after completion
       
     } catch (error) {

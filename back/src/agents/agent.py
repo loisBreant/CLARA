@@ -4,6 +4,7 @@ from dotenv import dotenv_values
 from openrouter import components
 import time
 import uuid
+from src.agents.telemetrics import append_to_csv
 from src.core.models import AgentData, AgentType, AgentsMetrics, AgentResponse
 
 config = dotenv_values(".env")
@@ -54,6 +55,7 @@ class Agent:
                 
                 metrics.agents[self.agent_data.id] = self.agent_data
                 yield AgentResponse(metrics=metrics, id=self.agent_data.id, chunk="")
+            
                 continue
 
             if not event.choices:
@@ -73,3 +75,5 @@ class Agent:
         self.agent_data.time_taken = base_time_taken + request_duration
         metrics.agents[self.agent_data.id] = self.agent_data
 
+        # csv_header = ["timestamp", "model_kind", "model_name", "input_tokens", "output_tokens", "time_taken"]
+        append_to_csv(str(self.agent_data.type), self.model, self.agent_data.input_token_count, self.agent_data.output_token_count, self.agent_data.time_taken)

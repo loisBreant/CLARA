@@ -3,6 +3,7 @@ export interface Message {
   content: string
   image?: string
   timestamp?: string
+  agentType?: AgentType
 }
 
 export type AgentType = "planner" | "executor" | "reactive"

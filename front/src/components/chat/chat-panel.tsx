@@ -2,12 +2,13 @@
 
 import type React from "react";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Send, ImagePlus, Mic } from "lucide-react";
 import { ChatMessage } from "./chat-message";
 import { StreamingMessage } from "./streaming-message";
+import { ReasoningGroup } from "./reasoning-group";
 import type { Message } from "@/lib/types";
 
 interface ChatPanelProps {
@@ -50,6 +51,32 @@ export function ChatPanel({
 
     const isInputDisabled = isStreaming || !sessionId;
 
+    // Group consecutive reasoning messages
+    const groupedMessages = useMemo(() => {
+        const groups: (Message | Message[])[] = [];
+        let currentReasoningGroup: Message[] = [];
+
+        messages.forEach((msg) => {
+            const isReasoning = !msg.role || (msg.role === 'assistant' && msg.agentType && msg.agentType !== 'reactive');
+            
+            if (isReasoning) {
+                currentReasoningGroup.push(msg);
+            } else {
+                if (currentReasoningGroup.length > 0) {
+                    groups.push([...currentReasoningGroup]);
+                    currentReasoningGroup = [];
+                }
+                groups.push(msg);
+            }
+        });
+
+        if (currentReasoningGroup.length > 0) {
+            groups.push([...currentReasoningGroup]);
+        }
+
+        return groups;
+    }, [messages]);
+
     return (
         <div className="flex flex-1 min-w-0 min-h-0 flex-col border-b md:border-b-0 md:border-r border-border bg-background">
             <div className="flex items-center justify-between border-b border-border px-6 py-4">
@@ -91,9 +118,13 @@ export function ChatPanel({
                         </div>
                     )}
 
-                    {messages.map((message, index) => (
-                        <ChatMessage key={index} message={message} />
-                    ))}
+                    {groupedMessages.map((group, index) => {
+                        if (Array.isArray(group)) {
+                            return <ReasoningGroup key={index} messages={group} />;
+                        } else {
+                            return <ChatMessage key={index} message={group} />;
+                        }
+                    })}
 
                     {isStreaming && currentStreamingText && (
                         <StreamingMessage text={currentStreamingText} />

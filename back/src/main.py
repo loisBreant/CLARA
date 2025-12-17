@@ -29,14 +29,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-chats = {}
+chats = {} # how stored chats
 
 base_dir = os.path.dirname(os.path.abspath(__file__))
 input_dir = os.path.join(base_dir, "../data/inputs")
-log_file = os.path.join(base_dir, "../data/logs/costs.csv")
 
 os.makedirs(input_dir, exist_ok=True)
-
 
 @app.get("/health")
 def health_check():
@@ -45,7 +43,7 @@ def health_check():
 
 class ChatRequest(BaseModel):
     question: str
-    session_id: str
+    session_id: uuid.UUID
 
 
 class ChatSession(BaseModel):
@@ -54,21 +52,16 @@ class ChatSession(BaseModel):
 
 @app.post("/init-session")
 async def init_session() -> ChatSession:
-    id = uuid.uuid4()
-    # On instancie les deux agents nécessaires pour la session
-    chats[id] = {
+    session_id = uuid.uuid4()
+    chats[session_id] = {
         "planner": PlannerAgent(),
-        "executor": ExecutorAgent()
+        "metrics": AgentsMetrics(),
     }
-    return ChatSession(session_id=id)
+    return ChatSession(session_id=session_id)
 
-def chat_generator(question: str) -> Generator[str, None, None]:
-    """
-    Générateur qui orchestre Planner + Executor et stream les résultats
-    au format attendu par le frontend (AgentResponse JSONs).
-    """
-    planner = PlannerAgent()
-    metrics = AgentsMetrics()
+def chat_generator(session_id: uuid.UUID, question: str) -> Generator[str, None, None]:
+    planner = chats[session_id]["planner"]
+    metrics = chats[session_id]["metrics"] 
     start_time = time.time()
  
     try:
@@ -79,14 +72,14 @@ def chat_generator(question: str) -> Generator[str, None, None]:
         raise e
 
     metrics.total_time = time.time() - start_time
-    # yield AgentResponse(metrics=metrics, id=executor.data.id, chunk="").model_dump_json() + "\n"
+    yield create_chunk(AgentResponse(metrics=metrics, id=planner.agent_data.id, chunk=""))
 
 def create_chunk(agent_response: AgentResponse) -> str:
     return agent_response.model_dump_json() + "\n"
 
 @app.post("/chat")
 async def chat(request: ChatRequest) -> StreamingResponse:
-    return StreamingResponse(chat_generator(request.question), media_type="application/x-ndjson")
+    return StreamingResponse(chat_generator(request.session_id, request.question), media_type="application/x-ndjson")
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000, reload=True)

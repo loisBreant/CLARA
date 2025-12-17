@@ -81,13 +81,13 @@ The project includes a multi-stage Dockerfile that uses `denoland/deno:alpine`.
 **Build the image:**
 
 ```bash
-docker build -t medvision-ai .
+docker build -t clara .
 ```
 
 **Run the container:**
 
 ```bash
-docker run -p 3000:3000 medvision-ai
+docker run -p 3000:3000 clara
 ```
 
 (The container serves the static `dist` folder on port 3000).
