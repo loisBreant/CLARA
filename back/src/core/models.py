@@ -15,9 +15,9 @@ class Status(Enum):
     BLOCKED = "blocked"
 
 class AgentData(BaseModel):
-    id: UUID
+    id: str 
     type: AgentType
-    dependencies: List[UUID] = []
+    dependencies: List[str] = []
     status: Status = Status.QUEUED
     
     input_token_count: float = 0.0
@@ -26,10 +26,10 @@ class AgentData(BaseModel):
 
 
 class AgentsMetrics(BaseModel):
-    agents: Dict[UUID, AgentData] = {}
+    agents: Dict[str, AgentData] = {}
     total_time: float = 0.0  # in seconds
 
 class AgentResponse(BaseModel):
     metrics: AgentsMetrics
-    id: UUID
+    id: str 
     chunk: str

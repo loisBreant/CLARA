@@ -79,7 +79,7 @@ def create_chunk(agent_response: AgentResponse) -> str:
 
 @app.post("/chat")
 async def chat(request: ChatRequest) -> StreamingResponse:
-    return StreamingResponse(chat_generator(request.session_id, request.question), media_type="application/x-ndjson")
+    return StreamingResponse(chat_generator(request.session_id, request.question))
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000, reload=True)

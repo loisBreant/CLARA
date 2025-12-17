@@ -1,8 +1,9 @@
 from dataclasses import dataclass
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any, Optional, Callable
 from src.agents.agent import Agent, AgentResponse
 from src.core.models import AgentType, AgentsMetrics, Status
 from src.core.task import Tasks, PlannedTask
+from src.agents.memory import MemoryAgent
 from src.tools.test import add
 import json
 import logging
@@ -19,14 +20,32 @@ logging.basicConfig(
     format='%(asctime)s - %(levelname)s - %(message)s'
 )
 
+# --- Mock Tools for Registry (since actual files are missing/not provided) ---
+def vision_tool(image_path: str):
+    return f"[MOCK] Analyse de l'image {image_path}: Masse suspecte détectée."
+
+def duckdb_tool(sql_query: str):
+    return f"[MOCK] Résultat SQL pour '{sql_query}': 42 cases found."
+
+def rag_tool(search_query: str):
+    return f"[MOCK] Guidelines trouvées pour '{search_query}': Protocole standard appliqué."
+
+# --- Tool Registry ---
+TOOL_REGISTRY: Dict[str, Callable] = {
+    "add": add,
+    "vision_tool": vision_tool,
+    "duckdb_tool": duckdb_tool,
+    "rag_tool": rag_tool
+}
+
 @dataclass
 class ToolExecutor:
     function_name: str
-    args: Any
+    args: List[Any]
 
 
 class ExecutorAgent(Agent):
-    def __init__(self):
+    def __init__(self, id: str):
         system_prompt = """
 
 Role: System 
@@ -35,33 +54,29 @@ Ton rôle est STRICTEMENT d'exécuter la tâche précise qui t'est donnée par l
 
 INSTRUCTIONS:
 1. Analyse la tâche reçue.
-2. Sélectionne l'OUTIL le plus approprié parmi ceux disponibles.
-3. Si la tâche nécessite un outil, RENVOIE UNIQUEMENT L'APPEL DE L'OUTIL au format JSON.
-   - Si l'instruction mentionne une variable comme "$step_1", utilise-la telle quelle dans les arguments.
-4. Si la tâche est une analyse textuelle ou une conclusion intermédiaire, réponds textuellement de manière concise.
+2. Sélectionne l'OUTIL le plus approprié.
+3. Si l'instruction mentionne une variable (ex: '$step_1'), utilise-la TELLE QUELLE dans les arguments.
+4. RENVOIE UNIQUEMENT L'APPEL DE L'OUTIL au format JSON.
 
 Voici les tools mis a ta disposition:
 
 ---
     ---
-    OUTIL 1 : "add"
+    OUTIL 4 : "add"
     DESCRIPTION : Additionne deux nombres entiers.
-    QUAND L'UTILISER : Pour effectuer des calculs simples d'addition.
     PARAMÈTRES : [a, b]
     OUTPUT: int
     ---
 
-FORMAT JSON OBLIGATOIRE POUR LES OUTILS :
+FORMAT JSON OBLIGATOIRE :
 [
     {
         "function_name": "nom_de_l_outil",
         "args": ["arg1", "arg2"]
     }
 ]
-
 """
-        super().__init__(system_prompt, AgentType.EXECUTOR, model="google/gemma-3-27b-it:free")
-        self.last_tool_result = None
+        super().__init__(system_prompt, AgentType.EXECUTOR, model="google/gemma-3-27b-it:free", id=id)
 
     def parse_tools(self, json_response: str) -> List[ToolExecutor]:
         try:
@@ -84,56 +99,48 @@ FORMAT JSON OBLIGATOIRE POUR LES OUTILS :
             logging.error(f"Failed to parse json : {e}")
             return []
 
-    def resolve_arguments(self, args: List[Any], context_results: Dict[str, Any]) -> List[Any]:
+    def exec_tools(self, tool: ToolExecutor) -> Any:
         """
-        Remplace les arguments de type string commençant par '$' par leur valeur dans context_results.
-        Ex: "$step_1" -> 3
+        Exécution générique via le TOOL_REGISTRY.
+        Les arguments doivent DÉJÀ être résolus (pas de '$var').
         """
-        resolved_args = []
-        for arg in args:
-            if isinstance(arg, str) and arg.startswith("$"):
-                key = arg[1:] # remove '$'
-                if key in context_results:
-                    resolved_args.append(context_results[key])
-                else:
-                    # Fallback: keep as is if not found (maybe it's not a ref)
-                    resolved_args.append(arg)
-            else:
-                resolved_args.append(arg)
-        return resolved_args
+        tool_func = TOOL_REGISTRY.get(tool.function_name)
+        
+        if not tool_func:
+            error_msg = f"Outil inconnu : {tool.function_name}"
+            logging.error(error_msg)
+            return f"Error: {error_msg}"
 
-    def exec_tools(self, tool: ToolExecutor, context_results: Dict[str, Any] = None) :
-        if context_results:
-            tool.args = self.resolve_arguments(tool.args, context_results)
+        try:
+            # Conversion des arguments en types appropriés si nécessaire ?
+            # Pour l'instant on passe les args tels quels.
+            # add attend des int, vision attend str.
+            # Si l'argument vient du JSON, c'est peut-être string "1".
+            # Une conversion intelligente pourrait être ajoutée ici ou déléguée à l'outil.
+            # Pour 'add', on caste en int si possible.
+            
+            clean_args = tool.args
+            if tool.function_name == "add":
+                 clean_args = [int(arg) for arg in tool.args]
 
-        if tool.function_name == "add":
-            try:
-                # Ensure args are ints
-                a = int(tool.args[0])
-                b = int(tool.args[1])
-                result = add(a, b)
-                logging.info(f"Tool 'add' called with args: {tool.args}. Result: {result}")
-                return result
-            except Exception as e:
-                logging.error(f"Error executing add: {e}")
-                return f"Error: {e}"
-        return None
+            result = tool_func(*clean_args)
+            logging.info(f"Tool '{tool.function_name}' executed. Result: {result}")
+            return result
+        except Exception as e:
+            logging.error(f"Error executing {tool.function_name}: {e}")
+            return f"Error executing {tool.function_name}: {e}"
 
-    def execute_task(self, task: PlannedTask, tasks: Tasks, metrics: AgentsMetrics, context_results: Dict[str, Any]):
+    def execute_task(self, task: PlannedTask, tasks: Tasks, metrics: AgentsMetrics, memory: MemoryAgent):
         """
-        Exec a task
+        Exécute la tâche en utilisant la mémoire partagée.
         """
-
+        
+        # 1. Validation Dépendances
         if tasks.dependencies_met(task):
             metrics.agents[self.agent_data.id].status = Status.PENDING
             task.status = Status.PENDING
             
-            # On ajoute le contexte des résultats précédents à la description pour que l'agent comprenne
-            # (optionnel, mais aide si l'agent doit faire du texte)
-            # context_str = "\n".join([f"{k}: {v}" for k, v in context_results.items()])
-            prompt = f"Voici la description de ta tache : \n{task.description}\n\nCONTEXTE VARIABLES:\n{context_results}"
-            
-            for response in self.ask(prompt, metrics):
+            for response in self.ask(task.description, metrics):
                 yield response
 
             metrics.agents[self.agent_data.id].status = Status.FINISHED
@@ -141,13 +148,27 @@ FORMAT JSON OBLIGATOIRE POUR LES OUTILS :
         else:
             task.status = Status.BLOCKED
             metrics.agents[self.agent_data.id].status = Status.BLOCKED
+            yield AgentResponse(metrics=metrics, id=self.agent_data.id, chunk="\n\n**Erreur : Dépendances non satisfaites.**")
+            return
 
-        tools = self.parse_tools(self.last_response)
+        tools_to_call = self.parse_tools(self.last_response)
         
-        # exec tools 
-        
-        for tool in tools:
-            result = self.exec_tools(tool, context_results)
+        for tool in tools_to_call:
+            
+            try:
+                original_args = tool.args
+                tool.args = memory.resolve_args(tool.args)
+                
+                if tool.args != original_args:
+                    yield AgentResponse(metrics=metrics, id=self.agent_data.id, 
+                                        chunk=f"\n> *Mémoire : Résolution {original_args} -> {tool.args}*")
+            except Exception as e:
+                yield AgentResponse(metrics=metrics, id=self.agent_data.id, chunk=f"\n**Erreur Mémoire : {e}**")
+                continue
+
+            result = self.exec_tools(tool)
+            memory.set(task.step_id, result)
             
             if result is not None:
-                yield AgentResponse(metrics=metrics, id=self.agent_data.id, chunk=f"\n{result}\n")
+                yield AgentResponse(metrics=metrics, id=self.agent_data.id, 
+                                    chunk=f"\n\n**Résultat de l'outil '{tool.function_name}' :** {result}")

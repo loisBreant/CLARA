@@ -4,7 +4,7 @@ import json
 
 @dataclass
 class PlannedTask:
-    id: str
+    step_id: str
     title: str
     description: str
     dependencies: list[str]
@@ -12,8 +12,9 @@ class PlannedTask:
 
 class Tasks:
 
-    def __init__(self, json_response):
-        self.tasks: list[PlannedTask] = self.init_taks(json_response)
+    def __init__(self, json_response: str, default_dep: str):
+        self.tasks: list[PlannedTask] = self.init_tasks(json_response)
+        self.default_dep = default_dep
 
     def __iter__(self):
         return iter(self.tasks)
@@ -21,7 +22,7 @@ class Tasks:
     def __len__(self):
         return len(self.tasks)
 
-    def init_taks(self, json_response: str) -> list[PlannedTask]:
+    def init_tasks(self, json_response: str) -> list[PlannedTask]:
         parsed_tasks = self.parse_tasks(json_response)
         sorted_tasks = self.topological_sort(parsed_tasks)
         return sorted_tasks
@@ -38,15 +39,17 @@ class Tasks:
             tasks = []
             for item in data:
                 task = PlannedTask(
-                    id=item.get("id", str(item.get("step", "unknown"))),
+                    step_id=item.get("step_id", ""),
                     title=item.get("title", ""),
                     description=item.get("description", ""),
-                    dependencies=item.get("dependencies", []),
+                    dependencies=item.get("dependencies", ""),
+                    status=Status.QUEUED
                 )
                 tasks.append(task)
             return tasks
         except Exception as e:
             print(f"Failed to parse json : {e}")
+            raise e
             return []
 
     def topological_sort(self, tasks: list[PlannedTask]) -> list[PlannedTask]:
@@ -60,7 +63,7 @@ class Tasks:
             iterations += 1
             progress = False
             for task in remaining:
-                if all(dep in [t.id for t in sorted_tasks] for dep in task.dependencies):
+                if all(dep in [t.step_id for t in sorted_tasks] for dep in task.dependencies):
                     sorted_tasks.append(task)
                     remaining.remove(task)
                     progress = True
@@ -73,12 +76,12 @@ class Tasks:
         return sorted_tasks
 
     def dependencies_met(self, task: PlannedTask) -> bool:
-        task_ids = {t.id for t in self.tasks}
+        task_ids = {t.step_id for t in self.tasks}
         return all(dep in task_ids for dep in task.dependencies)
 
     def render_tasks(self) -> str:
         plan_desc = "\n**Plan généré :**\n"
         for t in self.tasks:
-            plan_desc += f"- {t.id}: {t.description}\n"
+            plan_desc += f"- {t.step_id}: {t.description}\n"
         plan_desc += "\n"
         return plan_desc

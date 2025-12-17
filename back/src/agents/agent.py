@@ -10,15 +10,15 @@ from src.core.models import AgentData, AgentType, AgentsMetrics, AgentResponse
 config = dotenv_values(".env")
 
 class Agent:
-    def __init__(self, system_prompt: str, agent_type: AgentType, model: str = "google/gemma-3-27b-it:free"):
+    def __init__(self, system_prompt: str, agent_type: AgentType, model: str = "google/gemma-3-27b-it:free", id : str = str(uuid.uuid4())):
         self.client = OpenRouter(api_key=config["OPENROUTER_API_KEY"])
         self.model = model
         self.system_prompt = system_prompt
         self.last_response: str = ""
-        
+                    
         self.agent_data = AgentData(
-            id=uuid.uuid4(),
-            type=agent_type
+            id=id,
+            type=agent_type,
         )
 
     def ask(self, prompt: str, metrics: AgentsMetrics) -> Generator[AgentResponse, None, None]:

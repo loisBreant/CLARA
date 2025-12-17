@@ -1,6 +1,6 @@
-from typing import Any, Dict, List, Union
+from typing import Any, Dict, List
 
-class Memory:
+class MemoryAgent:
     def __init__(self):
         self._storage: Dict[str, Any] = {}
 

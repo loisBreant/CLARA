@@ -1,8 +1,8 @@
 from src.agents.agent import Agent, AgentResponse
 from src.agents.executor import ExecutorAgent
-from src.agents.memory import MemoryAgent
 from src.agents.reactive import ReactiveAgent
-from src.core.models import AgentType, AgentsMetrics
+from src.agents.memory import MemoryAgent
+from src.core.models import AgentType, AgentsMetrics, Status
 from src.core.task import Tasks
 
 
@@ -18,10 +18,15 @@ PROCESSUS:
 3. GÉNÈRE la liste COMPLÈTE des tâches au format JSON strict.
 
 CAPACITÉS (Outils disponibles pour l'Executor):
+- vision_tool(image_path): Analyse une image.
+- duckdb_tool(sql_query): Requête SQL.
+- rag_tool(search_query): Recherche guidelines.
 - add(a, b): Additionne 2 nombres.
+  -> IMPORTANT: Si tu dois enchaîner des calculs (ex: 1+2+3), utilise le format "$step_id" pour faire référence au résultat d'une étape précédente.
   Exemple:
   [
-    {"id": "s1", "title": "Calc 1+2", "description": "Addition 1 + 2", "dependencies": [], "Var1"},
+    {"id": "s1", "title": "Calc 1+2", "description": "Utilise add(1, 2)", "dependencies": []},
+    {"id": "s2", "title": "Calc s1+3", "description": "Utilise add($s1, 3)", "dependencies": ["s1"]}
   ]
 
 RÈGLES CRITIQUES:
@@ -31,18 +36,16 @@ RÈGLES CRITIQUES:
 Format JSON attendu :
 [
   {
-    "id": "step_1",
+    "step_id": "step_1",
     "title": "Nom court",
     "description": "Instruction pour l'Executor",
     "dependencies": []
-    "output_variable": "Var1"
   }
-]"""
+]
+"""
         super().__init__(system_prompt, AgentType.PLANNER)
-        self.memory = MemoryAgent()
 
     def plan(self, request: str, metrics: AgentsMetrics):
-        # Create tasks
         yield AgentResponse(metrics=metrics, id=self.agent_data.id, chunk="**Phase 1 : Planification Stratégique**\n\n")
         prompt = f"Requête à planifier : {request}" 
         full_response = ""
@@ -54,36 +57,32 @@ Format JSON attendu :
             print(f"Erreur lors de la génération du plan : {e}")
             return []
 
-        tasks = Tasks(full_response)
+        tasks = Tasks(full_response, self.agent_data.id)
+        memory = MemoryAgent()
         
-        # Execution
         if len(tasks) > 0:
-            last_agent_id = self.agent_data.id
-            execution_results = {}
-            execution_context = f"Requête initiale : {request}\n\nRésultats de l'exécution :\n"
+            yield AgentResponse(metrics=metrics, id=self.agent_data.id, chunk="\n\n**Phase 2 : Exécution du Plan**\n\n")
+            yield AgentResponse(metrics=metrics, id=self.agent_data.id, chunk=tasks.render_tasks())
             
+            last_agent_id = self.agent_data.id
+
             for t in tasks:
-                executor = ExecutorAgent()
-                executor.agent_data.dependencies = [self.agent_data.id]
+                executor = ExecutorAgent(t.step_id)
                 metrics.agents[executor.agent_data.id] = executor.agent_data
                 
                 task_result_accumulated = ""
                 yield AgentResponse(metrics=metrics, id=executor.agent_data.id, chunk=f"> *Exécution de la tâche : {t.title}*\n")
                 
-                for response in executor.execute_task(t, tasks, metrics, execution_results):
+                for response in executor.execute_task(t, tasks, metrics, memory):
                     task_result_accumulated += response.chunk
                     yield response
                 
-                execution_results[t.id] = task_result_accumulated
-                
-                execution_context += f"\n- Tâche '{t.title}' (ID: {t.id}):\n{task_result_accumulated}\n"
                 yield AgentResponse(metrics=metrics, id=executor.agent_data.id, chunk="\n\n")
-                
                 last_agent_id = executor.agent_data.id
+                # FIXME: add call to the planner to be sur it's ok
 
-            # Phase 3 : Validation & Synthèse
+            # Create final response
             yield AgentResponse(metrics=metrics, id=self.agent_data.id, chunk="**Phase 3 : Synthèse et Réponse Finale**\n\n")
-            
             reactive = ReactiveAgent()
             reactive.agent_data.dependencies = [last_agent_id]
             metrics.agents[reactive.agent_data.id] = reactive.agent_data
@@ -92,7 +91,11 @@ Format JSON attendu :
 Voici le contexte de la demande et les résultats des tâches exécutées.
 Synthétise tout cela pour donner une réponse finale complète et claire à l'utilisateur.
 
-{execution_context}
-"""
+"""            
             for response in reactive.ask(final_prompt, metrics):
                 yield response
+
+ 
+        # self.status = Status.FINISHED
+        # metrics.agents[self.agent_data.id].status = self.status
+        # yield AgentResponse(metrics=metrics, id=self.agent_data.id, chunk="")
