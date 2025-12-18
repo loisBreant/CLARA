@@ -12,7 +12,7 @@ from fastapi.responses import StreamingResponse
 
 from src.agents.planner import PlannerAgent
 from src.agents.agent import AgentResponse
-from src.core.models import AgentsMetrics
+from src.core.models import AgentsMetrics,Status
 
 app = FastAPI(
     title="Onco-Agent API",
@@ -59,8 +59,10 @@ async def init_session() -> ChatSession:
     return ChatSession(session_id=session_id)
 
 def chat_generator(session_id: uuid.UUID, question: str) -> Generator[str, None, None]:
-    planner = chats[session_id]["planner"]
-    metrics = chats[session_id]["metrics"] 
+    planner: PlannerAgent = chats[session_id]["planner"]
+    metrics: AgentsMetrics = chats[session_id]["metrics"] 
+    planner.reset_id()
+    planner.update_status(Status.PENDING, metrics)
     start_time = time.time()
  
     try:

@@ -10,7 +10,7 @@ from src.core.models import AgentData, AgentType, AgentsMetrics, AgentResponse, 
 config = dotenv_values(".env")
 
 class Agent:
-    def __init__(self, system_prompt: str, agent_type: AgentType,  agent_data: AgentData = None, model: str = "google/gemma-3-27b-it:free"):
+    def __init__(self, system_prompt: str, agent_type: AgentType,  agent_data: Optional[AgentData] = None, model: str = "google/gemma-3-27b-it:free"):
         self.client = OpenRouter(api_key=config["OPENROUTER_API_KEY"])
         self.model = model
         self.system_prompt = system_prompt
@@ -20,6 +20,9 @@ class Agent:
             id=str(uuid.uuid4()),
             type=agent_type,
         )
+
+    def reset_id(self):
+        self.agent_data.id = str(uuid.uuid4())
 
     def update_status(self, new_status: Status, metrics: AgentsMetrics, task = None):
         self.agent_data.status = new_status

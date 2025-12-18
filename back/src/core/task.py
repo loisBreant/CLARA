@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from .models import Status
 import json
+import logging
 
 
 @dataclass
@@ -53,7 +54,7 @@ class Tasks:
                 tasks.append(task)
             return tasks
         except Exception as e:
-            print(f"Failed to parse json : {e}")
+            logging.error(f"Failed to parse json : {e}")
             raise e
             return []
 
