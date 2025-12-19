@@ -3,13 +3,9 @@ services:
     build: ./front
     ports:
       - "8080:80"
-    volumes:
-      - ./front/src:/app/src
 
   back:
     build: back/
     env_file: back/.env # Make sure you've copied .env.example and filled your open router api key
     ports:
       - "8000:8000"
-    volumes:
-      - ./back/src:/app/src

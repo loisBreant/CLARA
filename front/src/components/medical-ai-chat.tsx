@@ -217,31 +217,9 @@ export function MedicalAIChat() {
     }
   };
 
-  const handleReset = () => {
-    setMessages([]);
-    setAgentNodes([]);
-    setIsStreaming(false);
-    setCurrentStreamingText("");
-    setActiveNodeId(null);
-    setSessionId(null);
-    setMetrics(null);
-    
-    // Re-initialize session
-    const initSession = async () => {
-      try {
-        const response = await fetchApi("/init-session", "POST");
-        const data = await response.json();
-        setSessionId(data.session_id);
-      } catch (error) {
-        console.error("Failed to re-initialize session:", error);
-      }
-    };
-    initSession();
-  };
-
   return (
     <div className="flex h-screen flex-col bg-background">
-      <Header onReset={handleReset} />
+      <Header />
       <div className="flex flex-1 min-h-0 flex-col md:flex-row overflow-hidden">
         <ChatPanel
           messages={messages}

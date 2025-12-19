@@ -1,13 +1,8 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Activity, RotateCcw, Sparkles } from "lucide-react";
+import { Activity } from "lucide-react";
 
-interface HeaderProps {
-    onReset: () => void;
-}
-
-export function Header({ onReset }: HeaderProps) {
+export function Header() {
     return (
         <header className="flex h-16 items-center justify-between border-b border-border bg-card px-6">
             <div className="flex items-center gap-3">
@@ -22,18 +17,6 @@ export function Header({ onReset }: HeaderProps) {
                         Agentic Medical Image Analysis
                     </p>
                 </div>
-            </div>
-
-            <div className="flex items-center gap-4">
-                <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={onReset}
-                    className="gap-2 bg-transparent"
-                >
-                    <RotateCcw className="h-4 w-4" />
-                    Reset Demo
-                </Button>
             </div>
         </header>
     );

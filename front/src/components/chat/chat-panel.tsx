@@ -121,17 +121,9 @@ export function ChatPanel({
                             <h3 className="mb-2 text-lg font-medium text-foreground">
                                 Start Medical Image Analysis
                             </h3>
-                            <p className="max-w-sm text-sm text-muted-foreground">
-                                Upload a medical image (X-ray, CT, MRI) and ask questions about
-                                it. Click the demo button to see the AI in action.
+                            <p className="max-w-lm text-sm text-muted-foreground">
+                                Upload a medical image (X-ray, CT, MRI) and ask questions about it.
                             </p>
-                            <Button
-                                className="mt-6"
-                                onClick={() => onSendMessage("")}
-                                disabled={isInputDisabled}
-                            >
-                                Run Demo Conversation
-                            </Button>
                         </div>
                     )}
 
