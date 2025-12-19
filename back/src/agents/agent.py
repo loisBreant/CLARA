@@ -6,12 +6,14 @@ import time
 import uuid
 from src.agents.telemetrics import append_to_csv
 from src.core.models import AgentData, AgentType, AgentsMetrics, AgentResponse, Status
+import os
 
 config = dotenv_values(".env")
+OPENROUTER_API_KEY = config.get("OPENROUTER_API_KEY") or os.environ.get("OPENROUTER_API_KEY")
 
 class Agent:
     def __init__(self, system_prompt: str, agent_type: AgentType,  agent_data: Optional[AgentData] = None, model: str = "google/gemma-3-27b-it:free"):
-        self.client = OpenRouter(api_key=config["OPENROUTER_API_KEY"])
+        self.client = OpenRouter(api_key=OPENROUTER_API_KEY)
         self.model = model
         self.system_prompt = system_prompt
         self.last_response: str = ""
