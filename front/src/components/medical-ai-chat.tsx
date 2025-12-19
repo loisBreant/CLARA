@@ -44,12 +44,14 @@ export function MedicalAIChat() {
     }
 
     let imageUrl: string | undefined = undefined;
+    let imagePath: string | undefined = undefined;
 
     if (file) {
       try {
         const uploadResponse = await uploadFile("/upload", file);
         const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:8000";
         imageUrl = `${BACKEND_URL}${uploadResponse.url}`;
+        imagePath = uploadResponse.url;
       } catch (error) {
         console.error("Failed to upload file:", error);
         setMessages((prev) => [
@@ -72,7 +74,7 @@ export function MedicalAIChat() {
       const response = await fetchApi("/chat", "POST", {
         question: text,
         session_id: sessionId,
-        image_url: imageUrl,
+        image_url: imagePath,
       });
 
       const reader = response.body?.getReader();

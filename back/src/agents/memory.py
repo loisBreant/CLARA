@@ -16,7 +16,6 @@ class MemoryAgent:
         Sinon renvoie la valeur telle quelle.
         """
         if isinstance(arg, str) and arg.startswith("$"):
-            key = arg  # La clé inclut le '$' ou non ? 
             # Dans l'exemple utilisateur: {"id": "$VAR1"} ... memory["$VAR1"] = ...
             # Ou memory.get(variable_name).
             # Le prompt du planner disait: "id": "s1" ... "args": ["$s1"]

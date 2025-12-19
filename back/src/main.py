@@ -60,7 +60,7 @@ class ChatSession(BaseModel):
 
 @app.post("/upload")
 async def upload_file(file: UploadFile = File(...)):
-    file_extension = os.path.splitext(file.filename)[1]
+    file_extension = os.path.splitext(str(file.filename))[1]
     file_name = f"{uuid.uuid4()}{file_extension}"
     file_path = os.path.join(uploads_dir, file_name)
     
@@ -79,7 +79,7 @@ async def init_session() -> ChatSession:
     }
     return ChatSession(session_id=session_id)
 
-def chat_generator(session_id: uuid.UUID, question: str) -> Generator[str, None, None]:
+def chat_generator(session_id: uuid.UUID, question: str, image_url: Optional[str]) -> Generator[str, None, None]:
     planner: PlannerAgent = chats[session_id]["planner"]
     metrics: AgentsMetrics = chats[session_id]["metrics"] 
     planner.reset_id()
@@ -87,7 +87,7 @@ def chat_generator(session_id: uuid.UUID, question: str) -> Generator[str, None,
     start_time = time.time()
  
     try:
-        for response in planner.plan(question, metrics):
+        for response in planner.plan(question, metrics, image_url):
             yield create_chunk(response)
     except Exception as e:
         yield create_chunk(AgentResponse(metrics=metrics, id=planner.agent_data.id, chunk=f"**Erreur :** {str(e)}"))
@@ -101,7 +101,7 @@ def create_chunk(agent_response: AgentResponse) -> str:
 
 @app.post("/chat")
 async def chat(request: ChatRequest) -> StreamingResponse:
-    return StreamingResponse(chat_generator(request.session_id, request.question))
+    return StreamingResponse(chat_generator(request.session_id, request.question, request.image_url))
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000, reload=True)

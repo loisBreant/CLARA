@@ -1,10 +1,10 @@
 from dataclasses import dataclass
-from typing import Dict, List, Any, Callable
+from typing import Dict, List, Any, Callable, Optional
 from src.agents.agent import Agent, AgentResponse
 from src.core.models import AgentData, AgentType, AgentsMetrics, Status
 from src.core.task import Tasks, PlannedTask
 from src.agents.memory import MemoryAgent
-from src.tools.test import add
+from src.agents.vision import VisionAgent
 import json
 import logging
 import os
@@ -20,9 +20,21 @@ logging.basicConfig(
     format='%(asctime)s - %(levelname)s - %(message)s'
 )
 
+# Initialize Vision Agent
+vision_agent = VisionAgent()
+
 # --- Mock Tools for Registry (since actual files are missing/not provided) ---
-def vision_tool(image_path: str):
-    return f"[MOCK] Analyse de l'image {image_path}: Masse suspecte détectée."
+def vision_tool(image_path: str, instruction: str, metrics: Optional[AgentsMetrics] = None):
+    if not metrics:
+        return "[Error] Metrics needed for vision agent"
+        
+    full_response = ""
+    try:
+        for response in vision_agent.analyze(instruction, image_path, metrics):
+            full_response += response.chunk
+        return full_response
+    except Exception as e:
+        return f"Error executing vision agent: {e}"
 
 def duckdb_tool(sql_query: str):
     return f"[MOCK] Résultat SQL pour '{sql_query}': 42 cases found."
@@ -32,7 +44,6 @@ def rag_tool(search_query: str):
 
 # --- Tool Registry ---
 TOOL_REGISTRY: Dict[str, Callable] = {
-    "add": add,
     "vision_tool": vision_tool,
     "duckdb_tool": duckdb_tool,
     "rag_tool": rag_tool
@@ -45,7 +56,7 @@ class ToolExecutor:
 
 
 class ExecutorAgent(Agent):
-    def __init__(self, agent_data: PlannedTask | AgentData = None):
+    def __init__(self, agent_data: Optional[PlannedTask | AgentData] = None):
         real_agent_data = None
         if isinstance(agent_data, PlannedTask):
             real_agent_data = AgentData(
@@ -72,12 +83,10 @@ INSTRUCTIONS:
 Voici les tools mis a ta disposition:
 
 ---
-    ---
-    OUTIL 4 : "add"
-    DESCRIPTION : Additionne deux nombres entiers.
-    PARAMÈTRES : [a, b]
-    OUTPUT: int
-    ---
+    OUTIL 1: "vision_tool"
+    DESCRIPTION: Analyse une image médicale.
+    PARAMÈTRES: [image_path, instruction]
+    OUTPUT: str (analyse textuelle)
 
 FORMAT JSON OBLIGATOIRE :
 [
@@ -110,7 +119,7 @@ FORMAT JSON OBLIGATOIRE :
             logging.error(f"Failed to parse json : {e}")
             return []
 
-    def exec_tools(self, tool: ToolExecutor) -> Any:
+    def exec_tools(self, tool: ToolExecutor, metrics: AgentsMetrics) -> Any:
         """
         Exécution générique via le TOOL_REGISTRY.
         Les arguments doivent DÉJÀ être résolus (pas de '$var').
@@ -123,18 +132,12 @@ FORMAT JSON OBLIGATOIRE :
             return f"Error: {error_msg}"
 
         try:
-            # Conversion des arguments en types appropriés si nécessaire ?
-            # Pour l'instant on passe les args tels quels.
-            # add attend des int, vision attend str.
-            # Si l'argument vient du JSON, c'est peut-être string "1".
-            # Une conversion intelligente pourrait être ajoutée ici ou déléguée à l'outil.
-            # Pour 'add', on caste en int si possible.
-            
             clean_args = tool.args
-            if tool.function_name == "add":
-                 clean_args = [int(arg) for arg in tool.args]
-
-            result = tool_func(*clean_args)
+            if tool.function_name == "vision_tool":
+                result = tool_func(*clean_args, metrics=metrics)
+            else:
+                result = tool_func(*clean_args)
+                
             logging.info(f"Tool '{tool.function_name}' executed. Result: {result}")
             return result
         except Exception as e:
@@ -175,7 +178,7 @@ FORMAT JSON OBLIGATOIRE :
                 yield AgentResponse(metrics=metrics, id=self.agent_data.id, chunk=f"\n**Erreur Mémoire : {e}**")
                 continue
 
-            result = self.exec_tools(tool)
+            result = self.exec_tools(tool, metrics)
             memory.set(task.step_id, result)
             
             if result is not None:

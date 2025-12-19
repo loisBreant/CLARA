@@ -1,3 +1,4 @@
+from typing import Optional
 from src.agents.agent import Agent, AgentResponse
 from src.agents.executor import ExecutorAgent
 from src.agents.reactive import ReactiveAgent
@@ -18,7 +19,7 @@ PROCESSUS:
 3. GÉNÈRE la liste COMPLÈTE des tâches au format JSON strict.
 
 CAPACITÉS (Outils disponibles pour l'Executor):
-- vision_tool(image_path): Analyse une image.
+- vision_tool(image_path, instruction): Analyse une image selon une instruction précise.
 - duckdb_tool(sql_query): Requête SQL.
 - rag_tool(search_query): Recherche guidelines.
 - add(a, b): Additionne 2 nombres.
@@ -46,9 +47,11 @@ Format JSON attendu :
         super().__init__(system_prompt, AgentType.PLANNER)
         self.logs = []
 
-    def plan(self, request: str, metrics: AgentsMetrics):
+    def plan(self, request: str, metrics: AgentsMetrics, image_url: Optional[str]):
         yield AgentResponse(metrics=metrics, id=self.agent_data.id, chunk="**Phase 1 : Planification Stratégique**\n\n")
-        prompt = f"Requête à planifier : {request}" 
+        prompt = f"Requête à planifier : {request}"
+        if image_url is not None:
+            prompt += f"\nUser uploaded image: {image_url}"
         full_response = ""
         try:
             for response in self.ask(prompt, metrics):
@@ -68,7 +71,6 @@ Format JSON attendu :
             last_agent_id = self.agent_data.id
 
             for t in tasks:
-                print (t.dependencies)
                 executor = ExecutorAgent(t)
                 metrics.agents[executor.agent_data.id] = executor.agent_data
                 
