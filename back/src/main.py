@@ -2,9 +2,12 @@ import uvicorn
 import os
 import uuid
 import time
+import shutil
+from typing import Optional
 
-from fastapi import FastAPI
+from fastapi import FastAPI, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from typing import Generator
 
@@ -22,7 +25,7 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,  # type:ignore
-    allow_origins=["http://localhost:8080", "http://localhost:5173"],
+    allow_origins=["http://localhost:8080", "http://localhost:5173", "http://127.0.0.1:8080", "http://127.0.0.1:5173"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -31,9 +34,14 @@ app.add_middleware(
 chats = {} # how stored chats
 
 base_dir = os.path.dirname(os.path.abspath(__file__))
+static_dir = os.path.join(base_dir, "../static")
+uploads_dir = os.path.join(static_dir, "uploads")
 input_dir = os.path.join(base_dir, "../data/inputs")
 
 os.makedirs(input_dir, exist_ok=True)
+os.makedirs(uploads_dir, exist_ok=True)
+
+app.mount("/static", StaticFiles(directory=static_dir), name="static")
 
 @app.get("/health")
 def health_check():
@@ -43,10 +51,23 @@ def health_check():
 class ChatRequest(BaseModel):
     question: str
     session_id: uuid.UUID
+    image_url: Optional[str] = None
 
 
 class ChatSession(BaseModel):
     session_id: uuid.UUID
+
+
+@app.post("/upload")
+async def upload_file(file: UploadFile = File(...)):
+    file_extension = os.path.splitext(file.filename)[1]
+    file_name = f"{uuid.uuid4()}{file_extension}"
+    file_path = os.path.join(uploads_dir, file_name)
+    
+    with open(file_path, "wb") as buffer:
+        shutil.copyfileobj(file.file, buffer)
+        
+    return {"url": f"/static/uploads/{file_name}"}
 
 
 @app.post("/init-session")

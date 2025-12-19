@@ -10,3 +10,5 @@ back/.env
 data/logs/costs.csv
 front/.vite/deps
 back/data/logs/app.log
+.direnv
+back/static/uploads

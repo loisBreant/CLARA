@@ -25,3 +25,22 @@ export async function fetchApi(endpoint: string, method: string, data?: unknown)
   // For OK responses, return the raw Response object to allow streaming
   return response;
 }
+
+export async function uploadFile(endpoint: string, file: File) {
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:8000";
+  
+  const formData = new FormData();
+  formData.append("file", file);
+
+  const response = await fetch(`${BACKEND_URL}${endpoint}`, {
+    method: "POST",
+    body: formData,
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.detail || "Upload failed");
+  }
+
+  return response.json();
+}

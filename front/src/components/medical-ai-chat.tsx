@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { fetchApi } from "@/lib/api";
+import { fetchApi, uploadFile } from "@/lib/api";
 import { ChatPanel } from "./chat/chat-panel";
 import { AgentGraphPanel } from "./agent-graph/agent-graph-panel";
 import { Header } from "./layout/header";
@@ -37,13 +37,33 @@ export function MedicalAIChat() {
     initSession();
   }, []);
 
-  const handleSendMessage = async (text: string) => {
+  const handleSendMessage = async (text: string, file?: File) => {
     if (!sessionId) {
       console.error("No session ID available. Message not sent.");
       return;
     }
 
-    const userMessage: Message = { role: "user", content: text };
+    let imageUrl: string | undefined = undefined;
+
+    if (file) {
+      try {
+        const uploadResponse = await uploadFile("/upload", file);
+        const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:8000";
+        imageUrl = `${BACKEND_URL}${uploadResponse.url}`;
+      } catch (error) {
+        console.error("Failed to upload file:", error);
+        setMessages((prev) => [
+          ...prev,
+          {
+            role: "assistant",
+            content: `Error: Failed to upload image. ${error}`,
+          },
+        ]);
+        return;
+      }
+    }
+
+    const userMessage: Message = { role: "user", content: text, image: imageUrl };
     setMessages((prev) => [...prev, userMessage]);
     setIsStreaming(true);
     setCurrentStreamingText("");
@@ -52,6 +72,7 @@ export function MedicalAIChat() {
       const response = await fetchApi("/chat", "POST", {
         question: text,
         session_id: sessionId,
+        image_url: imageUrl,
       });
 
       const reader = response.body?.getReader();

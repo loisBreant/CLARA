@@ -5,7 +5,7 @@ import type React from "react";
 import { useState, useRef, useEffect, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Send, ImagePlus, Mic } from "lucide-react";
+import { Send, ImagePlus, Mic, X } from "lucide-react";
 import { ChatMessage } from "./chat-message";
 import { StreamingMessage } from "./streaming-message";
 import { ReasoningGroup } from "./reasoning-group";
@@ -15,7 +15,7 @@ interface ChatPanelProps {
     messages: Message[];
     isStreaming: boolean;
     currentStreamingText: string;
-    onSendMessage: (text: string) => void;
+    onSendMessage: (text: string, file?: File) => void;
     sessionId: string | null; // Add sessionId prop
 }
 
@@ -27,6 +27,7 @@ export function ChatPanel({
     sessionId,
 }: ChatPanelProps) {
     const [input, setInput] = useState("");
+    const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
     const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -38,15 +39,31 @@ export function ChatPanel({
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        if (input.trim()) {
-            onSendMessage(input);
+        if (input.trim() || selectedFile) {
+            onSendMessage(input, selectedFile || undefined);
             setInput("");
+            setSelectedFile(null);
         }
     };
 
-
     const handleImageUploadClick = () => {
-        fileInputRef.current?.click();
+        if (fileInputRef.current) {
+            fileInputRef.current.value = "";
+            fileInputRef.current.click();
+        }
+    };
+
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files && e.target.files[0]) {
+            setSelectedFile(e.target.files[0]);
+        }
+    };
+
+    const handleRemoveFile = () => {
+        setSelectedFile(null);
+        if (fileInputRef.current) {
+            fileInputRef.current.value = "";
+        }
     };
 
     const isInputDisabled = isStreaming || !sessionId;
@@ -133,12 +150,27 @@ export function ChatPanel({
             </div>
 
             <div className="border-t border-border p-4">
+                {selectedFile && (
+                    <div className="mb-2 flex items-center gap-2 rounded-md border border-border bg-secondary/50 p-2 text-sm">
+                        <span className="truncate max-w-[200px]">{selectedFile.name}</span>
+                        <Button
+                            type="button"
+                            variant="ghost"
+                            size="icon"
+                            className="h-5 w-5 hover:bg-destructive/10 hover:text-destructive"
+                            onClick={handleRemoveFile}
+                        >
+                            <X className="h-3 w-3" />
+                        </Button>
+                    </div>
+                )}
                 <form onSubmit={handleSubmit} className="flex items-center gap-3">
                     <Input
                         type="file"
                         ref={fileInputRef}
                         className="hidden"
                         accept="image/*"
+                        onChange={handleFileChange}
                     />
                     <Button
                         type="button"
@@ -177,7 +209,7 @@ export function ChatPanel({
                     <Button
                         type="submit"
                         size="icon"
-                        disabled={isInputDisabled}
+                        disabled={isInputDisabled || (!input.trim() && !selectedFile)}
                         className="shrink-0 bg-primary hover:bg-primary/90"
                     >
                         <Send className="h-4 w-4" />
