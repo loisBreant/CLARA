@@ -1,6 +1,10 @@
-export async function fetchApi(endpoint: string, method: string, data?: unknown) {
-  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:8000"; // Assuming backend runs on 8000
-
+export async function fetchApi(
+  endpoint: string,
+  method: string,
+  data?: unknown,
+) {
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL ||
+    "http://localhost:8000"; // Assuming backend runs on 8000
 
   const options: RequestInit = {
     method,
@@ -15,7 +19,6 @@ export async function fetchApi(endpoint: string, method: string, data?: unknown)
 
   const response = await fetch(`${BACKEND_URL}${endpoint}`, options);
 
-
   if (!response.ok) {
     // If the response is not OK, try to parse error as JSON
     const errorData = await response.json();
@@ -27,8 +30,9 @@ export async function fetchApi(endpoint: string, method: string, data?: unknown)
 }
 
 export async function uploadFile(endpoint: string, file: File) {
-  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:8000";
-  
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL ||
+    "http://localhost:8000";
+
   const formData = new FormData();
   formData.append("file", file);
 

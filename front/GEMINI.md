@@ -1,8 +1,12 @@
 # MedVision AI (CLARA Frontend)
 
-This project is the frontend interface for MedVision AI (CLARA), a medical image analysis chat application. It allows users to upload medical images (X-ray, CT, MRI) and interact with an AI agent to analyze them. The application visualizes the agent's reasoning process via a dynamic graph.
+This project is the frontend interface for MedVision AI (CLARA), a medical image
+analysis chat application. It allows users to upload medical images (X-ray, CT,
+MRI) and interact with an AI agent to analyze them. The application visualizes
+the agent's reasoning process via a dynamic graph.
 
-**Note:** This project has been migrated from Next.js to **Vite + React** and utilizes **Deno** for development and build workflows.
+**Note:** This project has been migrated from Next.js to **Vite + React** and
+utilizes **Deno** for development and build workflows.
 
 ## Tech Stack
 
@@ -44,7 +48,8 @@ This project is the frontend interface for MedVision AI (CLARA), a medical image
 
 ### Installation
 
-Dependencies are installed automatically by Deno when running tasks, but you can explicitly cache them:
+Dependencies are installed automatically by Deno when running tasks, but you can
+explicitly cache them:
 
 ```bash
 deno install
@@ -94,14 +99,20 @@ docker run -p 3000:3000 clara
 
 ## Development Conventions
 
-- **Deno-First:** We use `deno task` for all lifecycle scripts. Avoid using `npm` or `yarn` directly.
+- **Deno-First:** We use `deno task` for all lifecycle scripts. Avoid using
+  `npm` or `yarn` directly.
 - **Imports:** Path alias `@/*` is configured to resolve to `./src/*`.
-- **Styling:** Use Tailwind utility classes. Global themes and variables are defined in `src/index.css`.
+- **Styling:** Use Tailwind utility classes. Global themes and variables are
+  defined in `src/index.css`.
 - **Icons:** Use `lucide-react` components.
-- **Fonts:** "Plus Jakarta Sans" for UI, "JetBrains Mono" for code. configured via `src/index.css` and `index.html`.
+- **Fonts:** "Plus Jakarta Sans" for UI, "JetBrains Mono" for code. configured
+  via `src/index.css` and `index.html`.
 
 ## Key Features
 
-1.  **Medical AI Chat:** Interactive chat interface for discussing medical images.
-2.  **Agent Graph:** Real-time visualization of the AI's internal thought process and "agents" (nodes).
-3.  **Mock Data:** currently driven by `src/lib/mock-data.ts` for demonstration purposes.
+1. **Medical AI Chat:** Interactive chat interface for discussing medical
+   images.
+2. **Agent Graph:** Real-time visualization of the AI's internal thought process
+   and "agents" (nodes).
+3. **Mock Data:** currently driven by `src/lib/mock-data.ts` for demonstration
+   purposes.

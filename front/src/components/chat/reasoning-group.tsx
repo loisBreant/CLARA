@@ -1,26 +1,25 @@
-"use client"
+"use client";
 
-import { cn } from "@/lib/utils"
-import { Avatar, AvatarFallback } from "@/components/ui/avatar"
-import { Bot, Brain, ChevronDown } from "lucide-react"
-import ReactMarkdown from "react-markdown"
-import remarkGfm from "remark-gfm"
-import type { Message } from "@/lib/types"
+import { Avatar, AvatarFallback } from "../ui/avatar.tsx";
+import { Bot, Brain, ChevronDown } from "lucide-react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import type { Message } from "../../lib/types.ts";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@/components/ui/collapsible"
+} from "../ui/collapsible.tsx";
 
 interface ReasoningGroupProps {
-  messages: Message[]
+  messages: Message[];
 }
 
 export function ReasoningGroup({ messages }: ReasoningGroupProps) {
-  if (messages.length === 0) return null
+  if (messages.length === 0) return null;
 
   // Use the timestamp of the first message, or none
-  const timestamp = messages[0].timestamp
+  const timestamp = messages[0].timestamp;
 
   return (
     <div className="flex gap-4 animate-in fade-in-0 slide-in-from-bottom-2 duration-300">
@@ -36,25 +35,31 @@ export function ReasoningGroup({ messages }: ReasoningGroupProps) {
             <CollapsibleTrigger className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors w-full text-left group">
               <Brain className="h-4 w-4" />
               <span className="font-medium">
-                Thinking Process ({messages.length} step{messages.length > 1 ? "s" : ""})
+                Thinking Process ({messages.length}{" "}
+                step{messages.length > 1 ? "s" : ""})
               </span>
               <ChevronDown className="h-4 w-4 ml-auto transition-transform group-data-[state=open]:rotate-180" />
             </CollapsibleTrigger>
-            
+
             <CollapsibleContent>
               <div className="mt-3 space-y-3 border-t border-border/50 pt-3">
                 {messages.map((msg, idx) => (
-                  <Collapsible key={idx} className="pl-2 border-l-2 border-border/50">
+                  <Collapsible
+                    key={idx}
+                    className="pl-2 border-l-2 border-border/50"
+                  >
                     <CollapsibleTrigger className="flex items-center gap-2 text-xs text-muted-foreground hover:text-foreground transition-colors w-full text-left group py-1">
-                       <span className="uppercase font-semibold tracking-wider opacity-70">
+                      <span className="uppercase font-semibold tracking-wider opacity-70">
                         {msg.agentType === "planner" ? "Planning" : "Execution"}
                       </span>
                       <ChevronDown className="h-3 w-3 ml-auto transition-transform group-data-[state=open]:rotate-180 opacity-50" />
                     </CollapsibleTrigger>
                     <CollapsibleContent>
-                         <div className="mt-1 text-sm leading-relaxed prose prose-sm dark:prose-invert max-w-none break-words prose-p:leading-relaxed prose-pre:bg-secondary/50 prose-pre:p-0 text-muted-foreground/90">
-                            <ReactMarkdown remarkPlugins={[remarkGfm]}>{msg.content}</ReactMarkdown>
-                        </div>
+                      <div className="mt-1 text-sm leading-relaxed prose prose-sm dark:prose-invert max-w-none break-words prose-p:leading-relaxed prose-pre:bg-secondary/50 prose-pre:p-0 text-muted-foreground/90">
+                        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                          {msg.content}
+                        </ReactMarkdown>
+                      </div>
                     </CollapsibleContent>
                   </Collapsible>
                 ))}
@@ -62,8 +67,10 @@ export function ReasoningGroup({ messages }: ReasoningGroupProps) {
             </CollapsibleContent>
           </Collapsible>
         </div>
-        {timestamp && <span className="text-xs text-muted-foreground">{timestamp}</span>}
+        {timestamp && (
+          <span className="text-xs text-muted-foreground">{timestamp}</span>
+        )}
       </div>
     </div>
-  )
+  );
 }

@@ -1,12 +1,12 @@
-"use client"
+"use client";
 
-import { Avatar, AvatarFallback } from "@/components/ui/avatar"
-import { Bot } from "lucide-react"
-import ReactMarkdown from "react-markdown"
-import remarkGfm from "remark-gfm"
+import { Avatar, AvatarFallback } from "../ui/avatar.tsx";
+import { Bot } from "lucide-react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 interface StreamingMessageProps {
-  text: string
+  text: string;
 }
 
 export function StreamingMessage({ text }: StreamingMessageProps) {
@@ -28,9 +28,11 @@ export function StreamingMessage({ text }: StreamingMessageProps) {
 
         <div className="flex items-center gap-2">
           <div className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse" />
-          <span className="text-xs text-muted-foreground">AI is responding...</span>
+          <span className="text-xs text-muted-foreground">
+            AI is responding...
+          </span>
         </div>
       </div>
     </div>
-  )
+  );
 }

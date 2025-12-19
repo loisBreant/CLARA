@@ -1,4 +1,4 @@
-import { MedicalAIChat } from "@/components/medical-ai-chat";
+import { MedicalAIChat } from "./components/medical-ai-chat.tsx";
 
 function App() {
   return (

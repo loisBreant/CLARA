@@ -1,15 +1,23 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { cn } from "@/lib/utils"
-import { Badge } from "@/components/ui/badge"
-import { Brain, Eye, FileSearch, MessageSquare, Stethoscope, Clock, Zap } from "lucide-react"
-import type { AgentNode } from "@/lib/types"
+import { cn } from "../../lib/utils.ts";
+import { Badge } from "../ui/badge.tsx";
+import {
+  Brain,
+  Clock,
+  Eye,
+  FileSearch,
+  MessageSquare,
+  Stethoscope,
+  Zap,
+} from "lucide-react";
+import type { AgentNode } from "../../lib/types.ts";
 
 interface AgentNodeListProps {
-  nodes: AgentNode[]
-  activeNodeId: string | null
+  nodes: AgentNode[];
+  activeNodeId: string | null;
 }
 
 const iconMap: Record<string, React.ElementType> = {
@@ -21,23 +29,25 @@ const iconMap: Record<string, React.ElementType> = {
   planner: Brain,
   executor: Stethoscope,
   reactive: Zap,
-}
+};
 
 export function AgentNodeList({ nodes, activeNodeId }: AgentNodeListProps) {
   if (nodes.length === 0) {
     return (
       <div className="flex h-64 items-center justify-center text-center">
-        <p className="text-sm text-muted-foreground">No agents have been invoked yet</p>
+        <p className="text-sm text-muted-foreground">
+          No agents have been invoked yet
+        </p>
       </div>
-    )
+    );
   }
 
   return (
     <div className="space-y-3">
       {nodes.map((node, index) => {
-        const Icon = iconMap[node.type] || Brain
-        const isActive = node.id === activeNodeId
-        const isComplete = node.status === "complete"
+        const Icon = iconMap[node.type] || Brain;
+        const isActive = node.id === activeNodeId;
+        const isComplete = node.status === "complete";
 
         return (
           <div
@@ -57,7 +67,8 @@ export function AgentNodeList({ nodes, activeNodeId }: AgentNodeListProps) {
                   "flex h-10 w-10 shrink-0 items-center justify-center rounded-lg",
                   isActive && "bg-primary text-primary-foreground",
                   isComplete && "bg-accent text-accent-foreground",
-                  !isActive && !isComplete && "bg-secondary text-muted-foreground",
+                  !isActive && !isComplete &&
+                    "bg-secondary text-muted-foreground",
                 )}
               >
                 <Icon className="h-5 w-5" />
@@ -65,25 +76,37 @@ export function AgentNodeList({ nodes, activeNodeId }: AgentNodeListProps) {
 
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 mb-1">
-                  <h4 className="font-medium text-sm text-foreground truncate">{node.name}</h4>
+                  <h4 className="font-medium text-sm text-foreground truncate">
+                    {node.name}
+                  </h4>
                   <Badge
                     variant={isComplete ? "default" : "secondary"}
-                    className={cn("text-xs", isActive && "bg-primary", isComplete && "bg-accent")}
+                    className={cn(
+                      "text-xs",
+                      isActive && "bg-primary",
+                      isComplete && "bg-accent",
+                    )}
                   >
                     {isActive ? "Running" : isComplete ? "Complete" : "Pending"}
                   </Badge>
                 </div>
 
-                <p className="text-xs text-muted-foreground mb-3 line-clamp-2">{node.description}</p>
+                <p className="text-xs text-muted-foreground mb-3 line-clamp-2">
+                  {node.description}
+                </p>
 
                 <div className="flex items-center gap-4">
                   <div className="flex items-center gap-1.5 text-xs">
                     <Zap className="h-3 w-3 text-chart-3" />
-                    <span className="text-muted-foreground">{node.tokens.toLocaleString()} tokens</span>
+                    <span className="text-muted-foreground">
+                      {node.tokens.toLocaleString()} tokens
+                    </span>
                   </div>
                   <div className="flex items-center gap-1.5 text-xs">
                     <Clock className="h-3 w-3 text-chart-1" />
-                    <span className="text-muted-foreground">{(node.duration / 1000).toFixed(1)}s</span>
+                    <span className="text-muted-foreground">
+                      {(node.duration / 1000).toFixed(1)}s
+                    </span>
                   </div>
                 </div>
               </div>
@@ -100,8 +123,8 @@ export function AgentNodeList({ nodes, activeNodeId }: AgentNodeListProps) {
               </div>
             )}
           </div>
-        )
+        );
       })}
     </div>
-  )
+  );
 }
