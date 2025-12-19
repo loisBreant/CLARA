@@ -1,0 +1,37 @@
+<svg version="1.1" width="600" height="400" xmlns="http://www.w3.org/2000/svg" style="font-family: sans-serif; background: white;">
+<line x1="80" y1="320" x2="520" y2="320" stroke="black" stroke-width="2" />
+<line x1="80" y1="80" x2="80" y2="320" stroke="black" stroke-width="2" />
+<text x="300.0" y="390" font-size="14" fill="black" text-anchor="middle" >Provider</text>
+<text x="20" y="200.0" font-size="14" fill="black" text-anchor="middle" transform="rotate(-90 20 200.0)">Coût ($)</text>
+<text x="300.0" y="30" font-size="18" fill="black" text-anchor="middle" >Coût par Provider</text>
+<line x1="75" y1="320.0" x2="80" y2="320.0" stroke="black" stroke-width="1" />
+<text x="70" y="324.0" font-size="10" fill="black" text-anchor="end" >0.0000</text>
+<line x1="75" y1="272.0" x2="80" y2="272.0" stroke="black" stroke-width="1" />
+<text x="70" y="276.0" font-size="10" fill="black" text-anchor="end" >0.0001</text>
+<line x1="75" y1="224.0" x2="80" y2="224.0" stroke="black" stroke-width="1" />
+<text x="70" y="228.0" font-size="10" fill="black" text-anchor="end" >0.0002</text>
+<line x1="75" y1="175.99999999999997" x2="80" y2="175.99999999999997" stroke="black" stroke-width="1" />
+<text x="70" y="179.99999999999997" font-size="10" fill="black" text-anchor="end" >0.0002</text>
+<line x1="75" y1="128.0" x2="80" y2="128.0" stroke="black" stroke-width="1" />
+<text x="70" y="132.0" font-size="10" fill="black" text-anchor="end" >0.0003</text>
+<line x1="75" y1="79.99999999999994" x2="80" y2="79.99999999999994" stroke="black" stroke-width="1" />
+<text x="70" y="83.99999999999994" font-size="10" fill="black" text-anchor="end" >0.0004</text>
+<rect x="94.66666666666666" y="256.25" width="43.99999999999999" height="63.750000000000014" fill="teal" stroke="black" fill-opacity="1.0" />
+<text x="116.66666666666666" y="340" font-size="10" fill="black" text-anchor="middle" transform="rotate(15 116.66666666666666 340)">DeepInfra</text>
+<text x="116.66666666666666" y="251.25" font-size="10" fill="black" text-anchor="middle" >0.0001</text>
+<rect x="167.99999999999997" y="320.0" width="43.99999999999999" height="0.0" fill="teal" stroke="black" fill-opacity="1.0" />
+<text x="189.99999999999997" y="340" font-size="10" fill="black" text-anchor="middle" transform="rotate(15 189.99999999999997 340)">Google AI Studio</text>
+<text x="189.99999999999997" y="315.0" font-size="10" fill="black" text-anchor="middle" >0.0000</text>
+<rect x="241.33333333333331" y="320.0" width="43.99999999999999" height="0.0" fill="teal" stroke="black" fill-opacity="1.0" />
+<text x="263.3333333333333" y="340" font-size="10" fill="black" text-anchor="middle" transform="rotate(15 263.3333333333333 340)">ModelRun</text>
+<text x="263.3333333333333" y="315.0" font-size="10" fill="black" text-anchor="middle" >0.0000</text>
+<rect x="314.6666666666667" y="251.875" width="43.99999999999999" height="68.12500000000001" fill="teal" stroke="black" fill-opacity="1.0" />
+<text x="336.6666666666667" y="340" font-size="10" fill="black" text-anchor="middle" transform="rotate(15 336.6666666666667 340)">NCompass</text>
+<text x="336.6666666666667" y="246.875" font-size="10" fill="black" text-anchor="middle" >0.0001</text>
+<rect x="388.0" y="120.0" width="43.99999999999999" height="200.0" fill="teal" stroke="black" fill-opacity="1.0" />
+<text x="410.0" y="340" font-size="10" fill="black" text-anchor="middle" transform="rotate(15 410.0 340)">Nebius</text>
+<text x="410.0" y="115.0" font-size="10" fill="black" text-anchor="middle" >0.0003</text>
+<rect x="461.3333333333333" y="243.75" width="43.99999999999999" height="76.25000000000001" fill="teal" stroke="black" fill-opacity="1.0" />
+<text x="483.3333333333333" y="340" font-size="10" fill="black" text-anchor="middle" transform="rotate(15 483.3333333333333 340)">Novita</text>
+<text x="483.3333333333333" y="238.75" font-size="10" fill="black" text-anchor="middle" >0.0001</text>
+</svg>

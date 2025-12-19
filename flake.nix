@@ -19,9 +19,12 @@
             deno
             just
             ruff
+            tinymist
             ty
             typescript-language-server
+            typst
             uv
+            zathura
           ];
         };
       }

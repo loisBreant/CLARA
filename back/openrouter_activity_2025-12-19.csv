@@ -1,0 +1,454 @@
+generation_id,created_at,cost_total,cost_web_search,cost_cache,cost_file_processing,byok_usage_inference,tokens_prompt,tokens_completion,tokens_reasoning,model_permaslug,provider_name,variant,cancelled,streamed,user,finish_reason_raw,finish_reason_normalized,generation_time_ms,time_to_first_token_ms,app_name,api_key_name
+gen-1766176333-571cT9ZUjKzbZWEL3yGz,2025-12-19 20:32:13.640,0,,,0,0,1144,512,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,5300,304,,clara tour
+gen-1766176331-nAqj1eXiG53FrhJn6gAK,2025-12-19 20:32:11.012,0,,,0,0,286,85,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1126,517,,clara tour
+gen-1766176325-WXKB4SYH6MgvvVx9huZA,2025-12-19 20:32:05.011,0.000143,,,0,0,461,325,0,google/gemma-3-27b-it,Nebius,standard,false,true,,stop,stop,5328,293,,clara tour
+gen-1766176322-lK80oWtcgI0wjlNaKLWu,2025-12-19 20:32:02.305,0,,,0,0,337,129,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,2033,346,,clara tour
+gen-1766176318-WKNgEE1SsjJR8tpXO0kY,2025-12-19 20:31:57.739,0,,,0,0,435,234,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,3570,438,,clara tour
+gen-1766176251-wxfh8tCTxKVJZscrb9VA,2025-12-19 20:30:51.628,0,,,0,0,2238,459,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,4672,305,,clara tour
+gen-1766176249-zqFpnGnWb063XSmUqC1r,2025-12-19 20:30:49.464,0,,,0,0,289,84,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1075,510,,clara tour
+gen-1766176238-4tfi3RbGIxnIdrFMJgej,2025-12-19 20:30:38.743,0.000102,,,0,0,458,384,0,google/gemma-3-27b-it,DeepInfra,standard,false,true,,stop,stop,9795,649,,clara tour
+gen-1766176236-vaPK2KsgzDamqz56Eizw,2025-12-19 20:30:35.876,0,,,0,0,331,124,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1899,252,,clara tour
+gen-1766176231-WZAR7ta2tpyTKPQZjjWY,2025-12-19 20:30:31.015,0,,,0,0,435,230,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,4022,268,,clara tour
+gen-1766174972-l1ucGrkPNMvyXnmyGYTf,2025-12-19 20:09:32.558,0,,,0,0,1090,368,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,4265,293,,clara tour
+gen-1766174965-bFkyoQ0PgXTgASfNUgrZ,2025-12-19 20:09:25.177,0.000177,,,0,0,462,437,0,google/gemma-3-27b-it,Nebius,standard,false,true,,stop,stop,6605,306,,clara tour
+gen-1766174962-OpqwzhURJ3xo2iRTph98,2025-12-19 20:09:21.944,0,,,0,0,328,120,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,2080,453,,clara tour
+gen-1766174959-AYMfe80bVIkTiKi8syDF,2025-12-19 20:09:18.760,0,,,0,0,435,137,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,2341,296,,clara tour
+gen-1766174714-07difiitLwhqmBDGLLSv,2025-12-19 20:05:14.294,0,,,0,0,1132,524,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,5154,338,,clara tour
+gen-1766174702-bPWp6TtTZ5B0pHjG99Pr,2025-12-19 20:05:02.040,0.000109,,,0,0,469,422,0,google/gemma-3-27b-it,NCompass,standard,false,true,,stop,stop,10003,1907,,clara tour
+gen-1766174698-JKfZZt3MBBxCT82mbwdC,2025-12-19 20:04:58.361,0,,,0,0,362,154,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,2707,242,,clara tour
+gen-1766174694-dmrLto9Dnm3cP7IUpivn,2025-12-19 20:04:54.717,0,,,0,0,435,169,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,2545,302,,clara tour
+gen-1766174634-O3MOQY1On0TaxQVOyAvo,2025-12-19 20:03:53.840,0,,,0,0,1356,355,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,3357,463,,clara tour
+gen-1766174631-tx5LcodL583H1h6SEle2,2025-12-19 20:03:51.107,0,,,0,0,285,146,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1772,512,,clara tour
+gen-1766174629-7P50eVFIwWxENLydp4CY,2025-12-19 20:03:49.218,0,,,0,0,282,50,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,767,807,,clara tour
+gen-1766174626-BTDEOsvkNVaqNSbdM55w,2025-12-19 20:03:46.004,0,,,0,0,343,136,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1793,224,,clara tour
+gen-1766174620-o48GIxNT71q54jj5Bqai,2025-12-19 20:03:40.213,0,,,0,0,435,327,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,4955,367,,clara tour
+gen-1766174385-aZF4znvZoz3WdftkwN9d,2025-12-19 19:59:45.508,0,,,0,0,672,193,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,2019,304,,clara tour
+gen-1766174384-OWqXr6nG4Mgd8pc9Hfui,2025-12-19 19:59:43.809,0,,,0,0,276,60,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,879,322,,clara tour
+gen-1766174380-Nn8UeUpQXaaJjJ58MSf3,2025-12-19 19:59:40.283,0,,,0,0,303,96,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1522,300,,clara tour
+gen-1766174376-MsBiUYRrGJpgz4T3xlmW,2025-12-19 19:59:36.163,0,,,0,0,436,190,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,2931,277,,clara tour
+gen-1766173833-wtlvg7uEe467bMeAG3FP,2025-12-19 19:50:33.538,0,,,0,0,1101,516,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,6330,486,,clara tour
+gen-1766173831-9BolY5d3mhfuOWQKPXnb,2025-12-19 19:50:31.513,0,,,0,0,335,53,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,851,587,,clara tour
+gen-1766173829-qk0h4yoJR65pQF1pBeVY,2025-12-19 19:50:29.560,0,,,0,0,309,73,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1216,212,,clara tour
+gen-1766173827-xz1s6B0715JTGEJPFShv,2025-12-19 19:50:27.553,0,,,0,0,295,56,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1205,258,,clara tour
+gen-1766173825-b61Oyl7TENRZFBbo5815,2025-12-19 19:50:25.763,0,,,0,0,292,28,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,519,858,,clara tour
+gen-1766173824-IRPB3lVPr7zDZzqSgGBa,2025-12-19 19:50:24.006,0,,,0,0,311,87,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,897,488,,clara tour
+gen-1766173822-hAotiHLZd2sz9ESlmXRr,2025-12-19 19:50:21.846,0,,,0,0,312,81,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1027,246,,clara tour
+gen-1766173812-VpS1g8PQNrguLiJW9Ufq,2025-12-19 19:50:11.661,0,,,0,0,401,563,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,8848,474,,clara tour
+gen-1766173703-BPLfFb7r8MO2BOUh3h2B,2025-12-19 19:48:23.875,0,,,0,0,524,192,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,2088,293,,clara tour
+gen-1766173701-NJmQnoqVvpDsaQupWSjT,2025-12-19 19:48:21.266,0,,,0,0,343,92,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1297,656,,clara tour
+gen-1766173698-GT3PHFf319JHYpNX0GQK,2025-12-19 19:48:18.669,0,,,0,0,419,117,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1738,296,,clara tour
+gen-1766172729-VdKsT6omksg1fsAp15hm,2025-12-19 19:32:08.962,0,,,0,0,797,194,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,2592,466,,clara tour
+gen-1766172727-1GR8YAqVSZhS7ghuBZQ0,2025-12-19 19:32:07.560,0,,,0,0,274,28,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,543,308,,clara tour
+gen-1766172725-0kBM9eogQkcg3gkLqFHN,2025-12-19 19:32:05.441,0,,,0,0,276,69,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,926,560,,clara tour
+gen-1766172724-lXCMnuZgnsB8IjVKS1yy,2025-12-19 19:32:04.198,0,,,0,0,263,42,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,526,364,,clara tour
+gen-1766172721-4VKLdhahJQ6t2TrGK3QY,2025-12-19 19:32:01.478,0,,,0,0,275,132,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1878,234,,clara tour
+gen-1766172715-CIkW8BYlEMc0tZnM7nIH,2025-12-19 19:31:55.414,0,,,0,0,391,323,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,4445,698,,clara tour
+gen-1766172020-5fGa5yGL2Nmmy7Kl7E5Y,2025-12-19 19:20:20.148,0,,,0,0,808,259,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,2847,242,,clara tour
+gen-1766172018-PdX6dsWpEHiEGGMgxlR5,2025-12-19 19:20:18.302,0,,,0,0,268,97,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1184,322,,clara tour
+gen-1766172016-tkmNY8JMcG1qT7GhUpAN,2025-12-19 19:20:16.581,0,,,0,0,282,71,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,889,344,,clara tour
+gen-1766172014-lw1k3EKLdOPbPGqGXjUA,2025-12-19 19:20:14.642,0,,,0,0,266,81,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1144,282,,clara tour
+gen-1766172013-Pmbt8p2WNYh40SJYOtxv,2025-12-19 19:20:12.872,0,,,0,0,242,70,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,896,324,,clara tour
+gen-1766172007-rou0DJY5lAeonI2rMv48,2025-12-19 19:20:07.211,0,,,0,0,401,299,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,4186,489,,clara tour
+gen-1766171626-LrDSGkUEfGLjy49RcvYt,2025-12-19 19:13:46.516,0,,,0,0,540,118,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1897,406,,clara tour
+gen-1766171625-tjLtu3AYdcZ0ZnIyHTN1,2025-12-19 19:13:45.548,0,,,0,0,231,28,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,474,233,,clara tour
+gen-1766171624-9PU3min6tjde6Z1isXXV,2025-12-19 19:13:43.928,0,,,0,0,232,30,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,582,258,,clara tour
+gen-1766171621-oggxHDcqhO0qdAIQSHfW,2025-12-19 19:13:41.403,0,,,0,0,391,83,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1655,457,,clara tour
+gen-1766171569-qNfVQtPTmONfuGcQtfRj,2025-12-19 19:12:49.285,0,,,0,0,513,207,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,2015,203,,clara tour
+gen-1766171567-RNOkHk2s4HiYg19MZYU3,2025-12-19 19:12:47.737,0,,,0,0,265,70,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,845,213,,clara tour
+gen-1766171566-XWNVkeq4MgUKYnAEzhl7,2025-12-19 19:12:46.258,0,,,0,0,251,46,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,635,270,,clara tour
+gen-1766171563-72dJzSnRRyuofLaUcO7v,2025-12-19 19:12:43.290,0,,,0,0,403,137,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1910,311,,clara tour
+gen-1766171156-wUBlCkzfFrWQJoXs9uV6,2025-12-19 19:05:56.732,0,,,0,0,360,231,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,2825,535,,clara tour
+gen-1766171155-X3tbBRFGcguui1nYa9tP,2025-12-19 19:05:55.535,0,,,0,0,233,39,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,381,212,,clara tour
+gen-1766171154-tmlkouf54EHh1ZYOjZzZ,2025-12-19 19:05:53.887,0,,,0,0,387,44,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,793,246,,clara tour
+gen-1766171029-l7g5QYPdG3IRf5FpQWOS,2025-12-19 19:03:49.194,0,,,0,0,753,211,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,2628,276,,clara tour
+gen-1766171027-TSWCUbAalLpCZJLoCo3u,2025-12-19 19:03:47.798,0,,,0,0,267,73,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,817,255,,clara tour
+gen-1766171026-toPPOKo0kyRvkVtHGRRy,2025-12-19 19:03:46.356,0,,,0,0,258,46,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,715,255,,clara tour
+gen-1766171024-NwpGRtbsxmdMNQbL43DV,2025-12-19 19:03:44.835,0,,,0,0,271,50,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,924,221,,clara tour
+gen-1766171023-Odm31l2ScuvAl2spz15S,2025-12-19 19:03:42.871,0,,,0,0,264,64,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,819,471,,clara tour
+gen-1766171016-2QOUAsdbgol7yhhdSlmE,2025-12-19 19:03:36.653,0,,,0,0,395,299,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,5083,446,,clara tour
+gen-1766170998-qU01jInz04Z6Ttg4RAp1,2025-12-19 19:03:18.645,0,,,0,0,364,132,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1403,293,,clara tour
+gen-1766170997-yLGpTvxc8xjG7wpnq6yg,2025-12-19 19:03:17.580,0,,,0,0,240,28,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,500,293,,clara tour
+gen-1766170995-e9k1yPlHNTomFI4SI2Fy,2025-12-19 19:03:15.571,0,,,0,0,387,52,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,845,306,,clara tour
+gen-1766170842-WGOcJbaDqLGNNSkJcCnZ,2025-12-19 19:00:42.395,0,,,0,0,610,214,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,4269,388,,clara tour
+gen-1766170839-B5N0sdcbWhyIJT9X0C8I,2025-12-19 19:00:38.915,0,,,0,0,284,74,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1649,829,,clara tour
+gen-1766170836-aw2KeAomiTRTNdZlw8wq,2025-12-19 19:00:35.997,0,,,0,0,278,63,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1580,655,,clara tour
+gen-1766170830-ApA0y67SniGrvvTxAAkY,2025-12-19 19:00:30.107,0,,,0,0,397,181,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,4851,660,,clara tour
+gen-1766170807-7yzpPpIHXl6V0UZsYDMa,2025-12-19 19:00:07.849,0,,,0,0,364,105,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1261,215,,clara tour
+gen-1766170806-fQCMktnsnb9vcdPhjS9Q,2025-12-19 19:00:06.488,0,,,0,0,240,28,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,516,317,,clara tour
+gen-1766170804-ZE9BtR33ebdaVHUBHIMQ,2025-12-19 19:00:04.503,0,,,0,0,387,52,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,750,424,,clara tour
+gen-1766170281-y4u3QJ4L1Bzb16L8NyxL,2025-12-19 18:51:21.695,0,,,0,0,358,102,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1081,217,,clara tour
+gen-1766170280-CZC2GF9eSRergTsHS0yD,2025-12-19 18:51:20.124,0,,,0,0,234,28,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,524,425,,clara tour
+gen-1766170278-qAUvwTmne0Te8IeBlv9G,2025-12-19 18:51:18.443,0,,,0,0,387,45,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,758,366,,clara tour
+gen-1766169979-0TLNe6t2AlippAhx9w6E,2025-12-19 18:46:19.319,0,,,0,0,399,346,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,4860,399,,clara tour
+gen-1766017388-1wpo5D0Q3CuqfQm9EhsM,2025-12-18 00:23:08.855,0,,,0,0,386,324,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,4640,350,,lois
+gen-1766016468-2BSIsrkG7jn2dMYTNsbp,2025-12-18 00:07:48.037,0.000122,,,0,0,379,538,0,google/gemma-3-27b-it,Novita,standard,false,true,,stop,stop,20437,2074,OpenRouter: Chatroom,
+gen-1766015656-ZfHwqkVhwioxwyJx1792,2025-12-17 23:54:16.725,0,,,0,0,1205,211,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,2218,408,,lois
+gen-1766015655-YDVvAy23pfS85YrHWUM2,2025-12-17 23:54:15.446,0,,,0,0,254,31,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,659,335,,lois
+gen-1766015654-YtGrikpHOKjvn9faynKK,2025-12-17 23:54:14.270,0,,,0,0,288,40,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,666,295,,lois
+gen-1766015653-Kd21UkdyFPWAtEnIHQo1,2025-12-17 23:54:13.151,0,,,0,0,317,36,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,539,297,,lois
+gen-1766015648-moo7FLPhJEKo9rLhWkGl,2025-12-17 23:54:08.388,0,,,0,0,392,302,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,4232,264,,lois
+gen-1766015604-LWKq3OcFSRBHmCyfyHoO,2025-12-17 23:53:24.808,0,,,0,0,1231,274,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,2824,482,,lois
+gen-1766015601-PbJ7gJRmzGCh3BwBkjS7,2025-12-17 23:53:21.225,0,,,0,0,383,233,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,2985,313,,lois
+gen-1766015598-aUNasOkpZH6v23479Xvf,2025-12-17 23:53:18.478,0,,,0,0,313,156,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1917,594,,lois
+gen-1766015597-vG7H7N6bbWbk0dd7yE18,2025-12-17 23:53:17.431,0,,,0,0,304,38,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,516,314,,lois
+gen-1766015595-1ONtNjv2lbu4kvaYtVAx,2025-12-17 23:53:15.729,0,,,0,0,290,70,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,892,214,,lois
+gen-1766015588-Bvj9NTFn6cWOC4PhaovA,2025-12-17 23:53:08.272,0,,,0,0,402,532,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,6568,280,,lois
+gen-1766015409-4yWLDEnmFEI2KcubV6Ut,2025-12-17 23:50:09.413,0,,,0,0,402,455,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,5917,335,,lois
+gen-1766014782-IV25nJmBGSxOdfsIFiAT,2025-12-17 23:39:42.885,0,,,0,0,403,147,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1728,265,,lois
+gen-1766014780-Cut6J5eQUXgCFf2XI8tO,2025-12-17 23:39:40.907,0,,,0,0,232,83,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1002,412,,lois
+gen-1766014779-yQR8CQ5SBScaROPLCJYh,2025-12-17 23:39:39.541,0,,,0,0,387,43,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,831,269,,lois
+gen-1766014729-wKA5dHmQQt1q9XqkUlp3,2025-12-17 23:38:49.079,0,,,0,0,549,117,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1390,462,,lois
+gen-1766014727-bWhd2FU6bKr91NYUODzH,2025-12-17 23:38:47.555,0,,,0,0,249,63,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,818,218,,lois
+gen-1766014725-P3RGftsBRGNP0VVh09n2,2025-12-17 23:38:45.814,0,,,0,0,262,39,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,622,324,,lois
+gen-1766014723-PoVTyNGyf2bPTbx77MLW,2025-12-17 23:38:43.063,0,,,0,0,388,129,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1864,217,,lois
+gen-1766014717-Sp6Y2qEaoTrRyEumRgcE,2025-12-17 23:38:37.721,0,,,0,0,353,100,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1176,315,,lois
+gen-1766014716-BETrFGyDOEmRq6BfBIrK,2025-12-17 23:38:36.163,0,,,0,0,232,25,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,967,329,,lois
+gen-1766014714-64sxNazWL4Gllfrlg23b,2025-12-17 23:38:34.544,0,,,0,0,386,43,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,800,236,,lois
+gen-1766014525-kl4fyxMHcZ64cz8eZBge,2025-12-17 23:35:25.340,0,,,0,0,436,245,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,2467,338,,lois
+gen-1766014523-j96xQt1xAqcbkm06n3W6,2025-12-17 23:35:23.756,0,,,0,0,248,28,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,511,304,,lois
+gen-1766014522-4MA6uEkUgGVZAv30Zp74,2025-12-17 23:35:22.193,0,,,0,0,388,59,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,929,328,,lois
+gen-1766014516-9f8qGFKWuqmTUJXV3DET,2025-12-17 23:35:16.080,0,,,0,0,384,212,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,2492,266,,lois
+gen-1766014514-LSMfd3GWwGwgEJzfDxfX,2025-12-17 23:35:14.434,0,,,0,0,233,63,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,890,210,,lois
+gen-1766014512-vYrp5ARau3VrcvkZygKN,2025-12-17 23:35:12.857,0,,,0,0,387,44,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,939,318,,lois
+gen-1766014398-YSQWgBuw6dJcF083JWIv,2025-12-17 23:33:18.011,0,,,0,0,472,236,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,2435,236,,lois
+gen-1766014396-dsWkgZn9gFDWA1ZrgZXi,2025-12-17 23:33:16.888,0,,,0,0,234,56,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,632,214,,lois
+gen-1766014395-9SrX5BZaT2YZkpKS38ju,2025-12-17 23:33:15.379,0,,,0,0,387,48,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,785,230,,lois
+gen-1766014389-s7RezJxzKzZEzi3i6mzg,2025-12-17 23:33:09.610,0,,,0,0,495,233,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,2244,322,,lois
+gen-1766014388-s6gXxV2tLfBfKoTrRKaz,2025-12-17 23:33:08.336,0,,,0,0,285,24,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,500,223,,lois
+gen-1766014386-WLc5fuKRARditqWjAPd3,2025-12-17 23:33:06.708,0,,,0,0,253,63,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,860,287,,lois
+gen-1766014383-5MTvK17m0Ckj37woDZJp,2025-12-17 23:33:03.118,0,,,0,0,385,164,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,2334,629,,lois
+gen-1766014038-4hoz1r1l3DCPIFWyDJyB,2025-12-17 23:27:18.926,0,,,0,0,401,124,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1284,330,,lois
+gen-1766014037-IGV01SZQNUGZvVPfdLNM,2025-12-17 23:27:17.674,0,,,0,0,230,25,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,511,273,,lois
+gen-1766014036-JdkRpKbs8mbKv8w6SE5h,2025-12-17 23:27:16.552,0,,,0,0,230,28,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,508,383,,lois
+gen-1766014034-70HtQYvrUT7cwtZmPg98,2025-12-17 23:27:14.477,0,,,0,0,394,74,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1481,266,,lois
+gen-1766014019-z585EWf0QdNKugXu6SBo,2025-12-17 23:26:59.082,0,,,0,0,230,25,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,572,293,,lois
+gen-1766014017-VSjUuif3PgXyNLz8pSka,2025-12-17 23:26:57.783,0,,,0,0,389,42,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,749,308,,lois
+gen-1766014002-Je5tqgtZ65uxuHbvqXkl,2025-12-17 23:26:42.787,0,,,0,0,414,81,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1145,307,,lois
+gen-1766014001-1x5sP7fdgaXDQxsIi6aW,2025-12-17 23:26:41.434,0,,,0,0,231,26,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,487,285,,lois
+gen-1766014000-OEYYKdZ448OQBALdF2lx,2025-12-17 23:26:40.084,0,,,0,0,230,28,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,498,606,,lois
+gen-1766013997-ejP3Xzxg5Hmo4ql7cXjR,2025-12-17 23:26:37.943,0,,,0,0,390,76,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1474,332,,lois
+gen-1766013981-cTt8JcIgRBNr9CaqYhtk,2025-12-17 23:26:21.752,0,,,0,0,362,70,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1060,360,,lois
+gen-1766013980-UB4o55Ncd249B4PuwA4X,2025-12-17 23:26:20.329,0,,,0,0,236,28,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,599,258,,lois
+gen-1766013978-0w50xYpGBcZeosjc3sNm,2025-12-17 23:26:18.301,0,,,0,0,389,47,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1020,358,,lois
+gen-1766013720-71U57wMMq7IPFDYrqgSg,2025-12-17 23:22:00.066,0,,,0,0,231,26,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,538,356,,lois
+gen-1766013719-ZnNl7HLhKsqgesLRUmX3,2025-12-17 23:21:58.996,0,,,0,0,230,28,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,517,315,,lois
+gen-1766013716-gV7eTCcJ5iO42A0NACkl,2025-12-17 23:21:56.809,0,,,0,0,396,78,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1520,384,,lois
+gen-1766013686-y2cWepsAAjpNLhaBkcm9,2025-12-17 23:21:26.134,0,,,0,0,232,73,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,783,312,,lois
+gen-1766013684-iLkeVjiFSoSgp5XJRnbf,2025-12-17 23:21:24.582,0,,,0,0,387,45,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,798,273,,lois
+gen-1766013674-56BIpw3AdI1Hd2O7O9dE,2025-12-17 23:21:14.443,0,,,0,0,232,75,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,812,285,,lois
+gen-1766013672-saH20YCk166oXfmjRJK7,2025-12-17 23:21:12.191,0,,,0,0,387,44,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1191,755,,lois
+gen-1766013413-gFV5XbPypwg9winxKdMh,2025-12-17 23:16:53.541,0,,,0,0,239,31,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,651,290,,lois
+gen-1766013411-HAK6KTAbWkGzAjF6RJSU,2025-12-17 23:16:51.891,0,,,0,0,388,52,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1064,254,,lois
+gen-1766013401-NWKeFafTSLGBKqEqu4Sz,2025-12-17 23:16:41.713,0,,,0,0,386,454,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,6202,617,,lois
+gen-1766013230-Xe45R8SUAiyrcD5rWG7G,2025-12-17 23:13:50.645,0,,,0,0,232,75,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,895,337,,lois
+gen-1766013229-GJQEmYrJ2MHxZCiYmxmC,2025-12-17 23:13:49.125,0,,,0,0,387,45,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,830,343,,lois
+gen-1766013100-Dl7qvxhNdPrXxoS6K4ai,2025-12-17 23:11:40.492,0,,,0,0,234,98,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1064,324,,lois
+gen-1766013098-8Vi0FyCBFndGnjWuzcCD,2025-12-17 23:11:38.406,0,,,0,0,387,45,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,791,720,,lois
+gen-1766013009-BSKNip4G3YuhIWI2WKlx,2025-12-17 23:10:09.851,0,,,0,0,232,75,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,937,382,,lois
+gen-1766013008-wLS0JiTZxvBJ3fmlgptO,2025-12-17 23:10:08.387,0,,,0,0,387,44,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,857,277,,lois
+gen-1766012908-xzrv0i2zgyJrzGnp0St4,2025-12-17 23:08:28.399,0,,,0,0,232,75,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1080,330,,lois
+gen-1766012906-NiOKy5M5oyFvngHWBzrF,2025-12-17 23:08:26.520,0,,,0,0,387,44,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1054,510,,lois
+gen-1766012806-z9YPudeckYT3fIVG6HWq,2025-12-17 23:06:45.944,0,,,0,0,387,45,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,822,277,,lois
+gen-1766012764-007lsSSyZ4UdhRbvVmQK,2025-12-17 23:06:04.724,0,,,0,0,233,28,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,678,220,,lois
+gen-1766012762-pE2mZOnlPfhWuqbSb68s,2025-12-17 23:06:02.710,0,,,0,0,387,44,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1200,261,,lois
+gen-1766012753-PYGrvcDQ53HZYl0PYbms,2025-12-17 23:05:53.254,0,,,0,0,232,75,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,996,260,,lois
+gen-1766012751-8qeMlMmuxfrqsT0HLaaG,2025-12-17 23:05:51.206,0,,,0,0,387,44,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1000,315,,lois
+gen-1766012600-u94ubGcB1IwC6yn3fjIG,2025-12-17 23:03:20.164,0,,,0,0,271,90,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1329,390,,lois
+gen-1766012597-jR2NbRtfqDu2Vuw8z9CD,2025-12-17 23:03:17.089,0,,,0,0,284,149,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,2425,341,,lois
+gen-1766012595-FRviBoOnJFjqvOKsSBzD,2025-12-17 23:03:15.482,0,,,0,0,264,40,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,790,330,,lois
+gen-1766012594-6A9jqMr0b34HnRiUn9XN,2025-12-17 23:03:14.037,0,,,0,0,283,41,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,617,425,,lois
+gen-1766012586-446LrJhDTp7VP11TlBrk,2025-12-17 23:03:06.769,0,,,0,0,385,345,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,6405,369,,lois
+gen-1766012550-yJDNdTUz8D3ejAA0pJnT,2025-12-17 23:02:30.180,0,,,0,0,240,7,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,182,330,,lois
+gen-1766012548-3ZgJp919q7dnAO2oeqZM,2025-12-17 23:02:28.029,0,,,0,0,386,54,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,985,270,,lois
+gen-1766012448-WoESrCrp2W76kYmreOl0,2025-12-17 23:00:48.072,0,,,0,0,247,67,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,815,390,,lois
+gen-1766012446-milwWYAlHQ7dpiS02bKC,2025-12-17 23:00:46.453,0,,,0,0,386,59,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,977,283,,lois
+gen-1766012382-oEiXTJ3XwTS0ZE1LPyUQ,2025-12-17 22:59:42.770,0,,,0,0,238,7,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,138,279,,lois
+gen-1766012381-7RWqb9ygJA0mgSnkounw,2025-12-17 22:59:41.050,0,,,0,0,386,51,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,766,284,,lois
+gen-1766012247-geW2cmWoVRiGOTEU1UNR,2025-12-17 22:57:27.194,0,,,0,0,386,51,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,824,234,,lois
+gen-1766012221-qbtE3QFOKftx9DgyUXMJ,2025-12-17 22:57:01.097,0,,,0,0,386,124,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1597,309,,lois
+gen-1766012189-V3c3LADEaGheLoSbe0vf,2025-12-17 22:56:29.388,0,,,0,0,386,68,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1117,531,,lois
+gen-1766012143-97iowVbMq2YjrovFq63i,2025-12-17 22:55:43.532,0,,,0,0,386,149,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,2116,223,,lois
+gen-1766012118-FeOe0oAUU5OMUvHzCdym,2025-12-17 22:55:18.371,0,,,0,0,386,61,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1078,315,,lois
+gen-1766011380-dTDU1RNiItv7Fj03BWw6,2025-12-17 22:43:00.622,0,,,0,0,254,34,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,413,354,,lois
+gen-1766011378-lCPymFH4iaWhLhD6OEGm,2025-12-17 22:42:58.866,0,,,0,0,386,68,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1075,340,,lois
+gen-1766011285-s0zo9ebQ8vQxDLSWRH3r,2025-12-17 22:41:25.709,0,,,0,0,268,47,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,644,528,,lois
+gen-1766011284-wU29XJEJid2eKtQRqN3O,2025-12-17 22:41:24.027,0,,,0,0,386,81,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1096,248,,lois
+gen-1766011270-854IUcl8eFaKNOSBlD1T,2025-12-17 22:41:10.210,0,,,0,0,255,7,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,136,225,,lois
+gen-1766011268-zhJB5oG0Xw0MrcAKiEeT,2025-12-17 22:41:08.469,0,,,0,0,386,68,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1042,259,,lois
+gen-1766010964-9hqAaZhTFmelO5qbYert,2025-12-17 22:36:04.892,0,,,0,0,271,15,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,262,240,,lois
+gen-1766010963-cUkAu66h4cCjgmEB3iun,2025-12-17 22:36:03.677,0,,,0,0,290,28,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,470,257,,lois
+gen-1766010960-N3ZzU7hNyMX8NEDN7MWV,2025-12-17 22:36:00.624,0,,,0,0,386,183,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,2238,308,,lois
+gen-1766010864-zS2H8SeM3VV8giMqCpnt,2025-12-17 22:34:24.424,0,,,0,0,246,16,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,255,307,,lois
+gen-1766010862-3c9DnIaBfVLYjFK8qu28,2025-12-17 22:34:22.890,0,,,0,0,386,61,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,921,377,,lois
+gen-1766010847-AELbyHmNTeyQAV40erwm,2025-12-17 22:34:07.854,0,,,0,0,267,91,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1127,359,,lois
+gen-1766010846-vj5tGzq9PcY3vZQYhcsV,2025-12-17 22:34:06.544,0,,,0,0,273,29,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,391,436,,lois
+gen-1766010844-eU29pnjT9RjnG9zWadPG,2025-12-17 22:34:04.331,0,,,0,0,386,88,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1330,281,,lois
+gen-1766010735-0JloJ3Q5RjEQwkKI6ifM,2025-12-17 22:32:15.009,0,,,0,0,267,120,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1114,301,,lois
+gen-1766010733-wrcA4SRdbPSuM7MWzdIt,2025-12-17 22:32:13.689,0,,,0,0,250,28,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,547,296,,lois
+gen-1766010732-TLVRKcuURUsyvjigzjoA,2025-12-17 22:32:11.952,0,,,0,0,386,63,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,877,272,,lois
+gen-1766010628-XlDsAlfUczpwMh5Hj9M6,2025-12-17 22:30:28.967,0,,,0,0,386,65,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,833,218,,lois
+gen-1766010574-2fNXDNs6hCgIAbh18c8P,2025-12-17 22:29:34.767,0,,,0,0,267,88,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,774,477,,lois
+gen-1766010572-WMInplnbKn727VJldbHe,2025-12-17 22:29:32.229,0,,,0,0,259,116,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1647,475,,lois
+gen-1766010570-fau9nlcmc74rzwCtC2Op,2025-12-17 22:29:30.344,0,,,0,0,386,74,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,961,312,,lois
+gen-1766010417-wxu3q7RaPbfBJKTv8FWP,2025-12-17 22:26:57.168,0,,,0,0,267,76,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,960,323,,lois
+gen-1766010415-rKKccsaeTBDVwhi4X24U,2025-12-17 22:26:55.746,0,,,0,0,242,66,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,905,300,,lois
+gen-1766010413-GvKs5gG3rDllnDK4rkSk,2025-12-17 22:26:53.431,0,,,0,0,386,59,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1289,506,,lois
+gen-1766010390-dEEx6PlnTHodxeqAwy3g,2025-12-17 22:26:30.568,0,,,0,0,386,59,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,891,234,,lois
+gen-1766010356-hMjtvlKRUPkF9zdJyYf2,2025-12-17 22:25:56.141,0,,,0,0,267,78,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1022,363,,lois
+gen-1766010354-o5iNiIQsw0pdaRZLbNvj,2025-12-17 22:25:54.662,0,,,0,0,269,28,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,521,408,,lois
+gen-1766010352-A6y631Nos0GArTxpcmqc,2025-12-17 22:25:52.845,0,,,0,0,386,85,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1232,212,,lois
+gen-1766009815-So2g7RjWf2ZyqJPtNPOx,2025-12-17 22:16:55.052,0,,,0,0,267,80,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,914,239,,lois
+gen-1766009813-4W4OgaEYO1HNgQmGDy8n,2025-12-17 22:16:53.926,0,,,0,0,236,25,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,406,288,,lois
+gen-1766009812-QbN03rE29gQtwOgVLjm6,2025-12-17 22:16:52.397,0,,,0,0,389,50,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,788,255,,lois
+gen-1766009739-jHyo99YBY1AknwpyFnS8,2025-12-17 22:15:39.178,0,,,0,0,267,104,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1136,259,,lois
+gen-1766009737-2MddrpjmTzLVB3q98o5C,2025-12-17 22:15:37.749,0,,,0,0,241,7,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,129,736,,lois
+gen-1766009736-NfwyMZKTP3GG5RSnI0jr,2025-12-17 22:15:35.996,0,,,0,0,386,55,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,785,311,,lois
+gen-1766009671-qyxP0bQacDrSU91tuN3T,2025-12-17 22:14:31.505,0,,,0,0,267,78,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,838,238,,lois
+gen-1766009670-4uMr6MEtxlclOY9WJr4o,2025-12-17 22:14:30.381,0,,,0,0,251,28,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,497,279,,lois
+gen-1766009668-T2HDYMAgqRo2mvQ4q9EJ,2025-12-17 22:14:28.681,0,,,0,0,386,66,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,877,228,,lois
+gen-1766009612-dItK85g4aJTGg8vi2CJa,2025-12-17 22:13:32.299,0,,,0,0,386,395,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,5222,371,,lois
+gen-1766009572-Q8D2yqbo3stSIy9BGoDJ,2025-12-17 22:12:52.092,0,,,0,0,386,50,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,683,305,,lois
+gen-1766009286-hVvTBXEiHGR8xKu7MqYC,2025-12-17 22:08:06.018,0,,,0,0,386,78,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1161,377,,lois
+gen-1766009103-GcuynyURWhH4jktgqgKZ,2025-12-17 22:05:03.748,0,,,0,0,386,69,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1314,383,,lois
+gen-1766008996-nxICN45ftKXwWBdlY4F0,2025-12-17 22:03:16.020,0,,,0,0,386,56,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,769,253,,lois
+gen-1766008983-kDe6tPCvPBctUE3IU3lU,2025-12-17 22:03:03.820,0,,,0,0,386,86,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1426,277,,lois
+gen-1766008825-uGXaV0qHjZCO86OJ4byk,2025-12-17 22:00:25.099,0,,,0,0,386,47,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,529,307,,lois
+gen-1766008770-9aPAVhfsEieYeRAwriLf,2025-12-17 21:59:30.104,0,,,0,0,387,45,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,976,259,,lois
+gen-1766008734-Yg2CQpZoKFKnHgMXcUuf,2025-12-17 21:58:54.716,0,,,0,0,387,45,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,763,331,,lois
+gen-1766008708-iBkDsWBj694lSDNs2w0W,2025-12-17 21:58:28.219,0,,,0,0,387,66,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1088,599,,lois
+gen-1766008590-c216GiAxVQxnpg7tgl8T,2025-12-17 21:56:30.850,0,,,0,0,387,44,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,0,294,,lois
+gen-1766008525-zCPPLkSwyEbvxyudDh9M,2025-12-17 21:55:25.386,0,,,0,0,387,44,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,855,293,,lois
+gen-1766008450-gNBdnMSA0O5xkltiMze5,2025-12-17 21:54:10.709,0,,,0,0,387,52,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,855,345,,lois
+gen-1766008332-ptlOp3cc0aiDvdTndHKe,2025-12-17 21:52:11.925,0,,,0,0,387,52,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,994,252,,lois
+gen-1766008029-VnTTWVWIYvAe7KOarPOf,2025-12-17 21:47:09.433,0,,,0,0,386,61,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1284,642,,lois
+gen-1766007916-99bMI3XV7ZxDfSTX5tEn,2025-12-17 21:45:16.409,0,,,0,0,389,50,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1090,557,,lois
+gen-1766007866-EwjEEAWZAd8m7OsQ8ygr,2025-12-17 21:44:25.978,0,,,0,0,386,59,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,994,361,,lois
+gen-1766007802-5TgxwUqEj2Pee9jDdiQp,2025-12-17 21:43:22.809,0,,,0,0,386,61,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1028,420,,lois
+gen-1766007681-Rv7unIP2bGFBeHoCwRnZ,2025-12-17 21:41:21.094,0,,,0,0,386,67,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1069,1149,,lois
+gen-1766007623-59vQ1Gz9Vw5pCO7OU0LD,2025-12-17 21:40:23.559,0,,,0,0,386,161,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,2321,292,,lois
+gen-1766007615-xv92ZSoXAZM8MRKMpqx4,2025-12-17 21:40:15.522,0,,,0,0,389,48,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1088,491,,lois
+gen-1766007592-2cztWS7cXSUQkJMnIf0u,2025-12-17 21:39:52.445,0,,,0,0,389,52,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1049,606,,lois
+gen-1766007577-VN8ilmfsWRzB4ri0iuxw,2025-12-17 21:39:37.029,0,,,0,0,389,41,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,766,749,,lois
+gen-1766007122-2DaQbCW3oDwFBwVxOutg,2025-12-17 21:32:02.425,0,,,0,0,267,81,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,788,427,,lois
+gen-1766007121-mY9c1ZxoqrRexMLlrqvS,2025-12-17 21:32:01.290,0,,,0,0,372,27,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,515,334,,lois
+gen-1766007119-4wJZ2X6GWl9jRjEE6dEo,2025-12-17 21:31:59.594,0,,,0,0,388,46,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,953,368,,lois
+gen-1766007066-PG4bKYkIi6qokR2mFAE4,2025-12-17 21:31:06.722,0,,,0,0,267,81,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,789,321,,lois
+gen-1766007065-xhyGf3LeaguA7kJGprl3,2025-12-17 21:31:05.277,0,,,0,0,372,27,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,624,232,,lois
+gen-1766007063-zxaByNBwp1koiUyK2ny7,2025-12-17 21:31:03.333,0,,,0,0,388,45,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1081,453,,lois
+gen-1766006943-v8M2OneLpoX0E5uc19V2,2025-12-17 21:29:03.211,0,,,0,0,267,81,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1091,482,,lois
+gen-1766006941-me8EW5YUYUKUwRDjmGC0,2025-12-17 21:29:01.612,0,,,0,0,372,27,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,773,563,,lois
+gen-1766006939-GajCssHs0usIUtFQIFcG,2025-12-17 21:28:59.666,0,,,0,0,388,45,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1061,514,,lois
+gen-1766005919-nklFx3UQB5qBx2AIkiKC,2025-12-17 21:11:59.409,0,,,0,0,302,87,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1027,290,,lois
+gen-1766005918-CYByV2V3DrMEL5Jd39NN,2025-12-17 21:11:58.487,0,,,0,0,321,22,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,258,369,,lois
+gen-1766005916-rJzc7dSFbZBTQdk5I0by,2025-12-17 21:11:56.493,0,,,0,0,388,45,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,901,520,,lois
+gen-1766005805-vukHqzVnRicLpTkKJd3Z,2025-12-17 21:10:05.031,0,,,0,0,304,118,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1459,597,,lois
+gen-1766005803-uiIscAW6H4Lv8vMGROXu,2025-12-17 21:10:03.763,0,,,0,0,321,22,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,284,575,,lois
+gen-1766005801-0IbX9uF7nLKnJkXlVeYx,2025-12-17 21:10:01.096,0,,,0,0,384,66,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1154,1191,,lois
+gen-1766005630-B1sq9jVEY5Ml2c9cabQc,2025-12-17 21:07:10.657,0,,,0,0,303,70,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,809,553,,lois
+gen-1766005629-wRhfpjOvhufjEkn63kuz,2025-12-17 21:07:08.997,0,,,0,0,372,27,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,581,741,,lois
+gen-1766005627-Yzjm67K1PJPmDASeKkRC,2025-12-17 21:07:07.205,0,,,0,0,388,48,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1137,245,,lois
+gen-1766003532-O2zGP40NoZW8XsFGJEzH,2025-12-17 20:32:12.959,0,,,0,0,396,106,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1444,329,,lois
+gen-1766003531-IZQsHko7kvmh6zQsYacu,2025-12-17 20:32:11.512,0,,,0,0,526,29,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,545,346,,lois
+gen-1766003530-dRbw1DBGl3gzJULHsFgt,2025-12-17 20:32:10.292,0,,,0,0,515,27,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,525,476,,lois
+gen-1766003527-HaqK9RGIvga3ZeX6HAtm,2025-12-17 20:32:07.284,0,,,0,0,283,115,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1862,436,,lois
+gen-1766003433-SJrENeKFlKBsdYk8aHrb,2025-12-17 20:30:33.614,0,,,0,0,303,106,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1185,357,,lois
+gen-1766003432-JLiuUpfA3NxC5JGA5lT0,2025-12-17 20:30:32.605,0,,,0,0,534,3,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,146,559,,lois
+gen-1766003430-LwrBUicReeVLZNKS4cE7,2025-12-17 20:30:30.758,0,,,0,0,278,73,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1034,441,,lois
+gen-1766003194-fCJWUpDgfeaInqTU7r7u,2025-12-17 20:26:34.009,0,,,0,0,339,81,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1690,414,,lois
+gen-1766003192-kIX1hjVS26ofNDszMQI3,2025-12-17 20:26:32.572,0,,,0,0,510,27,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,720,385,,lois
+gen-1766003190-ngPflPxRjVJEp04es5g4,2025-12-17 20:26:30.571,0,,,0,0,388,45,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1307,339,,lois
+gen-1765998140-cYOXuwvg9ynj25M67ubA,2025-12-17 19:02:20.389,0,,,0,0,330,79,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1629,501,,lois
+gen-1765998138-3GIwiW9DEblGE4woR3tD,2025-12-17 19:02:18.642,0,,,0,0,563,32,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,695,262,,lois
+gen-1765998137-ZUSeXWELSR6dzEvI70zJ,2025-12-17 19:02:17.646,0,,,0,0,513,3,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,180,361,,lois
+gen-1765998135-vD1owcl82tzE7q326O7X,2025-12-17 19:02:15.475,0,,,0,0,545,78,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1763,194,,lois
+gen-1765998133-fWwJ6KgwAFiW1WaiGgsC,2025-12-17 19:02:13.634,0,,,0,0,492,27,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,717,417,,lois
+gen-1765998131-wOegB7W66EwhPb5LbCnH,2025-12-17 19:02:11.589,0,,,0,0,491,55,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1266,468,,lois
+gen-1765998098-Goyinw8wGsf0nj5vTTbe,2025-12-17 19:01:38.702,0,,,0,0,313,46,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,874,625,,lois
+gen-1765998097-Hamy9CnmrCaSrMijyBL3,2025-12-17 19:01:37.097,0,,,0,0,544,32,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,731,396,,lois
+gen-1765998095-BoM9PyyiUGeFS640lSwj,2025-12-17 19:01:35.672,0,,,0,0,498,27,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,709,222,,lois
+gen-1765998093-HToqD2CVzuBYcT7cs9Zi,2025-12-17 19:01:33.453,0,,,0,0,490,61,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1443,381,,lois
+gen-1765997919-CZw2zXLecfBBp3gpucYa,2025-12-17 18:58:39.233,0,,,0,0,331,65,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1321,262,,lois
+gen-1765997917-cEmMVroXARVGfEjOrkvk,2025-12-17 18:58:37.150,0,,,0,0,563,41,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,865,964,,lois
+gen-1765997916-CgAESIIlnD3WMizVyiYD,2025-12-17 18:58:36.049,0,,,0,0,514,3,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,139,554,,lois
+gen-1765997913-J5R24pKXj4epyRb1lh5d,2025-12-17 18:58:33.850,0,,,0,0,545,80,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1652,215,,lois
+gen-1765997912-Ltq2uwCklavzBFkh50Em,2025-12-17 18:58:32.151,0,,,0,0,492,27,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,668,593,,lois
+gen-1765997909-DhiX4xvu8N4CyfFyIQoW,2025-12-17 18:58:29.947,0,,,0,0,491,55,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1208,502,,lois
+gen-1765997893-yxmJJdg9PViqrtS7NcEg,2025-12-17 18:58:13.112,0,,,0,0,313,46,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,867,646,,lois
+gen-1765997891-MkFAixjZLG1lnd73kQPt,2025-12-17 18:58:11.639,0,,,0,0,544,32,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,690,377,,lois
+gen-1765997889-r6ZC4S8kSxj2ATRFCS4M,2025-12-17 18:58:09.743,0,,,0,0,494,27,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,695,638,,lois
+gen-1765997887-axrZa0MIuRItADqHHg2B,2025-12-17 18:58:07.286,0,,,0,0,490,58,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1527,546,,lois
+gen-1765997575-goLzDa60qnBm8CP1j2dC,2025-12-17 18:52:55.849,0,,,0,0,715,84,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,2537,275,,lois
+gen-1765997574-Gqte5hzjG5lZs1zvQVDy,2025-12-17 18:52:54.745,0,,,0,0,510,13,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,281,286,,lois
+gen-1765997572-2GiRxeHKNHhSx4ox3Mdb,2025-12-17 18:52:52.876,0,,,0,0,680,84,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1319,224,,lois
+gen-1765997571-w9VYTRHDL56xzI6VNeD7,2025-12-17 18:52:51.779,0,,,0,0,510,13,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,280,305,,lois
+gen-1765997569-yS7ZvYRS1B5m8MooyX0L,2025-12-17 18:52:49.890,0,,,0,0,644,84,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1330,270,,lois
+gen-1765997568-Z9FpNUbBXPR595MrDeny,2025-12-17 18:52:48.905,0,,,0,0,510,13,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,295,506,,lois
+gen-1765997567-YfF40oLWf79jJ2XRNGRK,2025-12-17 18:52:47.153,0,,,0,0,609,81,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1255,249,,lois
+gen-1765997566-o1iwqBP9ldXAnn6AC8Jl,2025-12-17 18:52:46.442,0,,,0,0,524,13,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,294,230,,lois
+gen-1765997563-Zddx9rPzhKtPPVItercB,2025-12-17 18:52:43.602,0,,,0,0,575,95,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1870,473,,lois
+gen-1765997562-LCBajukvEsa43S6zy4n3,2025-12-17 18:52:42.410,0,,,0,0,506,16,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,270,490,,lois
+gen-1765997560-qJbEdcKgr7CFyjTc66KB,2025-12-17 18:52:40.282,0,,,0,0,536,78,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1296,320,,lois
+gen-1765997559-tiJrL1yj6LX7JXdK5wie,2025-12-17 18:52:38.973,0,,,0,0,543,29,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,403,519,,lois
+gen-1765997556-LHfHqNdG64g4NbLSRh0C,2025-12-17 18:52:36.407,0,,,0,0,487,112,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1517,354,,lois
+gen-1765997429-8Mj2JKEknwzebt1Zk0IU,2025-12-17 18:50:29.226,0,,,0,0,313,46,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,827,1022,,lois
+gen-1765997427-oqhHAs9ugtcL00dhjFKz,2025-12-17 18:50:27.904,0,,,0,0,544,32,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,536,305,,lois
+gen-1765997426-scKgmYSylC7N6YnCPZR8,2025-12-17 18:50:26.114,0,,,0,0,494,27,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,7,379,,lois
+gen-1765997424-T4SQSeMWosVo3oQgoOdH,2025-12-17 18:50:24.301,0,,,0,0,490,58,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1107,343,,lois
+gen-1765996866-pJ6Sl0cOo1gdofJGXWhh,2025-12-17 18:41:06.020,0,,,0,0,368,74,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,936,327,,lois
+gen-1765996864-oExUx8A1eB3uhQm9A3RN,2025-12-17 18:41:04.889,0,,,0,0,530,32,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,530,326,,lois
+gen-1765996863-wfjcTGZdvoLlHQn3zlr9,2025-12-17 18:41:03.750,0,,,0,0,512,27,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,526,352,,lois
+gen-1765996862-2uhRauXHFsRvJAenvAmY,2025-12-17 18:41:02.080,0,,,0,0,478,69,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1168,270,,lois
+gen-1765996860-IWr8HqEyNQGE5PYt8xxC,2025-12-17 18:41:00.759,0,,,0,0,511,27,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,618,426,,lois
+gen-1765996858-uggzptN34dnFkYspMT1Y,2025-12-17 18:40:58.862,0,,,0,0,425,68,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1494,188,,lois
+gen-1765996837-S75UVvxheVZHkrKTmVwj,2025-12-17 18:40:37.866,0,,,0,0,314,48,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,639,931,,lois
+gen-1765996836-Cyet19iDbPK0RRsvy9rU,2025-12-17 18:40:36.854,0,,,0,0,476,32,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,274,234,,lois
+gen-1765996835-fgFCiXz1mfNUIZB6xrbg,2025-12-17 18:40:35.461,0,,,0,0,492,27,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,514,469,,lois
+gen-1765996833-fy7Mu2skgav0yWeOQ3Wq,2025-12-17 18:40:33.721,0,,,0,0,424,48,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,915,243,,lois
+gen-1765996375-DL8HURIm54uGue9tuw6r,2025-12-17 18:32:55.119,0,,,0,0,357,115,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1644,349,,lois
+gen-1765996373-caDChg8SFsWCg0ieYsIq,2025-12-17 18:32:53.583,0,,,0,0,295,28,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,605,683,,lois
+gen-1765996370-mNLEOW6No1XiPxf46D4e,2025-12-17 18:32:50.572,0,,,0,0,306,107,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1942,521,,lois
+gen-1765996354-cIOwi3feJvEMy8WGC4NS,2025-12-17 18:32:34.829,0,,,0,0,374,131,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,2567,298,,lois
+gen-1765996353-a0AOb5WVaWgocvnKqoVd,2025-12-17 18:32:33.410,0,,,0,0,342,22,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,385,461,,lois
+gen-1765996347-QkViGtusPNTGGoK09LRi,2025-12-17 18:32:27.472,0,,,0,0,301,330,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,4642,575,,lois
+gen-1765995117-TYig2ybqmUVYzkXpBHvj,2025-12-17 18:11:57.739,0,,,0,0,341,49,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,656,487,,lois
+gen-1765995116-zh6nADUjCPRVmqfCFEyF,2025-12-17 18:11:56.554,0,,,0,0,481,27,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,540,322,,lois
+gen-1765995114-kckSjw4wKN3oyeH3YHen,2025-12-17 18:11:54.860,0,,,0,0,260,51,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,935,260,,lois
+gen-1765995059-pTmnmc9OCP8rFhsw4bfA,2025-12-17 18:10:59.037,0,,,0,0,303,81,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1076,277,,lois
+gen-1765995057-i9zMRaoWOYDL0LbJqDOe,2025-12-17 18:10:57.832,0,,,0,0,492,3,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,143,474,,lois
+gen-1765995056-S4Em1UGXDUbRGEtiTMOd,2025-12-17 18:10:56.174,0,,,0,0,260,60,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,964,226,,lois
+gen-1765995046-tCsIsSlPotBODggVRw7n,2025-12-17 18:10:46.323,0,,,0,0,304,76,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1457,321,,lois
+gen-1765995045-uJHfZOxfVBq1Q0l2TCdf,2025-12-17 18:10:45.032,0,,,0,0,491,3,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,140,572,,lois
+gen-1765995043-DUj9jUpfmUegc7Yc5nGA,2025-12-17 18:10:43.272,0,,,0,0,259,62,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1112,236,,lois
+gen-1765994828-L4daOnywNjPYxotSlHQj,2025-12-17 18:07:08.754,0,,,0,0,302,76,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1035,491,,lois
+gen-1765994827-TFNMjYH0cl4n1lZDSX2Q,2025-12-17 18:07:07.533,0,,,0,0,491,3,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,137,546,,lois
+gen-1765994825-RZ3dSOzwTmlPFlldF2dE,2025-12-17 18:07:05.744,0,,,0,0,259,60,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,995,316,,lois
+gen-1765994585-5Si7qlNH7tUDdG3dCe2k,2025-12-17 18:03:05.870,0,,,0,0,278,136,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,2455,247,,lois
+gen-1765994584-vRSglnwe6rBm7kP9dVcN,2025-12-17 18:03:04.935,0,,,0,0,491,3,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,130,238,,lois
+gen-1765994582-zHtZiAu114ybfndrqLER,2025-12-17 18:03:02.838,0,,,0,0,259,60,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,886,594,,lois
+gen-1765994559-rnyNYm0GiTVaXCuYcz3S,2025-12-17 18:02:39.033,0,,,0,0,293,149,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1629,203,,lois
+gen-1765994558-WuEwv6ggtusFMXBPZkgW,2025-12-17 18:02:38.117,0,,,0,0,563,14,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,370,293,,lois
+gen-1765994552-F5yaw1At8hiT6bBD2EFr,2025-12-17 18:02:31.893,0,,,0,0,256,138,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,5308,246,,lois
+gen-1765994259-RLvB5iG2ghWE7uz62DJv,2025-12-17 17:57:39.814,0,,,0,0,281,129,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1772,364,,lois
+gen-1765994258-17wDoH0da1KeuuAN0tMZ,2025-12-17 17:57:38.792,0,,,0,0,491,3,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,144,243,,lois
+gen-1765994256-y2trDZF78Usr17Ply94s,2025-12-17 17:57:36.624,0,,,0,0,259,62,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,790,464,,lois
+gen-1765994230-pAlSzLMFcASHADZtOftO,2025-12-17 17:57:10.400,0,,,0,0,414,223,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,2315,413,,lois
+gen-1765994228-DhDI46ZqQ2TwyTh76ayf,2025-12-17 17:57:08.792,0,,,0,0,548,85,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,993,329,,lois
+gen-1765994223-FK9p2xP4fUnJtVB3S15x,2025-12-17 17:57:03.195,0,,,0,0,259,331,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,4790,316,,lois
+gen-1765993925-qqSETGA3QFDQjCarSW3U,2025-12-17 17:52:05.684,0,,,0,0,280,108,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1392,381,,lois
+gen-1765993924-ovp8TwfcWuHxlu26pXBQ,2025-12-17 17:52:04.144,0,,,0,0,491,3,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,139,856,,lois
+gen-1765993922-WGzlzWy4vk8g2wvPKs8b,2025-12-17 17:52:02.230,0,,,0,0,259,61,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,893,492,,lois
+gen-1765993819-3Mywm2KNDL6XMzXsZcwE,2025-12-17 17:50:19.340,0,,,0,0,279,112,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1344,298,,lois
+gen-1765993818-EswhIBSSZ1HRkz01A0yV,2025-12-17 17:50:18.406,0,,,0,0,491,3,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,129,319,,lois
+gen-1765993816-DjoU97OLjJvOgUxm6O2Q,2025-12-17 17:50:16.944,0,,,0,0,259,60,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,881,331,,lois
+gen-1765993802-tqm1YkNs7hsUIXbmSVUX,2025-12-17 17:50:02.805,0,,,0,0,281,117,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1575,322,,lois
+gen-1765993801-4S5CapEnjSBKJjraKe3r,2025-12-17 17:50:01.771,0,,,0,0,491,3,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,127,429,,lois
+gen-1765993800-tx0ms5LuBg0Y2Ifd6hBa,2025-12-17 17:50:00.061,0,,,0,0,259,62,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,876,571,,lois
+gen-1765993782-udkYlMdsQZNtyFHLChXE,2025-12-17 17:49:42.040,0,,,0,0,319,210,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,2168,297,,lois
+gen-1765993781-9WAS0yUHgemFaa1i1Nxe,2025-12-17 17:49:41.337,0,,,0,0,539,9,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,132,235,,lois
+gen-1765993776-8lUHFAHNZhK5mxE0JWtC,2025-12-17 17:49:36.705,0,,,0,0,256,287,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,3738,254,,lois
+gen-1765993387-h7Ls3ecegvtwMPWrRT24,2025-12-17 17:43:07.780,0,,,0,0,279,155,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1932,197,,lois
+gen-1765993386-3iL5ic9m8Jynx2nmwjSl,2025-12-17 17:43:06.886,0,,,0,0,487,3,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,142,229,,lois
+gen-1765993385-Kzmd3FoBs8j38xtXApfT,2025-12-17 17:43:05.143,0,,,0,0,259,56,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,966,299,,lois
+gen-1765993370-1PJKynmx1caGV7GfCelp,2025-12-17 17:42:50.460,0,,,0,0,281,125,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1522,348,,lois
+gen-1765993369-HMH4Q9VBeM61V3mMSiqE,2025-12-17 17:42:49.769,0,,,0,0,491,3,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,130,302,,lois
+gen-1765993367-sdhoLR0ajNzdohCHn7dX,2025-12-17 17:42:47.870,0,,,0,0,259,62,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,996,517,,lois
+gen-1765993355-LVROWPBUFeK8wn1jaF83,2025-12-17 17:42:34.967,0,,,0,0,341,137,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1617,261,,lois
+gen-1765993353-b824p4NRCvCiTVMCz8Bf,2025-12-17 17:42:33.162,0,,,0,0,495,66,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1001,301,,lois
+gen-1765993351-HRfTnvSvBaXP6iIPgdVN,2025-12-17 17:42:31.152,0,,,0,0,257,66,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1017,572,,lois
+gen-1765992933-xaaCtTlJOBSOCes9bK9b,2025-12-17 17:35:33.928,0,,,0,0,281,101,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1126,451,,lois
+gen-1765992932-IQGzcDBcIUm8AjHBZPIH,2025-12-17 17:35:32.892,0,,,0,0,491,3,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,131,454,,lois
+gen-1765992931-wAne1hqUZuyWxtexVipM,2025-12-17 17:35:31.095,0,,,0,0,259,62,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,875,423,,lois
+gen-1765992917-CXzyiMJlYrWH5vcztwwQ,2025-12-17 17:35:17.778,0,,,0,0,319,216,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,2346,250,,lois
+gen-1765992916-7wsLobTlryMUdIEShWOV,2025-12-17 17:35:16.864,0,,,0,0,539,9,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,140,448,,lois
+gen-1765992911-srAqqM87SZjLNyr9rTEe,2025-12-17 17:35:11.367,0,,,0,0,256,296,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,4809,306,,lois
+gen-1765992882-HVYrZ31r29w8UcA0Cj7s,2025-12-17 17:34:42.251,0,,,0,0,280,3,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,140,472,,lois
+gen-1765992775-MQdMKPleIPEtqllTNTQy,2025-12-17 17:32:55.839,0,,,0,0,279,3,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,134,356,,lois
+gen-1765992764-GrPgsyWhlHGz6MAl6JUb,2025-12-17 17:32:44.749,0,,,0,0,282,3,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,123,771,,lois
+gen-1765992555-J2U3wt3IH5KuMiGThVj3,2025-12-17 17:29:15.386,0,,,0,0,332,83,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1133,289,,lois
+gen-1765992554-jY3NBPB1mTj3XgODHd72,2025-12-17 17:29:14.106,0,,,0,0,483,28,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,506,281,,lois
+gen-1765992552-UILghx6WE1ZC5d2PETa6,2025-12-17 17:29:12.124,0,,,0,0,298,52,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,890,499,,lois
+gen-1765992538-dpWluMuQdrAyia14RT81,2025-12-17 17:28:58.795,0,,,0,0,288,3,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,136,330,,lois
+gen-1765992043-1pL5TWoGS48eLwsfyuQI,2025-12-17 17:20:43.759,0,,,0,0,152,10,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,137,574,,lois
+gen-1765992024-kRpEsEwq9RyV8k7X5VGR,2025-12-17 17:20:24.180,0,,,0,0,398,27,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,534,280,,lois
+gen-1765991713-UBPaztkuG3Gpl0XCYufc,2025-12-17 17:15:13.700,0,,,0,0,149,40,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,529,643,,lois
+gen-1765991631-cJnFB0xY7IBfrud54l5A,2025-12-17 17:13:51.500,0,,,0,0,149,39,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,535,837,,lois
+gen-1765991603-cCpbEQIcyYwNcLHJlvp1,2025-12-17 17:13:23.386,0,,,0,0,149,39,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,537,289,,lois
+gen-1765831275-JdGOfiRbJJHtbN3wKlYm,2025-12-15 20:41:14.981,0,,,0,0,149,39,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,520,351,,lois
+gen-1765831066-dEc7B83ie3KGerj9iItA,2025-12-15 20:37:46.199,0,,,0,0,375,237,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,3155,859,,lois
+gen-1765831064-5OSLoT7KwGFFlXCrfIpu,2025-12-15 20:37:43.990,0,,,0,0,349,140,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1723,241,,lois
+gen-1765831056-W34TpQVhnKTj1Y0bKyd1,2025-12-15 20:37:36.685,0,,,0,0,152,453,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,6062,538,,lois
+gen-1765831042-1qcnmQXIrAoEBUrPbeAP,2025-12-15 20:37:22.714,0,,,0,0,150,12,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,281,636,,lois
+gen-1765830732-tAwaBNtnMEsmO4nn9hry,2025-12-15 20:32:12.362,0,,,0,0,371,281,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,3805,650,,lois
+gen-1765830722-NoG1wWiTMqQ8JRrZNRjI,2025-12-15 20:32:02.054,0,,,0,0,156,572,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,8700,1011,,lois
+gen-1765825502-nzKslmtDZ6nsFnNl63bY,2025-12-15 19:05:02.157,0,,,0,0,371,262,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,3829,235,,lois
+gen-1765825492-F6NB4ay8pw7nVqVUPlCF,2025-12-15 19:04:52.791,0,,,0,0,156,579,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,8093,338,,lois
+gen-1765825245-txnc2aUrurxRb6FOZ4im,2025-12-15 19:00:45.131,0,,,0,0,371,386,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,5634,230,,lois
+gen-1765825237-cAn4X6G9RUGFKsgq5ttC,2025-12-15 19:00:37.335,0,,,0,0,156,445,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,7218,219,,lois
+gen-1765825190-F1Sl7UexbC9e5PuSUXKr,2025-12-15 18:59:50.643,0,,,0,0,371,103,0,google/gemma-3-27b-it,ModelRun,free,true,true,,,,150,300,,lois
+gen-1765825181-ydUMScW4iY4dT4XxTrFL,2025-12-15 18:59:41.304,0,,,0,0,156,476,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,8266,581,,lois
+gen-1765825169-GDS3tDkPumEb99QTc8JD,2025-12-15 18:59:29.662,0,,,0,0,150,12,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,263,300,,lois
+gen-1765824665-pqbtCtofiOq9H4y0Ov9Q,2025-12-15 18:51:05.553,0,,,0,0,164,585,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,7394,292,,lois
+gen-1765824615-At1KoFbgnSvljsSAQblk,2025-12-15 18:50:14.899,0,,,0,0,160,249,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,3081,244,,lois
+gen-1765824447-aMI90VMnibCX5LqDMfSz,2025-12-15 18:47:27.057,0,,,0,0,112,385,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,5073,269,,lois
+gen-1765823697-DLZ6Kc9nHcVk583kO1WS,2025-12-15 18:34:57.363,0,,,0,0,109,1394,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,27926,2259,,lois
+gen-1765823138-5B300tEOLbuYkUp5GEow,2025-12-15 18:25:38.828,0,,,0,0,110,460,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,8245,458,,lois
+gen-1765823105-ojFrYYMbhIqG1HinOp4u,2025-12-15 18:25:05.161,0,,,0,0,110,395,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,6177,392,,lois
+gen-1765822998-lH1q8qOtCLsrEMWOYbSO,2025-12-15 18:23:18.246,0,,,0,0,110,430,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,5782,234,,lois
+gen-1765807533-ZDsZ7UcYBH5Kza1ClNF7,2025-12-15 14:05:32.935,0,,,0,0,131,793,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,11673,386,,lois
+gen-1765807380-SmetpGMHKIxze0cQJ5gl,2025-12-15 14:03:00.296,0,,,0,0,132,427,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,7554,238,,lois
+gen-1765807092-cGYAG49JNyVeQhbVymkS,2025-12-15 13:58:12.651,0,,,0,0,146,852,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,14112,491,,lois
+gen-1765807009-BADsJOoEZ5waYI7dnMOa,2025-12-15 13:56:49.633,0,,,0,0,139,537,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,7602,219,,lois
+gen-1765806978-M4SqeLg60NZtPzww74df,2025-12-15 13:56:18.597,0,,,0,0,136,214,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,3033,294,,lois
+gen-1765806950-IfEleqObGJtQDqXvkGl4,2025-12-15 13:55:49.981,0,,,0,0,132,523,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,8514,317,,lois
+gen-1765806776-xGz4kyTgfHp8qZqKsPJs,2025-12-15 13:52:55.522,0,,,0,0,132,232,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,3219,359,,lois
+gen-1765806725-cwyy5DKzRsuSpMeub9wG,2025-12-15 13:52:05.638,0,,,0,0,132,444,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,7703,462,,lois
+gen-1765655913-LWHwylK3gEIiaj9QudO0,2025-12-13 19:58:33.525,0,,,0,0,132,531,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,8492,508,,lois
+gen-1765655877-FrLhIu1qyJMuaZLgOFUw,2025-12-13 19:57:57.229,0,,,0,0,132,531,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,8505,339,,lois
+gen-1765655737-d0ikKO0vOPhewzWkIYAS,2025-12-13 19:55:37.446,0,,,0,0,132,531,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,7683,217,,lois
+gen-1765655721-WNZPxZfhIJHwMMro2iPo,2025-12-13 19:55:21.695,0,,,0,0,132,230,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,3312,298,,lois
+gen-1765655655-BYrgsNXHaJElMafrIB8b,2025-12-13 19:54:15.394,0,,,0,0,132,530,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,7759,312,,lois
+gen-1765655635-Vavu3RAmqRYvSFRRE8fK,2025-12-13 19:53:55.019,0,,,0,0,132,218,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,3498,562,,lois
+gen-1765653890-MnhYLMraGtA24d2XCIwy,2025-12-13 19:24:50.408,0,,,0,0,1301,399,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,5375,243,,lois
+gen-1765653884-XEjlOxLLhggy0RMfb9jy,2025-12-13 19:24:44.941,0,,,0,0,487,365,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,4577,359,,lois
+gen-1765653879-KQPrTszlyzvVaFHExapn,2025-12-13 19:24:39.895,0,,,0,0,477,302,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,4223,276,,lois
+gen-1765653872-ECwOdw9VYeJ2OCLTBOzS,2025-12-13 19:24:32.148,0,,,0,0,490,461,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,6792,375,,lois
+gen-1765653866-RiWLsymz4WcYRcJgzvnd,2025-12-13 19:24:26.144,0,,,0,0,193,318,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,4773,608,,lois
+gen-1765653856-9wvK4KFsMbuO4Xr1kpjn,2025-12-13 19:24:16.665,0,,,0,0,132,531,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,8134,558,,lois
+gen-1765653395-ts12t2SBTYoNeVEPxFJN,2025-12-13 19:16:35.080,0,,,0,0,668,441,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,6018,228,,lois
+gen-1765653387-unHU5BUkoYkAhtcOa94c,2025-12-13 19:16:27.816,0,,,0,0,174,487,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,6103,528,,lois
+gen-1765653383-M0f3Wq5MlZXuaMRK6dnt,2025-12-13 19:16:23.172,0,,,0,0,132,230,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,3299,662,,lois
+gen-1765595981-inNzqxmoGLeivnEB1wk5,2025-12-13 03:19:41.174,0,,,0,0,18,0,0,google/gemma-3-27b-it,Google AI Studio,free,false,true,,STOP,stop,1683,428,,lois
+gen-1765595959-BxJvJhVjWO0jfwMhuRfo,2025-12-13 03:19:19.764,0,,,0,0,10,0,0,google/gemma-3-27b-it,Google AI Studio,free,false,true,,STOP,stop,4005,467,,lois
+gen-1765595815-9tqqn6PI9PMkyOKPiooV,2025-12-13 03:16:54.933,0,,,0,0,2,0,0,google/gemma-3-27b-it,Google AI Studio,free,false,true,,STOP,stop,53396,1057,,lois
+gen-1765595776-gdW0ib2W8fnJOVlfL2XL,2025-12-13 03:16:16.060,0,,,0,0,18,100,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,2061,974,,lois
+gen-1765595725-9OXJJoCgVUO9fulBovdj,2025-12-13 03:15:25.632,0,,,0,0,2,0,0,google/gemma-3-27b-it,Google AI Studio,free,false,true,,STOP,stop,1767,408,,lois
+gen-1765595714-U3warGfGqAdt9LFyE1uD,2025-12-13 03:15:14.740,0,,,0,0,2,0,0,google/gemma-3-27b-it,Google AI Studio,free,false,true,,STOP,stop,1863,758,,lois
+gen-1765595702-NIyrp2wjURh2toZqZ4z8,2025-12-13 03:15:02.466,0,,,0,0,18,119,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,2435,629,,lois
+gen-1765595685-q7IwPNJe33abCKaT4zJ2,2025-12-13 03:14:45.147,0,,,0,0,2,0,0,google/gemma-3-27b-it,Google AI Studio,free,false,true,,STOP,stop,1550,761,,lois
+gen-1765595656-xcal6WjBp6dVg6Rg5dpI,2025-12-13 03:14:15.990,0,,,0,0,18,100,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,2513,765,,lois
+gen-1765595624-xd3esgbM9hvuW4XTVVJV,2025-12-13 03:13:44.809,0,,,0,0,3,0,0,google/gemma-3-27b-it,Google AI Studio,free,false,true,,STOP,stop,175,438,,lois
+gen-1765595612-iTHwJjqBxrfjR9BeE3o9,2025-12-13 03:13:32.856,0,,,0,0,17,132,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,2497,538,,lois
+gen-1765595503-48eiQCTBHQCiaZoYAQJj,2025-12-13 03:11:43.671,0,,,0,0,19,209,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,4920,643,,lois
+gen-1765595430-wym22D65cqkYYrJOMdhE,2025-12-13 03:10:30.341,0,,,0,0,18,183,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,3913,538,,lois
+gen-1765595247-zZshfN3vqV0eMavHl8Rf,2025-12-13 03:07:27.389,0,,,0,0,2,0,0,google/gemma-3-27b-it,Google AI Studio,free,false,true,,STOP,stop,2224,456,,lois
+gen-1765595115-wlt0qPz7XWtAD7FuiLGb,2025-12-13 03:05:15.792,0,,,0,0,18,111,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,2114,520,,lois
+gen-1765595066-vgEBPlgO8xCpehHow83d,2025-12-13 03:04:25.971,0,,,0,0,2,0,0,google/gemma-3-27b-it,Google AI Studio,free,false,true,,STOP,stop,1557,580,,lois
+gen-1765594990-JdvGerlwq6WdNX4UcYMU,2025-12-13 03:03:10.558,0,,,0,0,2,0,0,google/gemma-3-27b-it,Google AI Studio,free,false,true,,STOP,stop,1531,785,,lois
+gen-1765594946-0A1OTl6ZDydPXcUSXAYc,2025-12-13 03:02:26.467,0,,,0,0,2,0,0,google/gemma-3-27b-it,Google AI Studio,free,false,true,,STOP,stop,20149,405,,lois
+gen-1765594617-RTGKxrjOFdjsgBGfPT9o,2025-12-13 02:56:57.401,0,,,0,0,19,36,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,516,669,,lois
+gen-1765594565-pSBdv0E8i4mUxGZU3jVv,2025-12-13 02:56:05.796,0,,,0,0,3,0,0,google/gemma-3-27b-it,Google AI Studio,free,false,true,,STOP,stop,626,437,,lois
+gen-1765594494-ohLzWIJASp5at1J8TLsf,2025-12-13 02:54:54.489,0,,,0,0,20,35,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,478,475,,lois
+gen-1765594429-2AWUsbW5QmtY8kxlfuPG,2025-12-13 02:53:49.163,0,,,0,0,2,0,0,google/gemma-3-27b-it,Google AI Studio,free,false,true,,STOP,stop,2361,772,,lois
+gen-1765594367-zedhDzlnFp3gjQPCEZ3Z,2025-12-13 02:52:47.053,0,,,0,0,18,119,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1741,322,,lois
+gen-1765594351-rD9HpfVbKty00Imanh9Q,2025-12-13 02:52:31.357,0,,,0,0,2,0,0,google/gemma-3-27b-it,Google AI Studio,free,false,true,,STOP,stop,2353,957,,lois
+gen-1765593838-jVcvqhpxGUGkxFNoxgIG,2025-12-13 02:43:58.951,0,,,0,0,18,111,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1530,479,,lois
+gen-1765593825-zbAyEBEg7bs7TdAmriNO,2025-12-13 02:43:45.187,0,,,0,0,18,111,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1558,745,,lois
+gen-1765593791-1iTX09KT0ejjtQkpo19t,2025-12-13 02:43:10.973,0,,,0,0,2,0,0,google/gemma-3-27b-it,Google AI Studio,free,false,true,,STOP,stop,1595,673,,lois
+gen-1765593745-HmO7eQL1lgI9702govMC,2025-12-13 02:42:25.318,0,,,0,0,18,111,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1862,795,,lois
+gen-1765593632-Cq7atJg6n7uvF2TIMReo,2025-12-13 02:40:32.414,0,,,0,0,18,111,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1577,710,,lois
+gen-1765593453-Tv6I0mWAkwqG4deDGbIz,2025-12-13 02:37:33.143,0,,,0,0,2,0,0,google/gemma-3-27b-it,Google AI Studio,free,false,true,,STOP,stop,1611,617,,lois
+gen-1765593424-QSBqyxqjQRGGSZncq9dB,2025-12-13 02:37:04.122,0,,,0,0,18,111,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1670,503,,lois
+gen-1765592569-bOO7uI95WuYLwI8t5iN1,2025-12-13 02:22:49.234,0,,,0,0,2,0,0,google/gemma-3-27b-it,Google AI Studio,free,false,true,,STOP,stop,1480,652,,lois
+gen-1765592516-3h5kYoVpljEfNJ7ev7Pi,2025-12-13 02:21:56.197,0,,,0,0,2,0,0,google/gemma-3-27b-it,Google AI Studio,free,false,true,,STOP,stop,2223,664,,lois
+gen-1765592376-cfC9eK3tQC9i70OoBjkT,2025-12-13 02:19:36.577,0,,,0,0,18,100,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1809,251,,lois
+gen-1765592321-V5vBClDW09eu0b3C5kYa,2025-12-13 02:18:41.332,0,,,0,0,18,111,0,google/gemma-3-27b-it,ModelRun,free,false,true,,stop,stop,1786,252,,lois

@@ -1,0 +1,33 @@
+<svg version="1.1" width="800" height="700" xmlns="http://www.w3.org/2000/svg" style="font-family: sans-serif; background: white;">
+<defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="black" />
+    </marker>
+  </defs>
+<rect x="320.0" y="50" width="160" height="60" fill="#e0e0e0" stroke="black" stroke-width="2" rx="5" />
+<text x="400.0" y="85" font-size="16" fill="black" text-anchor="middle" font-weight="bold">User</text>
+<rect x="320.0" y="150" width="160" height="60" fill="#bbdefb" stroke="black" stroke-width="2" rx="5" />
+<text x="400.0" y="175" font-size="14" fill="black" text-anchor="middle" font-weight="bold">Frontend</text>
+<text x="400.0" y="195" font-size="12" fill="black" text-anchor="middle" font-weight="normal">(React + Vite)</text>
+<rect x="320.0" y="250" width="160" height="60" fill="#c8e6c9" stroke="black" stroke-width="2" rx="5" />
+<text x="400.0" y="275" font-size="14" fill="black" text-anchor="middle" font-weight="bold">Backend</text>
+<text x="400.0" y="295" font-size="12" fill="black" text-anchor="middle" font-weight="normal">(FastAPI)</text>
+<rect x="320.0" y="350" width="160" height="60" fill="#ffe0b2" stroke="black" stroke-width="2" rx="5" />
+<text x="400.0" y="375" font-size="14" fill="black" text-anchor="middle" font-weight="bold">Planner</text>
+<text x="400.0" y="395" font-size="12" fill="black" text-anchor="middle" font-weight="normal">(Orchestrator)</text>
+<rect x="170.0" y="450" width="160" height="60" fill="#fff9c4" stroke="black" stroke-width="2" rx="5" />
+<text x="250.0" y="485" font-size="14" fill="black" text-anchor="middle" font-weight="bold">Executor</text>
+<rect x="470.0" y="450" width="160" height="60" fill="#e1bee7" stroke="black" stroke-width="2" rx="5" />
+<text x="550.0" y="485" font-size="14" fill="black" text-anchor="middle" font-weight="bold">Vision Agent</text>
+<rect x="320.0" y="550" width="160" height="60" fill="#cfd8dc" stroke="black" stroke-width="2" rx="5" />
+<text x="400.0" y="585" font-size="14" fill="black" text-anchor="middle" font-weight="bold">OpenRouter API</text>
+<line x1="400.0" y1="110" x2="400.0" y2="150" stroke="black" stroke-width="2" marker-end="url(#arrow)" />
+<text x="410.0" y="120.0" font-size="10" fill="black" text-anchor="start" font-weight="normal">HTTP</text>
+<line x1="400.0" y1="210" x2="400.0" y2="250" stroke="black" stroke-width="2" marker-end="url(#arrow)" />
+<text x="410.0" y="220.0" font-size="10" fill="black" text-anchor="start" font-weight="normal">JSON Stream</text>
+<line x1="400.0" y1="310" x2="400.0" y2="350" stroke="black" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="400.0" y1="410" x2="250.0" y2="450" stroke="black" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="400.0" y1="410" x2="550.0" y2="450" stroke="black" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="250.0" y1="510" x2="380.0" y2="550" stroke="black" stroke-width="2" marker-end="url(#arrow)" />
+<line x1="550.0" y1="510" x2="420.0" y2="550" stroke="black" stroke-width="2" marker-end="url(#arrow)" />
+</svg>

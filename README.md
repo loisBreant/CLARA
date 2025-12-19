@@ -17,6 +17,10 @@ Create a free api key on [openrouter](https://openrouter.ai/settings/keys).
 cp ./back/.env.example ./back/.env
 ```
 
+## Documentation
+- [Project Report](report.pdf)
+The source code of the report can be found at `./report`.
+
 ### Development
 
 For development instructions, please refer to the specific `README.md` files located in the `back/` and `front/` directories.
