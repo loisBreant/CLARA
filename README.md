@@ -31,3 +31,15 @@ CLARA's intelligence is powered by a collaborative system of specialized AI agen
 -   **Executor Agent:** Executes specific tasks defined by the Planner.
 -   **Oncology Agent:** Specializes in analyzing oncology-related medical data.
 -   **Summary Agent:** Synthesizes findings into concise summaries.
+
+## TODO
+
+- [x] Agent memory
+- [x] Connect agents
+- [x] Agents' metrics
+- [x] Agents' graph
+- [x] Show planners high level steps
+- [ ] Save previous messages
+- [ ] Send image to backend
+- [ ] Segment image
+- [ ] Critic agent
