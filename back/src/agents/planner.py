@@ -48,7 +48,11 @@ Format JSON attendu :
         self.logs = []
 
     def plan(self, request: str, metrics: AgentsMetrics, image_url: Optional[str]):
-        yield AgentResponse(metrics=metrics, id=self.agent_data.id, chunk="**Phase 1 : Planification Stratégique**\n\n")
+        yield AgentResponse(
+            metrics=metrics,
+            id=self.agent_data.id,
+            chunk="**Phase 1 : Planification Stratégique**\n\n",
+        )
         prompt = f"Requête à planifier : {request}"
         if image_url is not None:
             prompt += f"\nUser uploaded image: {image_url}"
@@ -63,34 +67,50 @@ Format JSON attendu :
 
         tasks = Tasks(full_response, self.agent_data.id)
         memory = MemoryAgent()
-        
+
         if len(tasks) > 0:
-            yield AgentResponse(metrics=metrics, id=self.agent_data.id, chunk="\n\n**Phase 2 : Exécution du Plan**\n\n")
-            yield AgentResponse(metrics=metrics, id=self.agent_data.id, chunk=tasks.render_tasks())
-            
+            yield AgentResponse(
+                metrics=metrics,
+                id=self.agent_data.id,
+                chunk="\n\n**Phase 2 : Exécution du Plan**\n\n",
+            )
+            yield AgentResponse(
+                metrics=metrics, id=self.agent_data.id, chunk=tasks.render_tasks()
+            )
+
             last_agent_id = self.agent_data.id
 
             for t in tasks:
                 executor = ExecutorAgent(t)
                 metrics.agents[executor.agent_data.id] = executor.agent_data
-                
+
                 task_result_accumulated = ""
-                yield AgentResponse(metrics=metrics, id=executor.agent_data.id, chunk=f"> *Exécution de la tâche : {t.title}*\n")
-                
+                yield AgentResponse(
+                    metrics=metrics,
+                    id=executor.agent_data.id,
+                    chunk=f"> *Exécution de la tâche : {t.title}*\n",
+                )
+
                 for response in executor.execute_task(t, tasks, metrics, memory):
                     task_result_accumulated += response.chunk
                     yield response
-                
-                yield AgentResponse(metrics=metrics, id=executor.agent_data.id, chunk="\n\n")
+
+                yield AgentResponse(
+                    metrics=metrics, id=executor.agent_data.id, chunk="\n\n"
+                )
                 last_agent_id = executor.agent_data.id
                 self.logs.append(task_result_accumulated)
                 # FIXME: add call to the planner to be sur it's ok
 
-            yield AgentResponse(metrics=metrics, id=self.agent_data.id, chunk="**Phase 3 : Synthèse et Réponse Finale**\n\n")
+            yield AgentResponse(
+                metrics=metrics,
+                id=self.agent_data.id,
+                chunk="**Phase 3 : Synthèse et Réponse Finale**\n\n",
+            )
             reactive = ReactiveAgent()
             reactive.agent_data.dependencies = [last_agent_id]
             metrics.agents[reactive.agent_data.id] = reactive.agent_data
-            
+
             final_prompt = f"""
 Voici le contexte de la demande et les résultats des tâches exécutées.
 Synthétise tout cela pour donner une réponse finale complète et claire à l'utilisateur.
@@ -100,11 +120,10 @@ user-prompt: {prompt}\n
 tasks: {tasks.render_tasks()}\n
 agents-response: {self.logs}\n
 
-"""            
+"""
             for response in reactive.ask(final_prompt, metrics):
                 yield response
 
- 
         # self.status = Status.FINISHED
         self.agent_data.status = Status.FINISHED
         metrics.agents[self.agent_data.id] = self.agent_data

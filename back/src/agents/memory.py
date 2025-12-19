@@ -1,5 +1,6 @@
 from typing import Any, Dict, List
 
+
 class MemoryAgent:
     def __init__(self):
         self._storage: Dict[str, Any] = {}
@@ -20,26 +21,28 @@ class MemoryAgent:
             # Ou memory.get(variable_name).
             # Le prompt du planner disait: "id": "s1" ... "args": ["$s1"]
             # Si le planner met l'ID "s1", et référence "$s1", il faut gérer le '$'.
-            
-            # Convention: 
+
+            # Convention:
             # Si arg est "$s1", on cherche "s1" ou "$s1" dans la mémoire.
             # Pour simplifier, on stocke avec le nom fourni par le planner dans "id".
             # Si id="s1", memory["s1"] = val.
             # Si arg="$s1", on cherche "s1".
-            
-            key_to_find = arg[1:] # On enlève le '$'
+
+            key_to_find = arg[1:]  # On enlève le '$'
             if key_to_find in self._storage:
                 return self._storage[key_to_find]
-            
+
             # Si on ne trouve pas sans le $, on essaie avec (si jamais l'id était "$VAR1")
             if arg in self._storage:
                 return self._storage[arg]
-                
-            # Si pas trouvé, on renvoie None ou l'arg ? 
+
+            # Si pas trouvé, on renvoie None ou l'arg ?
             # L'utilisateur dit: "Si ... ne trouve rien ... il doit arrêter tout de suite".
             # Pour l'instant on renvoie l'arg et on laissera l'appelant gérer ou lever une erreur.
-            raise ValueError(f"Variable '{arg}' non trouvée en mémoire. Echec de la résolution.")
-            
+            raise ValueError(
+                f"Variable '{arg}' non trouvée en mémoire. Echec de la résolution."
+            )
+
         return arg
 
     def resolve_args(self, args: List[Any]) -> List[Any]:

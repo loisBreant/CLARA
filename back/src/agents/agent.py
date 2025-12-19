@@ -9,31 +9,45 @@ from src.core.models import AgentData, AgentType, AgentsMetrics, AgentResponse, 
 import os
 
 config = dotenv_values(".env")
-OPENROUTER_API_KEY = config.get("OPENROUTER_API_KEY") or os.environ.get("OPENROUTER_API_KEY")
+OPENROUTER_API_KEY = config.get("OPENROUTER_API_KEY") or os.environ.get(
+    "OPENROUTER_API_KEY"
+)
+
 
 class Agent:
-    def __init__(self, system_prompt: str, agent_type: AgentType,  agent_data: Optional[AgentData] = None, model: str = "google/gemma-3-27b-it:free"):
+    def __init__(
+        self,
+        system_prompt: str,
+        agent_type: AgentType,
+        agent_data: Optional[AgentData] = None,
+        model: str = "google/gemma-3-27b-it:free",
+    ):
         self.client = OpenRouter(api_key=OPENROUTER_API_KEY)
         self.model = model
         self.system_prompt = system_prompt
         self.last_response: str = ""
-                    
-        self.agent_data = agent_data if agent_data else AgentData(
-            id=str(uuid.uuid4()),
-            type=agent_type,
+
+        self.agent_data = (
+            agent_data
+            if agent_data
+            else AgentData(
+                id=str(uuid.uuid4()),
+                type=agent_type,
+            )
         )
 
     def reset_id(self):
         self.agent_data.id = str(uuid.uuid4())
 
-    def update_status(self, new_status: Status, metrics: AgentsMetrics, task = None):
+    def update_status(self, new_status: Status, metrics: AgentsMetrics, task=None):
         self.agent_data.status = new_status
         metrics.agents[self.agent_data.id] = self.agent_data
         if task:
             task.status = new_status
 
-
-    def ask(self, prompt: str, metrics: AgentsMetrics) -> Generator[AgentResponse, None, None]:
+    def ask(
+        self, prompt: str, metrics: AgentsMetrics
+    ) -> Generator[AgentResponse, None, None]:
         self.last_response = ""
         metrics.agents[self.agent_data.id] = self.agent_data
 
@@ -43,7 +57,7 @@ class Agent:
 
         messages = [
             {"role": "system", "content": self.system_prompt},
-            {"role": "user", "content": prompt}
+            {"role": "user", "content": prompt},
         ]
 
         stream = self.client.chat.send(
@@ -52,33 +66,39 @@ class Agent:
             stream=True,
             stream_options=components.ChatStreamOptions(include_usage=True),
         )
-        
+
         start_time = time.time()
         current_output_tokens = 0
 
         for event in stream:
             request_duration = time.time() - start_time
-            
+
             self.agent_data.time_taken = base_time_taken + request_duration
-            
+
             if event.usage:
-                self.agent_data.input_token_count = base_input_tokens + event.usage.prompt_tokens
-                self.agent_data.output_token_count = base_output_tokens + event.usage.completion_tokens
-                
+                self.agent_data.input_token_count = (
+                    base_input_tokens + event.usage.prompt_tokens
+                )
+                self.agent_data.output_token_count = (
+                    base_output_tokens + event.usage.completion_tokens
+                )
+
                 metrics.agents[self.agent_data.id] = self.agent_data
                 yield AgentResponse(metrics=metrics, id=self.agent_data.id, chunk="")
-            
+
                 continue
 
             if not event.choices:
                 continue
 
-            chunk: Optional[str] = event.choices[0].delta.content # type:ignore
+            chunk: Optional[str] = event.choices[0].delta.content  # type:ignore
 
             if chunk:
                 current_output_tokens += 1
-                self.agent_data.output_token_count = base_output_tokens + current_output_tokens
-                
+                self.agent_data.output_token_count = (
+                    base_output_tokens + current_output_tokens
+                )
+
                 metrics.agents[self.agent_data.id] = self.agent_data
                 self.last_response += chunk
                 yield AgentResponse(metrics=metrics, id=self.agent_data.id, chunk=chunk)
@@ -88,4 +108,10 @@ class Agent:
         metrics.agents[self.agent_data.id] = self.agent_data
 
         # csv_header = ["timestamp", "model_kind", "model_name", "input_tokens", "output_tokens", "time_taken"]
-        append_to_csv(str(self.agent_data.type), self.model, self.agent_data.input_token_count, self.agent_data.output_token_count, self.agent_data.time_taken)
+        append_to_csv(
+            str(self.agent_data.type),
+            self.model,
+            self.agent_data.input_token_count,
+            self.agent_data.output_token_count,
+            self.agent_data.time_taken,
+        )

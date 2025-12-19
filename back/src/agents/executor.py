@@ -17,17 +17,20 @@ log_file = os.path.join(log_dir, "app.log")
 logging.basicConfig(
     filename=log_file,
     level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s'
+    format="%(asctime)s - %(levelname)s - %(message)s",
 )
 
 # Initialize Vision Agent
 vision_agent = VisionAgent()
 
+
 # --- Mock Tools for Registry (since actual files are missing/not provided) ---
-def vision_tool(image_path: str, instruction: str, metrics: Optional[AgentsMetrics] = None):
+def vision_tool(
+    image_path: str, instruction: str, metrics: Optional[AgentsMetrics] = None
+):
     if not metrics:
         return "[Error] Metrics needed for vision agent"
-        
+
     full_response = ""
     try:
         for response in vision_agent.analyze(instruction, image_path, metrics):
@@ -36,18 +39,22 @@ def vision_tool(image_path: str, instruction: str, metrics: Optional[AgentsMetri
     except Exception as e:
         return f"Error executing vision agent: {e}"
 
+
 def duckdb_tool(sql_query: str):
     return f"[MOCK] Résultat SQL pour '{sql_query}': 42 cases found."
 
+
 def rag_tool(search_query: str):
     return f"[MOCK] Guidelines trouvées pour '{search_query}': Protocole standard appliqué."
+
 
 # --- Tool Registry ---
 TOOL_REGISTRY: Dict[str, Callable] = {
     "vision_tool": vision_tool,
     "duckdb_tool": duckdb_tool,
-    "rag_tool": rag_tool
+    "rag_tool": rag_tool,
 }
+
 
 @dataclass
 class ToolExecutor:
@@ -96,16 +103,23 @@ FORMAT JSON OBLIGATOIRE :
     }
 ]
 """
-        super().__init__(system_prompt, AgentType.EXECUTOR,  real_agent_data, model="google/gemma-3-27b-it:free")
+        super().__init__(
+            system_prompt,
+            AgentType.EXECUTOR,
+            real_agent_data,
+            model="google/gemma-3-27b-it:free",
+        )
 
     def parse_tools(self, json_response: str) -> List[ToolExecutor]:
         try:
-            cleaned_response = json_response.replace("```json", "").replace("```", "").strip()
+            cleaned_response = (
+                json_response.replace("```json", "").replace("```", "").strip()
+            )
             start = cleaned_response.find("[")
             end = cleaned_response.rfind("]")
             if start != -1 and end != -1:
-                cleaned_response = cleaned_response[start:end+1]
-                
+                cleaned_response = cleaned_response[start : end + 1]
+
             data = json.loads(cleaned_response)
             tasks = []
             for item in data:
@@ -125,7 +139,7 @@ FORMAT JSON OBLIGATOIRE :
         Les arguments doivent DÉJÀ être résolus (pas de '$var').
         """
         tool_func = TOOL_REGISTRY.get(tool.function_name)
-        
+
         if not tool_func:
             error_msg = f"Outil inconnu : {tool.function_name}"
             logging.error(error_msg)
@@ -137,50 +151,69 @@ FORMAT JSON OBLIGATOIRE :
                 result = tool_func(*clean_args, metrics=metrics)
             else:
                 result = tool_func(*clean_args)
-                
+
             logging.info(f"Tool '{tool.function_name}' executed. Result: {result}")
             return result
         except Exception as e:
             logging.error(f"Error executing {tool.function_name}: {e}")
             return f"Error executing {tool.function_name}: {e}"
 
-    def execute_task(self, task: PlannedTask, tasks: Tasks, metrics: AgentsMetrics, memory: MemoryAgent):
+    def execute_task(
+        self,
+        task: PlannedTask,
+        tasks: Tasks,
+        metrics: AgentsMetrics,
+        memory: MemoryAgent,
+    ):
         """
         Exécute la tâche en utilisant la mémoire partagée.
         """
-        
+
         # 1. Validation Dépendances
         if tasks.dependencies_met(task):
             # Update status
             self.update_status(Status.PENDING, metrics, task)
-            
+
             for response in self.ask(task.description, metrics):
                 yield response
 
             self.update_status(Status.FINISHED, metrics, task)
         else:
             self.update_status(Status.BLOCKED, metrics, task)
-            yield AgentResponse(metrics=metrics, id=self.agent_data.id, chunk="\n\n**Erreur : Dépendances non satisfaites.**")
+            yield AgentResponse(
+                metrics=metrics,
+                id=self.agent_data.id,
+                chunk="\n\n**Erreur : Dépendances non satisfaites.**",
+            )
             return
 
         tools_to_call = self.parse_tools(self.last_response)
-        
+
         for tool in tools_to_call:
-            
             try:
                 original_args = tool.args
                 tool.args = memory.resolve_args(tool.args)
-                
+
                 if tool.args != original_args:
-                    yield AgentResponse(metrics=metrics, id=self.agent_data.id, 
-                                        chunk=f"\n> *Mémoire : Résolution {original_args} -> {tool.args}*")
+                    yield AgentResponse(
+                        metrics=metrics,
+                        id=self.agent_data.id,
+                        chunk=f"\n> *Mémoire : Résolution {original_args} -> {tool.args}*",
+                    )
             except Exception as e:
-                yield AgentResponse(metrics=metrics, id=self.agent_data.id, chunk=f"\n**Erreur Mémoire : {e}**")
+                yield AgentResponse(
+                    metrics=metrics,
+                    id=self.agent_data.id,
+                    chunk=f"\n**Erreur Mémoire : {e}**",
+                )
                 continue
 
             result = self.exec_tools(tool, metrics)
             memory.set(task.step_id, result)
-            
+
             if result is not None:
-                yield AgentResponse(metrics=metrics, id=self.agent_data.id, 
-                                    chunk=f"\n\n**Résultat de l'outil '{tool.function_name}' :** {result}")
+                yield AgentResponse(
+                    metrics=metrics,
+                    id=self.agent_data.id,
+                    chunk=f"\n\n**Résultat de l'outil '{tool.function_name}' :** {result}",
+                )

@@ -1,6 +1,7 @@
 from src.agents.agent import Agent
 from src.core.models import AgentType, AgentsMetrics
 
+
 class ReactiveAgent(Agent):
     def __init__(self):
         system_prompt = """\
@@ -17,8 +18,10 @@ TA MISSION:
 4. Mentionne les éléments clés trouvés (ex: "L'analyse d'image a révélé...", "Selon les guidelines...").
 5. Ne mentionne pas les autres agents produit une reponse de la meilleure qualite possible
 """
-        super().__init__(system_prompt, AgentType.REACTIVE, model="google/gemma-3-27b-it:free")
-    
+        super().__init__(
+            system_prompt, AgentType.REACTIVE, model="google/gemma-3-27b-it:free"
+        )
+
     def handle_request(self, request: str, metrics: AgentsMetrics) -> str:
         full_response = ""
         try:

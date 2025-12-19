@@ -15,7 +15,7 @@ from fastapi.responses import StreamingResponse
 
 from src.agents.planner import PlannerAgent
 from src.agents.agent import AgentResponse
-from src.core.models import AgentsMetrics,Status
+from src.core.models import AgentsMetrics, Status
 
 app = FastAPI(
     title="Onco-Agent API",
@@ -25,13 +25,18 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,  # type:ignore
-    allow_origins=["http://localhost:8080", "http://localhost:5173", "http://127.0.0.1:8080", "http://127.0.0.1:5173"],
+    allow_origins=[
+        "http://localhost:8080",
+        "http://localhost:5173",
+        "http://127.0.0.1:8080",
+        "http://127.0.0.1:5173",
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-chats = {} # how stored chats
+chats = {}  # how stored chats
 
 base_dir = os.path.dirname(os.path.abspath(__file__))
 static_dir = os.path.join(base_dir, "../static")
@@ -42,6 +47,7 @@ os.makedirs(input_dir, exist_ok=True)
 os.makedirs(uploads_dir, exist_ok=True)
 
 app.mount("/static", StaticFiles(directory=static_dir), name="static")
+
 
 @app.get("/health")
 def health_check():
@@ -63,10 +69,10 @@ async def upload_file(file: UploadFile = File(...)):
     file_extension = os.path.splitext(str(file.filename))[1]
     file_name = f"{uuid.uuid4()}{file_extension}"
     file_path = os.path.join(uploads_dir, file_name)
-    
+
     with open(file_path, "wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
-        
+
     return {"url": f"/static/uploads/{file_name}"}
 
 
@@ -79,29 +85,45 @@ async def init_session() -> ChatSession:
     }
     return ChatSession(session_id=session_id)
 
-def chat_generator(session_id: uuid.UUID, question: str, image_url: Optional[str]) -> Generator[str, None, None]:
+
+def chat_generator(
+    session_id: uuid.UUID, question: str, image_url: Optional[str]
+) -> Generator[str, None, None]:
     planner: PlannerAgent = chats[session_id]["planner"]
-    metrics: AgentsMetrics = chats[session_id]["metrics"] 
+    metrics: AgentsMetrics = chats[session_id]["metrics"]
     planner.reset_id()
     planner.update_status(Status.PENDING, metrics)
     start_time = time.time()
- 
+
     try:
         for response in planner.plan(question, metrics, image_url):
             yield create_chunk(response)
     except Exception as e:
-        yield create_chunk(AgentResponse(metrics=metrics, id=planner.agent_data.id, chunk=f"**Erreur :** {str(e)}"))
+        yield create_chunk(
+            AgentResponse(
+                metrics=metrics,
+                id=planner.agent_data.id,
+                chunk=f"**Erreur :** {str(e)}",
+            )
+        )
         raise e
 
     metrics.total_time = time.time() - start_time
-    yield create_chunk(AgentResponse(metrics=metrics, id=planner.agent_data.id, chunk=""))
+    yield create_chunk(
+        AgentResponse(metrics=metrics, id=planner.agent_data.id, chunk="")
+    )
+
 
 def create_chunk(agent_response: AgentResponse) -> str:
     return agent_response.model_dump_json() + "\n"
 
+
 @app.post("/chat")
 async def chat(request: ChatRequest) -> StreamingResponse:
-    return StreamingResponse(chat_generator(request.session_id, request.question, request.image_url))
+    return StreamingResponse(
+        chat_generator(request.session_id, request.question, request.image_url)
+    )
+
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000, reload=True)
