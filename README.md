@@ -1,33 +1,33 @@
-This project C.L.A.R.A. stands for Clinical Logic & Agentic Reasoning Assistant.
+# C.L.A.R.A. (Clinical Logic & Agentic Reasoning Assistant)
 
-## Run the project
+CLARA is a project designed to assist with medical image analysis through an AI-powered chat interface. It leverages a multi-agent system to process medical data and provide insights, with a focus on clear and interpretable reasoning.
 
-### Dev
+## Demo
 
-Follow the instructions in the back/ and front/ directories.
+[![Watch the demo video](https://img.youtube.com/vi/YOUR_VIDEO_ID/hqdefault.jpg)](https://www.youtube.com/watch?v=YOUR_VIDEO_ID)
+*Replace `YOUR_VIDEO_ID` with the actual YouTube video ID.*
 
-### Prod
+## Getting Started
 
-1. Run back and front
+### Development
 
-```bash
-docker compose up --build
-```
+For development instructions, please refer to the specific `README.md` files located in the `back/` and `front/` directories.
 
-2.  Go on `http://localhost:8501` to view the front
+### Production Deployment
 
-Agent:
+To run the entire CLARA application in a production-like environment using Docker:
 
-- 1. Planneur agent
-- 1. Executor agent
-- 1. Oncology agent
-- 1. Summary agent
+1.  Build and start the services:
+    ```bash
+    docker compose up --build
+    ```
+2.  Access the frontend application in your browser at `http://localhost:8501`.
 
-TODO:
+## Core AI Agents
 
-- [ ] Save previous messages
-- [ ] Agent memory
-- [ ] Connect agents
-- [ ] Agents' metrics
-- [ ] Agents' graph
-- [ ] Show planners high level steps
+CLARA's intelligence is powered by a collaborative system of specialized AI agents:
+
+-   **Planner Agent:** Orchestrates the overall analysis process.
+-   **Executor Agent:** Executes specific tasks defined by the Planner.
+-   **Oncology Agent:** Specializes in analyzing oncology-related medical data.
+-   **Summary Agent:** Synthesizes findings into concise summaries.
