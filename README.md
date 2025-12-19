@@ -44,6 +44,43 @@ CLARA's intelligence is powered by a collaborative system of specialized AI agen
 -   **Oncology Agent:** Specializes in analyzing oncology-related medical data.
 -   **Summary Agent:** Synthesizes findings into concise summaries.
 
+## Project tree
+```bash
+.
+├── README.md             # <--- You are here :)
+├── demo/                 # Demo related scripts and configurations
+├── docker-compose.yml    # Docker Compose configuration for the entire application
+├── flake.nix             # Nix flake configuration
+├── back/                 # Backend service
+│   ├── data/             # Database and persistent storage for the backend
+│   ├── Dockerfile        # Dockerfile for the backend service
+│   ├── pyproject.toml    # Python project dependencies and metadata
+│   ├── README.md         # Backend specific README
+│   ├── src/              # Backend source code
+│   │   ├── agents/       # AI agent implementations
+│   │   ├── core/         # Core backend functionalities and models
+│   │   ├── main.py       # Main backend application entry point
+│   │   └── tools/        # Tools used by AI agents
+│   └── telemetrics.csv   # Telemetry/metrics data for agent usage
+├── front/                # Frontend application (Vite, React, TypeScript)
+│   ├── Dockerfile        # Dockerfile for the frontend service
+│   ├── index.html        # Frontend entry HTML file
+│   ├── package.json      # Frontend NPM dependencies
+│   ├── public/           # Static assets for the frontend
+│   ├── README.md         # Frontend specific README
+│   ├── src/              # Frontend source code
+│   │   ├── App.tsx       # Main React application component
+│   │   ├── components/   # Reusable React components
+│   │   ├── hooks/        # Custom React hooks
+│   │   ├── lib/          # Frontend utilities and mock data
+│   │   └── main.tsx      # Frontend entry point
+│   └── styles/           # Frontend global styles
+└── report/               # Project report and related files
+    ├── images/           # Images used in the report
+    ├── main.typ          # Source file for the project report
+    └── scripts/          # Scripts for generating report assets
+```
+
 ## TODO
 
 - [x] Agent memory
