@@ -4,8 +4,9 @@ CLARA is a project designed to assist with medical image analysis through an AI-
 
 ## Demo
 
-[![Watch the demo video](https://img.youtube.com/vi/YOUR_VIDEO_ID/hqdefault.jpg)](https://www.youtube.com/watch?v=YOUR_VIDEO_ID)
-*TODO*
+https://github.com/user-attachments/assets/f90fe625-6b4e-4a7f-979c-d0f4243d848c
+
+
 
 ## Getting Started
 
@@ -35,7 +36,7 @@ To run the entire CLARA application in a production-like environment using Docke
 CLARA's intelligence is powered by a collaborative system of specialized AI agents:
 
 -   **Planner Agent:** Orchestrates the overall analysis process.
--   **Executor Agent:** Executes specific tasks defined by the Planner.
+-   **Executor Agent:** Executes specific tasks defined by the Planner. (uses Vision agent)
 -   **Oncology Agent:** Specializes in analyzing oncology-related medical data.
 -   **Summary Agent:** Synthesizes findings into concise summaries.
 
@@ -46,7 +47,7 @@ CLARA's intelligence is powered by a collaborative system of specialized AI agen
 - [x] Agents' metrics
 - [x] Agents' graph
 - [x] Show planners high level steps
+- [x] Send image to backend
 - [ ] Save previous messages
-- [ ] Send image to backend
 - [ ] Segment image
 - [ ] Critic agent
