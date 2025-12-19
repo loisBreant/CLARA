@@ -1,12 +1,11 @@
-FROM denoland/deno:alpine AS builder
+FROM node:22-alpine AS builder
 
 WORKDIR /app
 
-COPY deno.json deno.lock package.json ./
-RUN deno install --allow-scripts --node-modules-dir
-
+COPY package.json ./
+RUN npm install
 COPY . .
-RUN deno task build
+RUN npm run build
 
 FROM caddy:latest AS runner
 
