@@ -1,0 +1,113 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  front-fmt:
+    name: Frontend Format
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Deno
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: v2.x
+
+      - name: Check Formatting
+        working-directory: front
+        run: deno fmt --check
+
+  front-lint:
+    name: Frontend Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Deno
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: v2.x
+
+      - name: Lint
+        working-directory: front
+        run: deno lint
+
+  back-fmt:
+    name: Backend Format
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+          cache-dependency-glob: "back/uv.lock"
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version-file: "back/.python-version"
+
+      - name: Install dependencies
+        working-directory: back
+        run: uv sync
+
+      - name: Check Formatting (Ruff)
+        working-directory: back
+        run: uv run ruff format --check
+
+  back-lint:
+    name: Backend Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+          cache-dependency-glob: "back/uv.lock"
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version-file: "back/.python-version"
+
+      - name: Install dependencies
+        working-directory: back
+        run: uv sync
+
+      - name: Check Linting (Ruff)
+        working-directory: back
+        run: uv run ruff check src/
+
+  back-ty:
+    name: Backend Type Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+          cache-dependency-glob: "back/uv.lock"
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version-file: "back/.python-version"
+
+      - name: Install dependencies
+        working-directory: back
+        run: uv sync
+
+      - name: Type Check (Ty)
+        working-directory: back
+        run: uv run ty check src/
