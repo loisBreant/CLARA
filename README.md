@@ -5,9 +5,16 @@ CLARA is a project designed to assist with medical image analysis through an AI-
 ## Demo
 
 [![Watch the demo video](https://img.youtube.com/vi/YOUR_VIDEO_ID/hqdefault.jpg)](https://www.youtube.com/watch?v=YOUR_VIDEO_ID)
-*Replace `YOUR_VIDEO_ID` with the actual YouTube video ID.*
+*TODO*
 
 ## Getting Started
+
+### Required Api Key
+Create a free api key on [openrouter](https://openrouter.ai/settings/keys).
+```bash
+# Copy the example env file and put your open router api key
+cp ./back/.env.example ./back/.env
+```
 
 ### Development
 
@@ -21,7 +28,7 @@ To run the entire CLARA application in a production-like environment using Docke
     ```bash
     docker compose up --build
     ```
-2.  Access the frontend application in your browser at `http://localhost:8501`.
+2.  Access the frontend application in your browser at `http://localhost:8080`.
 
 ## Core AI Agents
 
