@@ -271,7 +271,7 @@
 
 // --- Slide 9: Q&A ---
 #title-slide-custom(
-  "Démo Time 🔥",
+  "Démo Time",
   none,
   none
 )
