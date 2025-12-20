@@ -25,6 +25,7 @@
             typst
             uv
             zathura
+            libgcc.lib
           ];
         };
       }
