@@ -100,7 +100,6 @@ Format JSON attendu :
                 )
                 last_agent_id = executor.agent_data.id
                 self.logs.append(task_result_accumulated)
-                # FIXME: add call to the planner to be sur it's ok
 
             yield AgentResponse(
                 metrics=metrics,

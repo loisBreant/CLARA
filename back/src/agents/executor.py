@@ -5,6 +5,7 @@ from src.core.models import AgentData, AgentType, AgentsMetrics, Status
 from src.core.task import Tasks, PlannedTask
 from src.agents.memory import MemoryAgent
 from src.agents.vision import VisionAgent
+from src.tools import classification_tool
 import json
 import logging
 import os
@@ -53,6 +54,7 @@ TOOL_REGISTRY: Dict[str, Callable] = {
     "vision_tool": vision_tool,
     "duckdb_tool": duckdb_tool,
     "rag_tool": rag_tool,
+    "classification_tool": classification_tool,
 }
 
 
@@ -94,6 +96,11 @@ Voici les tools mis a ta disposition:
     DESCRIPTION: Analyse une image médicale.
     PARAMÈTRES: [image_path, instruction]
     OUTPUT: str (analyse textuelle)
+
+    OUTIL 2: "classification_tool"
+    DESCRIPTION: Classification d'image (Maligne/Bénigne).
+    PARAMÈTRES: [image_path]
+    OUTPUT: str (Diagnostic et confiance)
 
 FORMAT JSON OBLIGATOIRE :
 [
