@@ -21,11 +21,13 @@
             ruff
             tinymist
             ty
+            typescript
             typescript-language-server
             typst
             uv
             zathura
             libgcc.lib
+            nodejs
           ];
         };
       }

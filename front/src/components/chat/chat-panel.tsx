@@ -31,6 +31,46 @@ export function ChatPanel({
   const fileInputRef = useRef<HTMLInputElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
+  const [isRecording, setIsRecording] = useState(false);
+  const [recognitionError, setRecognitionError] = useState<string | null>(null);
+  const speechRecognitionRef = useRef<SpeechRecognition | null>(null);
+
+  useEffect(() => {
+    if ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) {
+      const SpeechRecognition =
+        window.SpeechRecognition || window.webkitSpeechRecognition;
+      speechRecognitionRef.current = new SpeechRecognition();
+      speechRecognitionRef.current.continuous = false;
+      speechRecognitionRef.current.interimResults = false;
+      speechRecognitionRef.current.lang = "fr-FR";
+
+      speechRecognitionRef.current.onresult = (event) => {
+        const transcript = event.results[0][0].transcript;
+        setInput((prevInput) => prevInput + transcript);
+        setIsRecording(false);
+        setRecognitionError(null); // Clear error on successful result
+      };
+
+      speechRecognitionRef.current.onerror = (event) => {
+        console.error("Speech recognition error:", event.error);
+        setIsRecording(false);
+        setRecognitionError(`Erreur de reconnaissance vocale: ${event.error}. Veuillez réessayer.`);
+      };
+
+      speechRecognitionRef.current.onend = () => {
+        setIsRecording(false);
+      };
+    } else {
+      console.warn("Speech Recognition API not supported in this browser.");
+    }
+
+    return () => {
+      if (speechRecognitionRef.current) {
+        speechRecognitionRef.current.stop();
+      }
+    };
+  }, []); // Empty dependency array to run once on mount
+
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
@@ -43,6 +83,7 @@ export function ChatPanel({
       onSendMessage(input, selectedFile || undefined);
       setInput("");
       setSelectedFile(null);
+      setRecognitionError(null); // Clear error on send
     }
   };
 
@@ -63,6 +104,20 @@ export function ChatPanel({
     setSelectedFile(null);
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
+    }
+  };
+
+  const toggleRecording = () => {
+    if (!speechRecognitionRef.current) return;
+
+    if (isRecording) {
+      speechRecognitionRef.current.stop();
+      setIsRecording(false);
+    } else {
+      setInput(""); // Clear input before starting new speech input
+      setRecognitionError(null); // Clear previous errors
+      speechRecognitionRef.current.start();
+      setIsRecording(true);
     }
   };
 
@@ -159,6 +214,9 @@ export function ChatPanel({
             </Button>
           </div>
         )}
+        {recognitionError && (
+          <div className="text-red-500 text-sm mb-2">{recognitionError}</div>
+        )}
         <form onSubmit={handleSubmit} className="flex items-center gap-3">
           <Input
             type="file"
@@ -188,15 +246,21 @@ export function ChatPanel({
               className="pr-10 bg-secondary border-0"
               disabled={isInputDisabled}
             />
-            <Button
-              type="button"
-              variant="ghost"
-              size="icon"
-              className="absolute right-1 top-1/2 -translate-y-1/2 h-7 w-7"
-              disabled={isInputDisabled}
-            >
-              <Mic className="h-4 w-4 text-muted-foreground" />
-            </Button>
+            {"SpeechRecognition" in window ||
+            "webkitSpeechRecognition" in window ? (
+              <Button
+                type="button"
+                variant="ghost"
+                size="icon"
+                className={`absolute right-1 top-1/2 -translate-y-1/2 h-7 w-7 ${
+                  isRecording ? "animate-pulse text-red-500" : ""
+                }`}
+                onClick={toggleRecording}
+                disabled={isInputDisabled}
+              >
+                <Mic className="h-4 w-4" />
+              </Button>
+            ) : null}
           </div>
 
           <Button
