@@ -81,7 +81,6 @@ async def init_session() -> ChatSession:
     session_id = uuid.uuid4()
     chats[session_id] = {
         "planner": PlannerAgent(),
-        "metrics": AgentsMetrics(),
     }
     return ChatSession(session_id=session_id)
 
@@ -90,7 +89,7 @@ def chat_generator(
     session_id: uuid.UUID, question: str, image_url: Optional[str]
 ) -> Generator[str, None, None]:
     planner: PlannerAgent = chats[session_id]["planner"]
-    metrics: AgentsMetrics = chats[session_id]["metrics"]
+    metrics: AgentsMetrics = AgentsMetrics()
     planner.reset_id()
     planner.update_status(Status.PENDING, metrics)
     start_time = time.time()
@@ -120,12 +119,6 @@ def create_chunk(agent_response: AgentResponse) -> str:
 
 @app.post("/chat")
 async def chat(request: ChatRequest) -> StreamingResponse:
-    if request.session_id not in chats:
-        chats[request.session_id] = {
-            "planner": PlannerAgent(),
-            "metrics": AgentsMetrics(),
-        }
-
     return StreamingResponse(
         chat_generator(request.session_id, request.question, request.image_url)
     )
