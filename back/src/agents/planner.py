@@ -46,6 +46,7 @@ Format JSON attendu :
 """
         super().__init__(system_prompt, AgentType.PLANNER)
         self.logs = []
+        self.chat_history = []
 
     def plan(self, request: str, metrics: AgentsMetrics, image_url: Optional[str]):
         yield AgentResponse(
@@ -53,9 +54,20 @@ Format JSON attendu :
             id=self.agent_data.id,
             chunk="**Phase 1 : Planification Stratégique**\n\n",
         )
-        prompt = f"Requête à planifier : {request}"
+        
+        # Format history for context
+        history_str = ""
+        if self.chat_history:
+            history_str = "HISTORIQUE DE LA CONVERSATION PRÉCÉDENTE :\n"
+            for msg in self.chat_history:
+                role = "Utilisateur" if msg["role"] == "user" else "Assistant"
+                history_str += f"- {role}: {msg['content']}\n"
+            history_str += "\n"
+
+        prompt = f"{history_str}Nouvelle requête à planifier : {request}"
         if image_url is not None:
             prompt += f"\nUser uploaded image: {image_url}"
+        
         full_response = ""
         try:
             for response in self.ask(prompt, metrics):
@@ -114,14 +126,27 @@ Format JSON attendu :
 Voici le contexte de la demande et les résultats des tâches exécutées.
 Synthétise tout cela pour donner une réponse finale complète et claire à l'utilisateur.
 
-Voici l'historique des conversations :
-user-prompt: {prompt}\n
-tasks: {tasks.render_tasks() if len(tasks) > 0 else "Aucune tâche complexe nécessaire."}\n
-agents-response: {self.logs if self.logs else "Aucune exécution d'outil."}\n
+CONTEXTE CONVERSATIONNEL (Historique):
+{history_str if history_str else "Aucun historique."}
 
+DERNIÈRE REQUÊTE UTILISATEUR:
+{request}
+
+RÉSULTATS DES TÂCHES (Outils):
+{self.logs if self.logs else "Aucune exécution d'outil."}
+
+PLANIFICATION:
+{tasks.render_tasks() if len(tasks) > 0 else "Aucune tâche complexe nécessaire."}
 """
+        
+        full_reactive_response = ""
         for response in reactive.ask(final_prompt, metrics):
+            full_reactive_response += response.chunk
             yield response
+
+        # Save to history
+        self.chat_history.append({"role": "user", "content": request})
+        self.chat_history.append({"role": "assistant", "content": full_reactive_response})
 
         # self.status = Status.FINISHED
         self.agent_data.status = Status.FINISHED

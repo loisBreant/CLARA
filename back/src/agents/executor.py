@@ -96,11 +96,13 @@ Voici les tools mis a ta disposition:
     DESCRIPTION: Analyse une image médicale.
     PARAMÈTRES: [image_path, instruction]
     OUTPUT: str (analyse textuelle)
+    NOTE: Utilisez toujours des chemins relatifs (ex: "static/uploads/...") et non absolus.
 
     OUTIL 2: "classification_tool"
     DESCRIPTION: Classification d'image (Maligne/Bénigne).
     PARAMÈTRES: [image_path]
     OUTPUT: str (Diagnostic et confiance)
+    NOTE: Utilisez toujours des chemins relatifs (ex: "static/uploads/...") et non absolus.
 
 FORMAT JSON OBLIGATOIRE :
 [

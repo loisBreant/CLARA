@@ -43,8 +43,20 @@ def predict_single_image(image_path, model=model):
     except Exception as e:
         return f"Error during classification: {e}"
 
+upploads_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../../static/uploads")
+
 def classification_tool(image_path: str):
+    # try to correct the path
     if image_path.startswith("/"):
         image_path = image_path.lstrip("/")
+    if os.path.exists(image_path):
+        return predict_single_image(image_path)
+    path_in_uploads = os.path.join(upploads_dir, image_path)
+    if os.path.exists(path_in_uploads):
+        return predict_single_image(path_in_uploads)
+    filename = os.path.basename(image_path)
+    path_from_filename = os.path.join(upploads_dir, filename)
+    if os.path.exists(path_from_filename):
+        return predict_single_image(path_from_filename)
     return predict_single_image(image_path)
 

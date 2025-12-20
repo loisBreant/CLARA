@@ -120,6 +120,12 @@ def create_chunk(agent_response: AgentResponse) -> str:
 
 @app.post("/chat")
 async def chat(request: ChatRequest) -> StreamingResponse:
+    if request.session_id not in chats:
+        chats[request.session_id] = {
+            "planner": PlannerAgent(),
+            "metrics": AgentsMetrics(),
+        }
+
     return StreamingResponse(
         chat_generator(request.session_id, request.question, request.image_url)
     )

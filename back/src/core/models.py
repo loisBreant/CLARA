@@ -7,6 +7,7 @@ class AgentType(Enum):
     PLANNER = "planner"
     EXECUTOR = "executor"
     REACTIVE = "reactive"
+    VISION = "vision"
 
 
 class Status(Enum):

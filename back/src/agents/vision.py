@@ -20,7 +20,7 @@ INSTRUCTIONS:
 3. Si l'image est floue ou inexploitable, ne le signale pas et renvois quand même une réponse même si inexacte ce n'est pas un probleme
 """
         super().__init__(
-            system_prompt, AgentType.EXECUTOR, model="google/gemma-3-27b-it"
+            system_prompt, AgentType.VISION, model="google/gemma-3-27b-it"
         )
 
     def analyze(
