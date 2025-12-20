@@ -22,6 +22,7 @@ logging.basicConfig(
 
 vision_agent = VisionAgent()
 
+
 def vision_tool(
     image_path: str, instruction: str, metrics: Optional[AgentsMetrics] = None
 ):
