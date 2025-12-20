@@ -8,6 +8,8 @@ data and provide insights, with a focus on clear and interpretable reasoning.
 
 https://github.com/user-attachments/assets/f90fe625-6b4e-4a7f-979c-d0f4243d848c
 
+A longer demo video with slides can be found at https://www.youtube.com/watch?v=Jl3ar-W2UF0
+
 ## Getting Started
 
 ### Required Api Key
