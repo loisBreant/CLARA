@@ -110,7 +110,7 @@
         #align(center)[#text(size: 0.5em)[andy.shan]]
       ],
       [
-        #block(clip: true, width: 2.5cm, height: 2.5cm, image("images/lois.breant.jpg", fit: "cover"))
+        #block(clip: true, width: 2.5cm, height: 2.5cm, image("images/lois.breant.png", fit: "cover"))
         #v(0.2em)
         #align(center)[#text(size: 0.5em)[lois.breant]]
       ],
