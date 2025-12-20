@@ -44,5 +44,7 @@ def predict_single_image(image_path, model=model):
         return f"Error during classification: {e}"
 
 def classification_tool(image_path: str):
+    if image_path.startswith("/"):
+        image_path = image_path.lstrip("/")
     return predict_single_image(image_path)
 

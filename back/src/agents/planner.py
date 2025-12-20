@@ -128,7 +128,3 @@ agents-response: {self.logs if self.logs else "Aucune exécution d'outil."}\n
         metrics.agents[self.agent_data.id] = self.agent_data
         yield AgentResponse(metrics=metrics, id=self.agent_data.id, chunk="")
 
-        # self.status = Status.FINISHED
-        self.agent_data.status = Status.FINISHED
-        metrics.agents[self.agent_data.id] = self.agent_data
-        yield AgentResponse(metrics=metrics, id=self.agent_data.id, chunk="")
