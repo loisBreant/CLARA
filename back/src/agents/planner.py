@@ -80,10 +80,22 @@ Format JSON attendu :
 
             last_agent_id = self.agent_data.id
 
+            executors = []
             for t in tasks:
                 executor = ExecutorAgent(t)
                 metrics.agents[executor.agent_data.id] = executor.agent_data
+                executors.append(executor)
 
+            reactive = ReactiveAgent()
+            reactive_dependency = (
+                executors[-1].agent_data.id if executors else last_agent_id
+            )
+            reactive.agent_data.dependencies = [reactive_dependency]
+            metrics.agents[reactive.agent_data.id] = reactive.agent_data
+
+            yield AgentResponse(metrics=metrics, id=self.agent_data.id, chunk="")
+
+            for executor, t in zip(executors, tasks):
                 task_result_accumulated = ""
                 yield AgentResponse(
                     metrics=metrics,
@@ -106,9 +118,6 @@ Format JSON attendu :
                 id=self.agent_data.id,
                 chunk="**Phase 3 : Synthèse et Réponse Finale**\n\n",
             )
-            reactive = ReactiveAgent()
-            reactive.agent_data.dependencies = [last_agent_id]
-            metrics.agents[reactive.agent_data.id] = reactive.agent_data
 
             final_prompt = f"""
 Voici le contexte de la demande et les résultats des tâches exécutées.

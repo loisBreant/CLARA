@@ -44,10 +44,11 @@ export function MermaidGraph({ nodes, activeNodeId }: MermaidGraphProps) {
       const graphDefinition = generateMermaidDefinition(nodes, activeNodeId);
 
       try {
-        containerRef.current.innerHTML = "";
         const graphId = `agent-graph-${Date.now()}`;
         const { svg } = await mermaid.render(graphId, graphDefinition);
-        containerRef.current.innerHTML = svg;
+        if (containerRef.current) {
+          containerRef.current.innerHTML = svg;
+        }
         setRendered(true);
       } catch (error) {
         console.error("Mermaid rendering error:", error);
