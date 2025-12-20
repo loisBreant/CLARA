@@ -54,7 +54,7 @@ Format JSON attendu :
             id=self.agent_data.id,
             chunk="**Phase 1 : Planification Stratégique**\n\n",
         )
-        
+
         # Format history for context
         history_str = ""
         if self.chat_history:
@@ -67,7 +67,7 @@ Format JSON attendu :
         prompt = f"{history_str}Nouvelle requête à planifier : {request}"
         if image_url is not None:
             prompt += f"\nUser uploaded image: {image_url}"
-        
+
         full_response = ""
         try:
             for response in self.ask(prompt, metrics):
@@ -138,7 +138,7 @@ RÉSULTATS DES TÂCHES (Outils):
 PLANIFICATION:
 {tasks.render_tasks() if len(tasks) > 0 else "Aucune tâche complexe nécessaire."}
 """
-        
+
         full_reactive_response = ""
         for response in reactive.ask(final_prompt, metrics):
             full_reactive_response += response.chunk
@@ -146,10 +146,11 @@ PLANIFICATION:
 
         # Save to history
         self.chat_history.append({"role": "user", "content": request})
-        self.chat_history.append({"role": "assistant", "content": full_reactive_response})
+        self.chat_history.append(
+            {"role": "assistant", "content": full_reactive_response}
+        )
 
         # self.status = Status.FINISHED
         self.agent_data.status = Status.FINISHED
         metrics.agents[self.agent_data.id] = self.agent_data
         yield AgentResponse(metrics=metrics, id=self.agent_data.id, chunk="")
-

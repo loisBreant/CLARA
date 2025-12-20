@@ -13,16 +13,14 @@ class MemoryAgent:
 
     def resolve(self, arg: Any) -> Any:
         if isinstance(arg, str) and arg.startswith("$"):
-            key_to_find = arg[1:] 
+            key_to_find = arg[1:]
             if key_to_find in self._storage:
                 return self._storage[key_to_find]
 
             if arg in self._storage:
                 return self._storage[arg]
 
-            raise ValueError(
-                f"Variable '{arg}' not found"
-            )
+            raise ValueError(f"Variable '{arg}' not found")
 
         return arg
 

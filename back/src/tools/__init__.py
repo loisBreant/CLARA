@@ -1,1 +1,1 @@
-from .classification import classification_tool
+from .classification import classification_tool as classification_tool
