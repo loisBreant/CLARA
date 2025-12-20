@@ -90,7 +90,7 @@
 
 // --- Slide 1: Title ---
 #title-slide-custom(
-  "C.L.A.R.A. 🩺",
+  "C.L.A.R.A.",
   "LLM'S AGENTIC AND BIOMEDICAL - ING3 SCIA/Santé",
   [
     *Membres du groupe:*
@@ -132,8 +132,9 @@
   *Objectif :*
   Créer un agent capable de :
   - *Planifier* une analyse.
-  - *Utiliser des outils* pour répondre aux attentes du patient.
+  - *Utiliser des outils pertinants* pour répondre aux attentes du patient.
   - *Mémoriser et contextualiser* ses actions.
+  - *Minimiser les coûts* d'utilisation des LLMs.
 
   #v(1em)
   #block(fill: secondary-color, inset: 0.5em, radius: 5pt, width: 100%)[
@@ -145,25 +146,25 @@
 ]
 
 // --- Slide 3: Architecture Globale ---
-#new-slide(title: "Architecture du Système")[ 
-  *Approche Modulaire :*
-  - *Backend (FastAPI) :* Orchestration des agents (Planner, Executor, Reactive).
+#new-slide(title: "Architecture du Système")[
+  - *Backend (FastAPI) :* Orchestration des agents (Planner/Executor/Reactive).
+
   - *Frontend (React/Vite) :* Visualisation temps réel du graphe de raisonnement. 
   
   #align(center)[
     #image("../report/images/architecture.png", height: 50%)
     #v(0.5em)
-    #text(size: 0.8em, style: "italic")[Figure 1 : Architecture Globale et Flux de Données]
+    #text(size: 0.8em, style: "italic")[Figure 1 : Architecture Globale]
   ]
 ]
 
 // --- Slide 4: Motifs de Conception (Design Patterns) ---
-#new-slide(title: "Motifs Agentiques Clés")[ 
+#new-slide(title: "Motifs Agentiques")[ 
   #grid(columns: (1fr, 1fr), gutter: 1.5cm,
     [
       *1. Planner-Executor*
       - *Pourquoi ?* L'analyse médicale est procédurale.
-      - *Comment ?* Le Planner décompose (ex: "Vérifier radio"), l'Executor agit.
+      - *Comment ?* Le Planner décompose les actions, l'Executor agit.
       
       #v(0.5em)
       *2. Mémoire (Contextuelle)*
@@ -172,13 +173,17 @@
     ],
     [
       *3. Outils & Délégation*
-      - *Pourquoi ?* Utiliser des experts pour chaque sous-tâche.
-      - *Comment ?* L'Executor délègue à `vision_tool` ou `classification_tool` selon le plan.
-      
-      #v(1em)
-      #block(fill: secondary-color, inset: 0.5em, radius: 5pt, width: 100%)[
-        *Note:* Ces motifs augmentent la traçabilité et la robustesse.
-      ]
+      L'Executor délègue les tâches perceptives :
+
+      #v(0.5em)
+      - *Outil Classification (CNN)*
+        - *Input :* Image (Mammographie/Scan).
+        - *Output :* Label (Bénin/Malin) + Confiance.
+
+      #v(0.5em)
+      - *Agent Vision (VLM)*
+        - *Input :* Image + Instructions.
+        - *Output :* Description textuelle et analyse visuelle.
     ]
   )
 ]
@@ -187,7 +192,7 @@
 #new-slide(title: "Stack Technique & Streaming")[ 
   *Backend :*
   - Python 3.13, FastAPI.
-  - Modèles : `google/gemma-3-27b-it` (Vision & Texte).
+  - Modèle `google/gemma-3-27b-it` (Vision & Texte).
   - Client `openrouter`.
 
   *Frontend :*
@@ -196,42 +201,40 @@
 
   #v(1em)
   #block(stroke: (left: 4pt + primary-color), inset: (left: 1em))[
-    *Streaming Temps Réel :* \ 
-    Flux continu JSON (`AgentResponse`). L'utilisateur voit l'agent "réfléchir" étape par étape, améliorant la confiance utilisateur.
+    *Streaming de réponse en temps réel :* \ 
+    Flux continu JSON (`AgentResponse`). L'utilisateur voit l'agent "réfléchir" et peut consulter chaque étape de la plannification.
   ]
 ]
 
 // --- Slide 6: Protocole d'Évaluation ---
-#new-slide(title: "Évaluation & Métriques")[ 
-  *Méthodologie :*
-  Comparaison sur 50 cas cliniques variés (Fractures, Pneumonies, Normal).
+#new-slide(title: "Monitoring & Métriques")[
+  *Approche :*
+  Monitoring temps réel de la performance des agents via une instrumentation dédiée.
 
   #v(1em)
-  *Métriques suivies (via Telemetrics):*
-  - *Taux de Succès :* Pertinence du diagnostic final vs Ground Truth.
-  - *Latence :* Temps total de traitement (Planner + Execution).
-  - *Consommation :* Nombre de tokens (Input/Output) par étape.
+  *Métriques loggées :*
+  - *Latence :* Temps d'exécution par étape (Planner/Executor/Vision).
+  - *Consommation :* Comptage précis des tokens (Input/Output) pour l'analyse des coûts.
   
   #v(1em)
   *Instrumentation :*
-  - Logging automatique dans `telemetrics.csv`.
-  - Suivi détaillé par `session_id` et `agent_id`.
+  - Export automatique dans `telemetrics.csv`.
+  - Permet d'identifier les goulots d'étranglement.
 ]
-
 // --- Slide 7: Analyse Économique ---
 #new-slide(title: "Coûts & Scalabilité")[ 
   *Modèle Économique :*
   
   #grid(columns: (1fr, 1fr), gutter: 1cm,
     [
-      - *Stratégie Actuelle :* Utilisation de modèles "Free Tier" (Gemma, Llama) via OpenRouter pour le développement.
-      - *Coût Réel :* Quasi-nul pour le prototype.
+      - *Stratégie :* Utilisation de modèles "Free Tier" (Gemma, Llama) via OpenRouter pour le développement.
+      - *Coût réel :* Quasi-nul pour le prototype.
       
       #v(1em)
-      *Suivi des Coûts :*
+      *Suivi des coûts :*
       Chaque appel API est loggé avec :
       - Modèle utilisé.
-      - Tokens (Prompt + Completion).
+      - Tokens (Prompt & Complétion).
       - Latence.
     ],
     [
@@ -242,7 +245,7 @@
       ]
       #align(center)[
         #v(0em)
-        *Optimisation :* \ Le Planner consomme peu (contexte court), l'Executor (Vision) est le poste principal.
+        *Optimisation :* \ Le Planner est léger (texte), la Vision est le poste principal de consommation (images).
       ]
     ]
   )
@@ -253,7 +256,7 @@
   #grid(columns: (1fr, 1fr), gutter: 1cm,
     [
       *Apports du projet :*
-      - Architecture agentique fonctionnelle (Planner-Executor).
+      - Architecture agentique fonctionnelle (Planner/Executor).
       - Transparence accrue pour le praticien (Graphe de pensée).
       - Démonstration de la viabilité des modèles Open Source.
     ],

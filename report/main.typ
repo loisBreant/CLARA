@@ -99,7 +99,7 @@ L'architecture repose sur un backend Python (FastAPI) orchestrant plusieurs agen
 #placeholder("Screenshot de l'interface Frontend (Chat + Graphe)")
 
 #figure(
-  image("images/architecture.svg", width: 80%),
+  image("images/architecture.png", width: 80%),
   caption: [Architecture du Système et Flux de Données]
 )
 
@@ -115,18 +115,13 @@ Nous avons intégré les motifs suivants, jugés pertinents pour la complexité 
 - L'#underline[Executor] traite chaque tâche séquentiellement en appelant les outils appropriés (vision, base de connaissances).
 - Si une étape échoue, le Planner peut réajuster le plan.
 
-=== Module de Mémoire (RAG & Historique)
+=== Module de Mémoire (Contexte & Historique)
 *Justification :* Le contexte du patient et l'historique de la conversation sont essentiels pour un diagnostic cohérent.
 
 *Implémentation :* 
-- #underline[Mémoire à court terme] : Gestion de l'historique de chat dans la session courante.
-- #underline[Mémoire à long terme] : Stockage de cas cliniques de référence ou de documentation médicale mockée ou réelle via `medical.db`.
+- #underline[Mémoire Conversationnelle] : Gestion de l'historique de chat dans la session courante (List[Message]).
+- #underline[Mémoire de Travail] : Résolution de variables entre les tâches (ex: `$step_id`) via `MemoryAgent`.
 
-=== Module de Réflexion / Auto-Critique
-*Justification :* Pour éviter les hallucinations dangereuses dans un contexte médical.
-
-*Implémentation :* 
-- Après avoir généré une analyse préliminaire, un agent relit la réponse pour vérifier sa cohérence factuelle et sa prudence (ex: ajout de disclaimers).
 
 = Implémentation Technique
 
@@ -161,7 +156,7 @@ Le code est organisé de manière modulaire :
         # Tool parsing & execution
         tools_to_call = self.parse_tools(self.last_response)
         for tool in tools_to_call:
-            # Résolution des arguments via la mémoire
+            # Résolution es arguments via la mémoire
             tool.args = memory.resolve_args(tool.args)
             
             # Execution
@@ -233,7 +228,7 @@ Ce projet a permis de démontrer qu'une architecture agentique, bien que plus co
 #table(
   columns: (auto, auto, auto, auto),
   inset: 5pt,
-  [*Timestamp*], [*Model*], [*Tokens*], [*Cost (\$)*],
-  "2025-12-19 10:01", "gemma-3-27b-it:free", "1540", "0.00",
-  "2025-12-19 10:02", "gemma-3-27b-it:free", "200", "0.00",
+  [*Timestamp*], [*Model*], [*Input Tokens*], [*Output Tokens*],
+  "1765991604", "gemma-3-27b-it:free", "149", "39",
+  "1765992025", "gemma-3-27b-it:free", "398", "27",
 )
