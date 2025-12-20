@@ -90,8 +90,8 @@
 
 // --- Slide 1: Title ---
 #title-slide-custom(
-  "C.L.A.R.A.",
-  "Agentification & Analyse d'Images Médicales",
+  "C.L.A.R.A. 🩺",
+  "LLM'S AGENTIC AND BIOMEDICAL - ING3 SCIA/Santé",
   [
     *Membres du groupe:*
     #v(1em)
@@ -124,19 +124,16 @@
 )
 
 // --- Slide 2: Introduction ---
-#new-slide(title: "Introduction & Objectifs")[ 
-  *Contexte :* 
-  Module "Agentification" - SCIA/Santé 3ème Année.
-  
+#new-slide(title: "Introduction & Objectifs")[   
   *Problématique :*
-  Comment transformer une analyse d'image médicale "boîte noire" en un processus transparent, planifié et vérifiable ?
+  Comment concevoir un agent intelligent capable d'analyser des images médicales de manière autonome et explicable ?
 
   #v(0.5em)
   *Objectif :*
   Créer un agent capable de :
-  - *Planifier* son analyse (qualité, zone, anomalies).
-  - *Utiliser des outils* (Vision, Classification).
-  - *Contextualiser* ses actions (Mémoire à court terme).
+  - *Planifier* une analyse.
+  - *Utiliser des outils* pour répondre aux attentes du patient.
+  - *Mémoriser et contextualiser* ses actions.
 
   #v(1em)
   #block(fill: secondary-color, inset: 0.5em, radius: 5pt, width: 100%)[
