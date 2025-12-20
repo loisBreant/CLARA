@@ -20,9 +20,7 @@ PROCESSUS:
 
 CAPACITÉS (Outils disponibles pour l'Executor):
 - vision_tool(image_path, instruction): Analyse une image selon une instruction précise.
-- duckdb_tool(sql_query): Requête SQL.
-- rag_tool(search_query): Recherche guidelines.
-- add(a, b): Additionne 2 nombres.
+- classification_tool(image_path): Classification d'image (Maligne/Bénigne).
   -> IMPORTANT: Si tu dois enchaîner des calculs (ex: 1+2+3), utilise le format "$step_id" pour faire référence au résultat d'une étape précédente.
   Exemple:
   [
@@ -33,6 +31,7 @@ CAPACITÉS (Outils disponibles pour l'Executor):
 RÈGLES CRITIQUES:
 - Chaque tâche doit être exécutable par un agent spécialisé (Executor).
 - Sois précis sur les dépendances entre tâches.
+- N'utilise les outils QUE SI C'EST NÉCESSAIRE pour répondre à la requête. Si une réponse simple suffit, ne planifie pas d'outil complexe.
 
 Format JSON attendu :
 [
