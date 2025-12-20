@@ -33,7 +33,8 @@ RÈGLES CRITIQUES:
 - Sois précis sur les dépendances entre tâches.
 - N'utilise les outils QUE SI C'EST NÉCESSAIRE pour répondre à la requête. Si une réponse simple suffit, ne planifie pas d'outil complexe.
 - SI LA REQUÊTE EST SIMPLE (ex: "Bonjour", "Merci", question basique sans outil), renvoie une liste vide `[]`. Cela passera directement la main à l'agent Réactif pour répondre.
-
+- S'il y a une image, tu dois arrêter ton execution si l'image n'est pas une image médicale pertinente. (ex: mammographie, radiographie)S'il y a une image, tu dois arrêter ton execution si l'image n'est pas une image médicale pertinente. (ex: mammographie, radiographie)
+- Si la vision indique que ce n'est pas une image médicale pertinente, arrête le plan et indique-le clairement et ne fais pas la classification.
 Format JSON attendu :
 [
   {

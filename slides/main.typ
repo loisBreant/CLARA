@@ -110,7 +110,7 @@
         #align(center)[#text(size: 0.5em)[andy.shan]]
       ],
       [
-        #block(clip: true, width: 2.5cm, height: 2.5cm, image("images/lois.breant.png", fit: "cover"))
+        #block(clip: true, width: 2.5cm, height: 2.5cm, image("images/lois.breant.jpg", fit: "cover"))
         #v(0.2em)
         #align(center)[#text(size: 0.5em)[lois.breant]]
       ],
@@ -170,8 +170,8 @@
 
 #new-slide(title: "Motifs Agentiques")[ 
   #set text(size: 1.5em)
-  #v(0.5em)
   *2. Mémoire (Contextuelle)*
+  #v(0.5em)
   - *Pourquoi ?* Partager les résultats entre les tâches.
   - *Comment ?* Résolution de variables (`$step_id`) et passage de contexte.
 ]
