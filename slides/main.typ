@@ -163,7 +163,7 @@
   #set text(size: 1.5em)
   *1. Planner-Executor*
   #v(0.5em)
-  - *Pourquoi ?* L'analyse médicale est procédurale.
+  - *Pourquoi ?* Une meilleure précision: la planner a la vision globale, l'executor se concentre sur sa tâche.
   - *Comment ?* Le Planner décompose les actions, l'Executor agit.
 ]
 
@@ -179,6 +179,7 @@
 #new-slide(title: "Motifs Agentiques")[ 
   #set text(size: 1.3em)
   *3. Outils & Délégation*
+
   L'Executor délègue les tâches perceptives :
 
   #v(0.5em)
@@ -231,7 +232,7 @@
   
   #grid(columns: (1fr, 1fr), gutter: 1cm,
     [
-      - *Stratégie :* Utilisation de modèles "Free Tier" (Gemma, Llama) via OpenRouter pour le développement.
+      - *Stratégie :* Utilisation de modèles "Free Tier" (Gemma) via OpenRouter pour le développement.
       - *Coût réel :* Quasi-nul pour le prototype.
       
       #v(1em)
