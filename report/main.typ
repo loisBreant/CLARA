@@ -1,4 +1,4 @@
-#set document(title: "Rapport de Projet Agentification: MedVision AI (CLARA)", author: "Groupe Étudiants", date: datetime.today())
+#set document(title: "Rapport de Projet Agentification: CLARA", author: "Groupe Étudiants", date: datetime.today())
 #set page(
   paper: "a4",
   margin: (x: 2.5cm, y: 2.5cm),

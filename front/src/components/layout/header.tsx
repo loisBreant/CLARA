@@ -11,10 +11,10 @@ export function Header() {
         </div>
         <div>
           <h1 className="text-lg font-semibold text-foreground">
-            MedVision AI
+            C.L.A.R.A.
           </h1>
           <p className="text-xs text-muted-foreground">
-            Agentic Medical Image Analysis
+            Clinical Logic & Agentic Reasoning Assistant
           </p>
         </div>
       </div>
