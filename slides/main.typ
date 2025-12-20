@@ -28,7 +28,7 @@
     },
     footer-descent: 0.5cm, // Ensure footer sticks to bottom with no gap // Ensure footer sticks to bottom with no gap
   )
-  set text(font: "DejaVu Sans", size: 15pt, fill: text-color)
+  set text(font: "DejaVu Sans", size: 14pt, fill: text-color)
   set strong(delta: 300)
   set par(justify: true)
   
@@ -90,7 +90,7 @@
 
 // --- Slide 1: Title ---
 #title-slide-custom(
-  "C.L.A.R.A.",
+  "C.L.A.R.A. 🩺",
   "LLM'S AGENTIC AND BIOMEDICAL - ING3 SCIA/Santé",
   [
     *Membres du groupe:*
@@ -158,34 +158,38 @@
   ]
 ]
 
-// --- Slide 4: Motifs de Conception (Design Patterns) ---
+// Slides 4, 5, 6 lol
 #new-slide(title: "Motifs Agentiques")[ 
-  #grid(columns: (1fr, 1fr), gutter: 1.5cm,
-    [
-      *1. Planner-Executor*
-      - *Pourquoi ?* L'analyse médicale est procédurale.
-      - *Comment ?* Le Planner décompose les actions, l'Executor agit.
-      
-      #v(0.5em)
-      *2. Mémoire (Contextuelle)*
-      - *Pourquoi ?* Partager les résultats entre les tâches.
-      - *Comment ?* Résolution de variables (`$step_id`) et passage de contexte.
-    ],
-    [
-      *3. Outils & Délégation*
-      L'Executor délègue les tâches perceptives :
+  #set text(size: 1.5em)
+  *1. Planner-Executor*
+  #v(0.5em)
+  - *Pourquoi ?* L'analyse médicale est procédurale.
+  - *Comment ?* Le Planner décompose les actions, l'Executor agit.
+]
 
-      #v(0.5em)
-      - *Outil Classification (CNN)*
-        - *Input :* Image (Mammographie/Scan).
-        - *Output :* Label (Bénin/Malin) + Confiance.
 
-      #v(0.5em)
-      - *Agent Vision (VLM)*
-        - *Input :* Image + Instructions.
-        - *Output :* Description textuelle et analyse visuelle.
-    ]
-  )
+#new-slide(title: "Motifs Agentiques")[ 
+  #set text(size: 1.5em)
+  #v(0.5em)
+  *2. Mémoire (Contextuelle)*
+  - *Pourquoi ?* Partager les résultats entre les tâches.
+  - *Comment ?* Résolution de variables (`$step_id`) et passage de contexte.
+]
+
+#new-slide(title: "Motifs Agentiques")[ 
+  #set text(size: 1.3em)
+  *3. Outils & Délégation*
+  L'Executor délègue les tâches perceptives :
+
+  #v(0.5em)
+  - *Outil Classification (CNN)*
+    - *Input :* Image (Mammographie/Scan).
+    - *Output :* Label (Bénin/Malin) + Confiance.
+
+  #v(0.5em)
+  - *Agent Vision (VLM)*
+    - *Input :* Image + Instructions.
+    - *Output :* Description textuelle et analyse visuelle.
 ]
 
 // --- Slide 5: Implémentation Technique ---
@@ -271,7 +275,7 @@
 
 // --- Slide 9: Q&A ---
 #title-slide-custom(
-  "Démo Time",
+  "Démo Time 🔥",
   none,
   none
 )

@@ -24,6 +24,7 @@
             typescript
             typescript-language-server
             typst
+            typstyle
             uv
             zathura
             libgcc.lib
