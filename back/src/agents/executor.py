@@ -10,7 +10,6 @@ import json
 import logging
 import os
 
-# Configure logging
 log_dir = os.path.join(os.getcwd(), "data", "logs")
 os.makedirs(log_dir, exist_ok=True)
 log_file = os.path.join(log_dir, "app.log")
@@ -21,11 +20,8 @@ logging.basicConfig(
     format="%(asctime)s - %(levelname)s - %(message)s",
 )
 
-# Initialize Vision Agent
 vision_agent = VisionAgent()
 
-
-# --- Mock Tools for Registry (since actual files are missing/not provided) ---
 def vision_tool(
     image_path: str, instruction: str, metrics: Optional[AgentsMetrics] = None
 ):
@@ -49,8 +45,7 @@ def rag_tool(search_query: str):
     return f"[MOCK] Guidelines trouvées pour '{search_query}': Protocole standard appliqué."
 
 
-# --- Tool Registry ---
-TOOL_REGISTRY: Dict[str, Callable] = {
+tool_registry: Dict[str, Callable] = {
     "vision_tool": vision_tool,
     "duckdb_tool": duckdb_tool,
     "rag_tool": rag_tool,
@@ -148,7 +143,7 @@ FORMAT JSON OBLIGATOIRE :
         Exécution générique via le TOOL_REGISTRY.
         Les arguments doivent DÉJÀ être résolus (pas de '$var').
         """
-        tool_func = TOOL_REGISTRY.get(tool.function_name)
+        tool_func = tool_registry.get(tool.function_name)
 
         if not tool_func:
             error_msg = f"Outil inconnu : {tool.function_name}"
