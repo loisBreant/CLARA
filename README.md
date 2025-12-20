@@ -23,6 +23,8 @@ cp ./back/.env.example ./back/.env
 
 - [Project Report](./report/main.pdf) The source code of the report can be found at
   `./report`.
+- [Project slides](./slides/main.pdf) The source code of the slides can be found at
+  `./slides`.
 
 ### Development
 
@@ -83,20 +85,9 @@ agents:
 │   │   ├── lib/          # Frontend utilities and mock data
 │   │   └── main.tsx      # Frontend entry point
 │   └── styles/           # Frontend global styles
+└── slides/               # Project slides and related files
 └── report/               # Project report and related files
     ├── images/           # Images used in the report
     ├── main.typ          # Source file for the project report
     └── scripts/          # Scripts for generating report assets
 ```
-
-## TODO
-
-- [x] Agent memory
-- [x] Connect agents
-- [x] Agents' metrics
-- [x] Agents' graph
-- [x] Show planners high level steps
-- [x] Send image to backend
-- [ ] Save previous messages
-- [ ] Segment image
-- [ ] Critic agent

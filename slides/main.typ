@@ -9,14 +9,14 @@
 #let academic-theme(footer-left: [], footer-center: [], body) = {
   set page(
     paper: "presentation-16-9",
-    margin: 0cm,
+    margin: (rest: 0cm, bottom: 1cm),
     footer: context {
       set text(size: 10pt, fill: white)
       block(
         fill: primary-color,
         width: 100%,
         height: 100%, // Fill the footer area
-        inset: (x: 1cm),
+        inset: (x: 1cm, y: 0.2cm),
         grid(
           columns: (1fr, 2fr, 1fr),
           align(left + horizon, footer-left),
@@ -27,7 +27,7 @@
         )
       )
     },
-    footer-descent: 0cm, // Ensure footer sticks to bottom with no gap
+    footer-descent: 0.5cm, // Ensure footer sticks to bottom with no gap // Ensure footer sticks to bottom with no gap
   )
   set text(font: "DejaVu Sans", size: 15pt, fill: text-color)
   set strong(delta: 300)
@@ -91,7 +91,7 @@
 
 // --- Slide 1: Title ---
 #title-slide-custom(
-  "C.L.A.R.A.",
+  "C.L.A.R.A. 🩺",
   "Agentification & Analyse d'Images Médicales",
   [
     *Membres du groupe:*
@@ -245,7 +245,7 @@
         #text(size: 0.8em, style: "italic")[Figure 2 : Simulation des Coûts]
       ]
       #align(center)[
-        #v(1em)
+        #v(0em)
         *Optimisation :* \ Le Planner consomme peu (contexte court), l'Executor (Vision) est le poste principal.
       ]
     ]
