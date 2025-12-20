@@ -36,7 +36,7 @@
 // --- Title Page ---
 
 #align(center + horizon)[
-  #text(size: 24pt, weight: "bold")[MedVision AI (CLARA)]
+  #text(size: 24pt, weight: "bold")[CLARA (Clinical Logic & Agentic Reasoning Assistant)]
   
   #v(1cm)
   #text(size: 18pt)[
@@ -46,7 +46,7 @@
   ]
   
   #v(0.5cm)
-  #text(size: 14pt)[SCIA - Santé 3ème Année - LLMs & Agentification]
+  #text(size: 14pt)[ING3 SCIA & Santé - LLM'S AGENTIC AND BIOMEDICAL]
   
   #v(2cm)
   
@@ -55,10 +55,10 @@
     gutter: 20pt,
     align(center)[
       *Membres du groupe:* 
-      - aglae.tournois 
-      - andy.shan
-      - lois.breant 
-      - oscar.le-dauphin 
+      - aglae.tournois (Santé)
+      - andy.shan (SCIA)
+      - lois.breant (SCIA)
+      - oscar.le-dauphin (SCIA)
     ],
     align(center)[
       *Date de rendu:* 
@@ -70,26 +70,25 @@
   )
 
   #v(4cm)
-  #image("../front/public/placeholder-logo.png", width: 30%)
 ]
 
-#pagebreak()
 
 // --- Abstract ---
 
 #heading(numbering: none)[Résumé]
-Ce rapport présente la conception et l'implémentation de *MedVision AI (CLARA)*, un système agentique d'analyse d'images médicales. L'objectif principal était de transformer un processus d'analyse linéaire en une architecture autonome capable de planification, de raisonnement et d'utilisation d'outils. Nous avons intégré plusieurs motifs de conception agentiques (Planner-Executor, Mémoire, Réflexion) pour améliorer la robustesse et la précision des diagnostics assistés par IA. Ce document détaille l'architecture, justifie les choix techniques, et fournit une évaluation quantitative des performances et des coûts en tokens.
+Ce rapport présente la conception et l'implémentation de *CLARA (Clinical Logic & Agentic Reasoning Assistant)*, un système agentique d'analyse d'images médicales. L'objectif principal est de transformer un processus d'analyse linéaire en une architecture autonome capable de planification, de raisonnement et d'utilisation d'outils. Nous avons intégré plusieurs motifs de conception agentiques (Planner-Executor, Mémoire, Réflexion) pour améliorer la robustesse et la précision des diagnostics assistés par IA. Ce document détaille l'architecture, justifie les choix techniques, et fournit une évaluation quantitative des performances et des coûts en tokens.
 
-#outline(indent: auto)
 #pagebreak()
+#outline(indent: auto)
 
 // --- Content ---
+#pagebreak()
 
 = Introduction
 
 Les systèmes d'IA générative modernes dépassent le simple paradigme "Question-Réponse" pour devenir des agents capables d'agir sur leur environnement. Dans le domaine médical, la précision et la traçabilité du raisonnement sont critiques. 
 
-Ce projet s'inscrit dans le cadre du module d'Agentification de la majeure SCIA. Nous avons choisi d'agentifier un service d'analyse d'images médicales (Radiographie/CT/MRI). Le but est de permettre à un utilisateur (praticien ou étudiant) de soumettre une image et de dialoguer avec une IA qui ne se contente pas de décrire l'image, mais qui planifie son analyse, consulte sa mémoire de cas similaires ou de connaissances médicales, et critique ses propres conclusions avant de répondre.
+Ce projet s'inscrit dans le cadre du module d'Agentification des majeures SCIA et Santé. Nous avons choisi d'agentifier un service d'analyse d'images médicales (Radiographie/CT/MRI). Le but est de permettre à un utilisateur (praticien ou étudiant) de soumettre une image et de dialoguer avec une IA qui ne se contente pas de décrire l'image, mais qui planifie son analyse, consulte sa mémoire de cas similaires ou de connaissances médicales et critique ses propres conclusions avant de répondre.
 
 = Architecture du Système
 
@@ -104,27 +103,30 @@ L'architecture repose sur un backend Python (FastAPI) orchestrant plusieurs agen
   caption: [Architecture du Système et Flux de Données]
 )
 
-== Motifs de Conception Agentiques (Design Patterns)
+== Design Patterns de Conception Agentiques
 
 Nous avons intégré les motifs suivants, jugés pertinents pour la complexité de l'analyse médicale :
 
-=== 1. Motif Planner-Executor
+=== Motif Planner-Executor
 *Justification :* L'analyse médicale est procédurale. Elle nécessite de vérifier la qualité de l'image, d'identifier la zone anatomique, de détecter les anomalies, puis de conclure.
+
 *Implémentation :* 
-- Le *Planner* génère une liste de tâches (ex: "Vérifier la clarté", "Chercher des fractures").
-- L'*Executor* traite chaque tâche séquentiellement en appelant les outils appropriés (Vision, Base de connaissances).
+- Le #underline[Planner] génère une liste de tâches (vérifier la clarté, chercher des fractures).
+- L'#underline[Executor] traite chaque tâche séquentiellement en appelant les outils appropriés (vision, base de connaissances).
 - Si une étape échoue, le Planner peut réajuster le plan.
 
-=== 2. Module de Mémoire (RAG & Historique)
+=== Module de Mémoire (RAG & Historique)
 *Justification :* Le contexte du patient et l'historique de la conversation sont essentiels pour un diagnostic cohérent.
-*Implémentation :* 
-- *Mémoire à court terme :* Gestion de l'historique de chat dans la session courante.
-- *Mémoire à long terme (Vector Store) :* Stockage de cas cliniques de référence ou de documentation médicale (mockée ou réelle via `medical.db`).
 
-=== 3. Réflexion / Auto-Critique
-*Justification :* Pour éviter les hallucinations dangereuses dans un contexte médical.
 *Implémentation :* 
-- Après avoir généré une analyse préliminaire, un agent *Critic* relit la réponse pour vérifier sa cohérence factuelle et sa prudence (ex: ajout de disclaimers).
+- #underline[Mémoire à court terme] : Gestion de l'historique de chat dans la session courante.
+- #underline[Mémoire à long terme] : Stockage de cas cliniques de référence ou de documentation médicale mockée ou réelle via `medical.db`.
+
+=== Module de Réflexion / Auto-Critique
+*Justification :* Pour éviter les hallucinations dangereuses dans un contexte médical.
+
+*Implémentation :* 
+- Après avoir généré une analyse préliminaire, un agent relit la réponse pour vérifier sa cohérence factuelle et sa prudence (ex: ajout de disclaimers).
 
 = Implémentation Technique
 
@@ -132,7 +134,7 @@ Nous avons intégré les motifs suivants, jugés pertinents pour la complexité 
 - *Backend :* Python 3.13, FastAPI (Async), Pydantic, `openrouter` client.
 - *Frontend :* React 19, Vite, TailwindCSS v4, Recharts (Graphiques), Mermaid (Visualisation Agent).
 - *Modèles :*
-  - `google/gemma-3-27b-it:free` : Utilisé pour la planification et l'exécution textuelle (coût nul).
+  - `google/gemma-3-27b-it:free` : Utilisé pour la planification et l'exécution textuelle (aucun coût).
   - `google/gemma-3-27b-it` (Version payante) : Utilisé par l'agent Vision pour une précision maximale sur les images.
 - *Qualité & CI :* GitHub Actions (Deno fmt/lint pour le front, Ruff format/check et Ty pour le back).
 - *Déploiement :* Docker (Multi-stage build).
@@ -149,17 +151,17 @@ Le code est organisé de manière modulaire :
 #block(fill: luma(240), inset: 8pt, radius: 4pt)[
 ```python
     def execute_task(self, task: PlannedTask, tasks: Tasks, metrics: AgentsMetrics, memory: MemoryAgent):
-        # 1. Validation Dépendances
+        # Validation Dépendances
         if tasks.dependencies_met(task):
             self.update_status(Status.PENDING, metrics, task)
             for response in self.ask(task.description, metrics):
                 yield response
             self.update_status(Status.FINISHED, metrics, task)
         
-        # 2. Tool Parsing & Execution
+        # Tool parsing & execution
         tools_to_call = self.parse_tools(self.last_response)
         for tool in tools_to_call:
-            # Resolution des arguments via la Memoire
+            # Résolution des arguments via la mémoire
             tool.args = memory.resolve_args(tool.args)
             
             # Execution
@@ -170,53 +172,7 @@ Le code est organisé de manière modulaire :
 ```
 ]
 
-= Protocole d'Évaluation
-
-Pour valider notre approche, nous avons défini un protocole rigoureux comparant une version "Baseline" (Prompt simple) vs "Agentifiée" (Planner + Memory).
-
-== Métriques
-1. *Taux de Succès :* Pourcentage de diagnostics corrects sur un dataset de test (ex: 20 cas cliniques annotés).
-2. *Latence Moyenne :* Temps de réponse total (s).
-3. *Coût en Tokens :* Consommation totale (Prompt + Completion).
-4. *Ratio Qualité/Prix :* Score de pertinence divisé par le coût.
-5. *Robustesse :* Capacité à gérer des images floues ou des demandes hors-sujet.
-
-== Scénarios de Test
-- *Scénario A (Simple) :* Identification d'une fracture nette.
-- *Scénario B (Complexe) :* Analyse d'une pathologie pulmonaire nécessitant contexte historique.
-- *Scénario C (Erreur) :* Image non médicale ou corrompue.
-
-= Résultats et Analyse
-
-Les données suivantes sont issues des logs de production (`telemetrics.csv`) sur une série de 50 tests.
-
-== Performance Quantitative
-
-#table(
-  columns: (auto, auto, auto, auto, auto),
-  inset: 10pt,
-  align: center,
-  [*Scénario*], [*Architecture*], [*Succès (%)*], [*Latence (s)*], [*Tokens Moy.*],
-  "A (Fracture)", "Baseline", "80%", "2.5", "500",
-  "A (Fracture)", "Agent", "95%", "8.2", "2100",
-  "B (Complexe)", "Baseline", "40%", "3.0", "600",
-  "B (Complexe)", "Agent", "85%", "12.5", "3500",
-)
-
-#figure(
-  image("images/agent_activity.svg", width: 80%),
-  caption: [Volume d'activité par type d'agent]
-)
-
-#figure(
-  image("images/latency_vs_tokens.svg", width: 100%),
-  caption: [Latence vs Tokens (par type d'agent)]
-)
-
-== Analyse Qualitative
-L'agent montre une supériorité nette sur les cas complexes grâce à la décomposition des tâches. Cependant, la latence est multipliée par 3 ou 4, ce qui peut impacter l'expérience utilisateur. Le mécanisme de réflexion a permis de corriger 15% des erreurs initiales de l'Executor.
-
-= Analyse Économique (Coûts)
+= Analyse Économique
 
 Le suivi des coûts a été réalisé via un logger custom (`back/src/agents/telemetrics.py`) exportant vers `telemetrics.csv`.
 
@@ -232,7 +188,7 @@ Le suivi des coûts a été réalisé via un logger custom (`back/src/agents/tel
 
 Actuellement, le coût par diagnostic est de *0.00 \$* grâce à l'utilisation du modèle `gemma-3-27b-it:free`.
 
-Cependant, une projection des coûts en utilisant un modèle propriétaire comme GPT-4o est nécessaire pour anticiper la mise à l'échelle :
+Cependant, une projection des coûts en utilisant un modèle payant comme GPT-4o est nécessaire pour anticiper la mise à l'échelle :
 - *Tokens moyens par cas complexe :* ~4000 tokens.
 - *Coût estimé (GPT-4o) :* 5\$ / 1M tokens (moyenne input/output).
 - *Coût par diagnostic :* $4000 times 5 / 1000000 approx 0.02 \$$.
@@ -248,7 +204,9 @@ Pour une base de 1000 utilisateurs effectuant un diagnostic par jour, le coût m
 
 == Améliorations Futures
 - *Streaming :* Améliorer le retour visuel pendant la réflexion (déjà partiellement implémenté dans le frontend).
-- *Modèles Locaux :* Utiliser Ollama/Llama 3 pour les tâches simples (Planner) afin de réduire les coûts.
+- *Modèles Locaux :* Utiliser Ollama pour les tâches simples (Planner) afin de réduire les coûts.
+- *Optimisation des Prompts :* Affiner les prompts pour réduire la consommation de tokens.
+- *Augmentation de la Mémoire :* Intégrer une base de connaissances médicale plus riche.
 - *Cache Sémantique :* Ne pas relancer l'analyse pour des images similaires.
 
 = Conclusion
@@ -261,10 +219,13 @@ Ce projet a permis de démontrer qu'une architecture agentique, bien que plus co
 == Exemple de Trace d'Exécution
 #block(fill: luma(240), inset: 8pt, radius: 4pt)[
   *User:* Analyse cette radio.
+
   *Planner:* 1. Vérifier qualité. 2. Identifier zone. 3. Détecter anomalies.
+  
   *Executor:* Qualité OK. Zone: Thorax.
+  
   *Executor:* Anomalie détectée: Opacité lobe inférieur droit.
-  *Critic:* Attention, vérifier si c'est une pneumonie ou une atélectasie.
+  
   *Agent:* Conclusion: Suspicion de pneumonie, suggère examens complémentaires.
 ]
 
