@@ -32,6 +32,7 @@ RÈGLES CRITIQUES:
 - Chaque tâche doit être exécutable par un agent spécialisé (Executor).
 - Sois précis sur les dépendances entre tâches.
 - N'utilise les outils QUE SI C'EST NÉCESSAIRE pour répondre à la requête. Si une réponse simple suffit, ne planifie pas d'outil complexe.
+- SI LA REQUÊTE EST SIMPLE (ex: "Bonjour", "Merci", question basique sans outil), renvoie une liste vide `[]`. Cela passera directement la main à l'agent Réactif pour répondre.
 
 Format JSON attendu :
 [
@@ -66,6 +67,7 @@ Format JSON attendu :
 
         tasks = Tasks(full_response, self.agent_data.id)
         memory = MemoryAgent()
+        last_agent_id = self.agent_data.id
 
         if len(tasks) > 0:
             yield AgentResponse(
@@ -77,24 +79,10 @@ Format JSON attendu :
                 metrics=metrics, id=self.agent_data.id, chunk=tasks.render_tasks()
             )
 
-            last_agent_id = self.agent_data.id
-
-            executors = []
             for t in tasks:
                 executor = ExecutorAgent(t)
                 metrics.agents[executor.agent_data.id] = executor.agent_data
-                executors.append(executor)
 
-            reactive = ReactiveAgent()
-            reactive_dependency = (
-                executors[-1].agent_data.id if executors else last_agent_id
-            )
-            reactive.agent_data.dependencies = [reactive_dependency]
-            metrics.agents[reactive.agent_data.id] = reactive.agent_data
-
-            yield AgentResponse(metrics=metrics, id=self.agent_data.id, chunk="")
-
-            for executor, t in zip(executors, tasks):
                 task_result_accumulated = ""
                 yield AgentResponse(
                     metrics=metrics,
@@ -112,24 +100,33 @@ Format JSON attendu :
                 last_agent_id = executor.agent_data.id
                 self.logs.append(task_result_accumulated)
 
-            yield AgentResponse(
-                metrics=metrics,
-                id=self.agent_data.id,
-                chunk="**Phase 3 : Synthèse et Réponse Finale**\n\n",
-            )
+        # Phase 3 : Toujours exécutée, même si pas de tâches (pour réponse simple)
+        yield AgentResponse(
+            metrics=metrics,
+            id=self.agent_data.id,
+            chunk="**Phase 3 : Synthèse et Réponse Finale**\n\n",
+        )
+        reactive = ReactiveAgent()
+        reactive.agent_data.dependencies = [last_agent_id]
+        metrics.agents[reactive.agent_data.id] = reactive.agent_data
 
-            final_prompt = f"""
+        final_prompt = f"""
 Voici le contexte de la demande et les résultats des tâches exécutées.
 Synthétise tout cela pour donner une réponse finale complète et claire à l'utilisateur.
 
 Voici l'historique des conversations :
 user-prompt: {prompt}\n
-tasks: {tasks.render_tasks()}\n
-agents-response: {self.logs}\n
+tasks: {tasks.render_tasks() if len(tasks) > 0 else "Aucune tâche complexe nécessaire."}\n
+agents-response: {self.logs if self.logs else "Aucune exécution d'outil."}\n
 
 """
-            for response in reactive.ask(final_prompt, metrics):
-                yield response
+        for response in reactive.ask(final_prompt, metrics):
+            yield response
+
+        # self.status = Status.FINISHED
+        self.agent_data.status = Status.FINISHED
+        metrics.agents[self.agent_data.id] = self.agent_data
+        yield AgentResponse(metrics=metrics, id=self.agent_data.id, chunk="")
 
         # self.status = Status.FINISHED
         self.agent_data.status = Status.FINISHED

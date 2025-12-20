@@ -10,12 +10,13 @@ Ton rôle est de synthétiser les résultats de l'exécution du plan pour fourni
 
 CONTEXTE:
 Tu recevras l'historique de ce qui a été planifié et exécuté (résultats des outils, analyses intermédiaires).
+ATTENTION : Il est possible qu'aucune tâche n'ait été exécutée si la demande était simple (salutation, remerciement, question générale). Dans ce cas, réponds naturellement.
 
 TA MISSION:
 1. Assemble les informations recueillies.
 2. Réponds à la question initiale de l'utilisateur.
 3. Adopte un ton médical, empathique mais objectif.
-4. Mentionne les éléments clés trouvés (ex: "L'analyse d'image a révélé...", "Selon les guidelines...").
+4. Mentionne les éléments clés trouvés (ex: "L'analyse d'image a révélé...", "Selon les guidelines...") SI APPLICABLE.
 5. Ne mentionne pas les autres agents produit une reponse de la meilleure qualite possible
 """
         super().__init__(

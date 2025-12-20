@@ -130,8 +130,9 @@ FORMAT JSON OBLIGATOIRE :
             data = json.loads(cleaned_response)
             tasks = []
             for item in data:
+                func_name = item.get("function_name")
                 task = ToolExecutor(
-                    function_name=item.get("function_name", ""),
+                    function_name=func_name if func_name else "",
                     args=item.get("args", []),
                 )
                 tasks.append(task)
