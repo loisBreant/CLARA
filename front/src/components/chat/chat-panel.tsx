@@ -37,8 +37,8 @@ export function ChatPanel({
 
   useEffect(() => {
     if ("SpeechRecognition" in window || "webkitSpeechRecognition" in window) {
-      const SpeechRecognition =
-        window.SpeechRecognition || window.webkitSpeechRecognition;
+      const SpeechRecognition = globalThis.SpeechRecognition ||
+        globalThis.webkitSpeechRecognition;
       speechRecognitionRef.current = new SpeechRecognition();
       speechRecognitionRef.current.continuous = false;
       speechRecognitionRef.current.interimResults = false;
@@ -54,7 +54,9 @@ export function ChatPanel({
       speechRecognitionRef.current.onerror = (event) => {
         console.error("Speech recognition error:", event.error);
         setIsRecording(false);
-        setRecognitionError(`Erreur de reconnaissance vocale: ${event.error}. Veuillez réessayer.`);
+        setRecognitionError(
+          `Erreur de reconnaissance vocale: ${event.error}. Veuillez réessayer.`,
+        );
       };
 
       speechRecognitionRef.current.onend = () => {
@@ -247,20 +249,22 @@ export function ChatPanel({
               disabled={isInputDisabled}
             />
             {"SpeechRecognition" in window ||
-            "webkitSpeechRecognition" in window ? (
-              <Button
-                type="button"
-                variant="ghost"
-                size="icon"
-                className={`absolute right-1 top-1/2 -translate-y-1/2 h-7 w-7 ${
-                  isRecording ? "animate-pulse text-red-500" : ""
-                }`}
-                onClick={toggleRecording}
-                disabled={isInputDisabled}
-              >
-                <Mic className="h-4 w-4" />
-              </Button>
-            ) : null}
+                "webkitSpeechRecognition" in window
+              ? (
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="icon"
+                  className={`absolute right-1 top-1/2 -translate-y-1/2 h-7 w-7 ${
+                    isRecording ? "animate-pulse text-red-500" : ""
+                  }`}
+                  onClick={toggleRecording}
+                  disabled={isInputDisabled}
+                >
+                  <Mic className="h-4 w-4" />
+                </Button>
+              )
+              : null}
           </div>
 
           <Button

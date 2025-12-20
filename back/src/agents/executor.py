@@ -61,7 +61,9 @@ class ToolExecutor:
 
 
 class ExecutorAgent(Agent):
-    def __init__(self, agent_data: Optional[PlannedTask | AgentData], image_url: str | None):
+    def __init__(
+        self, agent_data: Optional[PlannedTask | AgentData], image_url: str | None
+    ):
         real_agent_data = None
         self.image_url = image_url
         if isinstance(agent_data, PlannedTask):
@@ -155,7 +157,7 @@ FORMAT JSON OBLIGATOIRE :
         try:
             clean_args = tool.args
             if tool.function_name == "vision_tool":
-                result = tool_func(self.image_url, *clean_args[1:], metrics=metrics) # type: ignore
+                result = tool_func(self.image_url, *clean_args[1:], metrics=metrics)  # type: ignore
             elif tool.function_name == "classification_tool":
                 result = tool_func(self.image_url, *clean_args[1:])
             else:
