@@ -1,6 +1,5 @@
 #import "@preview/polylux:0.4.0": *
 
-// --- Colors & Styling ---
 #let primary-color = rgb("#343885") // Indigo-like Blue matching the reference
 #let secondary-color = rgb("#E0E0E0") 
 #let text-color = rgb("#333333")
@@ -91,7 +90,7 @@
 
 // --- Slide 1: Title ---
 #title-slide-custom(
-  "C.L.A.R.A. 🩺",
+  "C.L.A.R.A.",
   "Agentification & Analyse d'Images Médicales",
   [
     *Membres du groupe:*
@@ -155,7 +154,7 @@
   - *Frontend (React/Vite) :* Visualisation temps réel du graphe de raisonnement. 
   
   #align(center)[
-    #image("../report/images/architecture.svg", height: 50%)
+    #image("../report/images/architecture.png", height: 50%)
     #v(0.5em)
     #text(size: 0.8em, style: "italic")[Figure 1 : Architecture Globale et Flux de Données]
   ]
