@@ -92,7 +92,7 @@ Format JSON attendu :
             )
 
             for t in tasks:
-                executor = ExecutorAgent(t)
+                executor = ExecutorAgent(t, image_url)
                 metrics.agents[executor.agent_data.id] = executor.agent_data
 
                 task_result_accumulated = ""
